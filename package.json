@@ -6,10 +6,13 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "anychart-react": "^1.4.1",
+    "js-cookie": "^3.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "react-switch": "^6.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,5 +37,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "anychart": "^8.10.0",
+    "axios": "^0.23.0",
+    "isomorphic-fetch": "^3.0.0",
+    "universal-cookie": "^4.0.4"
   }
 }
