@@ -59,7 +59,9 @@ function render(props, state) {
                 }}
                 graphData={state.graphData}
                 onSubmitForm={props.onSubmitForm}
-                nodeFileName={props.nodeFileName}
+                addFile={props.addFile}
+                addNode={props.addNode}
+                addEdge={props.addEdge}
             />
         </div>
 

@@ -1,8 +1,29 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
 html, body, #root {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 #graphCanvas {
@@ -32,18 +53,8 @@ html, body, #root {
   width: 100%;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.go2441762052 {
+  display: none;
 }
 
 svg {
@@ -56,6 +67,24 @@ button {
   background-color: transparent;
 }
 
-.freeButton:hover, .freeButton:focus {
-  background-color: darkgrey;
+button:hover {
+  background-color: lightgray;
 }
+
+input, select {
+  width: 100%;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+label {
+  font-size: 14px;
+}
+
+.formInput {
+  margin: 5px;
+}
+
+/*.freeButton:hover {*/
+/*  background-color: darkgrey;*/
+/*}*/

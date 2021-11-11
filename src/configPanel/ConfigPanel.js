@@ -1,6 +1,7 @@
 import React from 'react';
 import Collapsible from "../generalPurposeComponents/collapsible/Collapsible";
-import ConfigureForm from "../configureForm/ConfigureForm";
+import GraphController from "../graphController/GraphController";
+import ProcessForm from "../processForm/ProcessForm";
 
 class ConfigPanel extends React.Component {
     render() {
@@ -13,22 +14,29 @@ class ConfigPanel extends React.Component {
             }}
         >
             <Collapsible
-                title='test collapsible component'
+                title='Edit Graph'
                 id='nodeAndEdgeEditingCollapsible'
                 style={{
                     marginBottom: '1rem'
                 }}
             >
-                <p>this is simply a test</p>
+                <GraphController
+                    addNode={this.props.addNode}
+                    addEdge={this.props.addEdge}
+                    addFile={this.props.addFile}
+                    graphData={this.props.graphData}
+                />
             </Collapsible>
 
             <Collapsible
-                title='test collapsible component 2'
-                id='nodeConfigurationCollapsible'
+                title='Process'
+                id='processCollapsible'
+                style={{
+                    marginBottom: '1rem'
+                }}
             >
-                <ConfigureForm
-                    graphData={this.props.graphData}
-                    nodeFileName={this.props.nodeFileName}
+                {/*will have a file name option which will not be required*/}
+                <ProcessForm
                     onSubmitForm={this.props.onSubmitForm}
                 />
             </Collapsible>
