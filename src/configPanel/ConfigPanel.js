@@ -22,9 +22,16 @@ class ConfigPanel extends React.Component {
             >
                 <GraphController
                     addNode={this.props.addNode}
+                    editNode={this.props.editNode}
+                    deleteNode={this.props.deleteNode}
                     addEdge={this.props.addEdge}
+                    editEdge={this.props.editEdge}
+                    deleteEdge={this.props.deleteEdge}
                     addFile={this.props.addFile}
                     graphData={this.props.graphData}
+                    setStep={this.props.setStep}
+                    step={this.props.step}
+                    editingId={this.props.editingId}
                 />
             </Collapsible>
 

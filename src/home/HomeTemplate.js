@@ -1,6 +1,6 @@
 import Graph from '../graph/Graph'
 import ConfigPanel from '../configPanel/ConfigPanel';
-import Switch from "../generalPurposeComponents/switch/Switch";
+// import Switch from "../generalPurposeComponents/switch/Switch";
 import Popup from "../generalPurposeComponents/popup/Popup";
 import React from "react";
 
@@ -47,7 +47,10 @@ function render(props, state) {
                      width: '75%'
                  }}
             >
-                <Graph graphData={state.graphData}/>
+                <Graph
+                    graphData={state.graphData}
+                    setStep={props.setStep}
+                />
             </div>
 
             <ConfigPanel
@@ -61,7 +64,14 @@ function render(props, state) {
                 onSubmitForm={props.onSubmitForm}
                 addFile={props.addFile}
                 addNode={props.addNode}
+                editNode={props.editNode}
+                deleteNode={props.deleteNode}
                 addEdge={props.addEdge}
+                editEdge={props.editEdge}
+                deleteEdge={props.deleteEdge}
+                setStep={props.setStep}
+                step={state.step}
+                editingId={state.editingId}
             />
         </div>
 
@@ -82,13 +92,6 @@ function render(props, state) {
             <p>hello</p>
             <br />
             <p>world!</p>
-            {/*<Switch*/}
-            {/*    id='isCSC1026'*/}
-            {/*    graphData={state.graphData}*/}
-            {/*    isChecked={state.isCSC1026}*/}
-            {/*    onChange={props.toggleIsCSC1026}*/}
-            {/*    title={state.switchTitle}*/}
-            {/*/>*/}
         </Popup>
     </div>
 }

@@ -71,16 +71,35 @@ class Graph extends React.Component {
         zoomController.render();
     }
 
+    addClickListener(chart) {
+        let setStep = this.props.setStep;
+
+        //todo: currently rerender loses graph position (store x,y on each node) => not critical but would be nice
+        chart.listen('dblClick', function(e) {
+            let tag = e.domTarget.tag;
+
+            if (tag) {
+                if (tag.type === 'node') {
+                    setStep('Edit Node', tag.id);
+                }
+
+                if (tag.type === 'edge') {
+                    setStep('Edit Edge', tag.id);
+                }
+            }
+        });
+    }
+
     render() {
         let chart = anychart.graph();
 
-        // chart.title('Processing Plan');
         chart.contextMenu(false);
         this.setNodeLabels(chart.nodes());
         this.setNodeAppearance(chart.nodes());
         this.setTooltip(chart);
         this.setArrows(chart.edges());
         this.setZoom(chart);
+        this.addClickListener(chart);
 
         return <AnyChart
             id='graphCanvas'

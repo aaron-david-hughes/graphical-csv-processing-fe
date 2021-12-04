@@ -157,7 +157,7 @@ class NodeForm extends React.Component {
                                     await this.setNodeObjKey('onLeft', e.target.value)
                                     this.props.setNodeTemplate(this.state.nodeObj);
                                     this.setInputValidity('onLeft', 'valid');
-                                } else{
+                                } else {
                                     this.setInputValidity('onLeft', 'invalid');
                                 }
                             }}
@@ -180,7 +180,7 @@ class NodeForm extends React.Component {
                                     await this.setNodeObjKey('onRight', e.target.value)
                                     this.props.setNodeTemplate(this.state.nodeObj);
                                     this.setInputValidity('onRight', 'valid');
-                                } else{
+                                } else {
                                     this.setInputValidity('onRight', 'invalid');
                                 }
                             }}

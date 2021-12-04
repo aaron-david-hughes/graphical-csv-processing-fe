@@ -1,6 +1,8 @@
 import React from 'react';
 import NodeForm, {NodeList as Nodes} from "../graphComponentForms/NodeForm";
 import EdgeForm from "../graphComponentForms/EdgeForm";
+import EditEdgeForm from "../graphComponentForms/EditEdgeForm";
+import EditNodeForm from "../graphComponentForms/EditNodeForm";
 
 class GraphController extends React.Component {
 
@@ -64,12 +66,60 @@ class GraphController extends React.Component {
                     >
                         add edge
                     </button>
+                },
+                {
+                    name: 'Edit Node',
+                    prev: <button
+                        id='editNodeCancel'
+                        title='Cancel'
+                        onClick={e => this.setStep(e, 'Add Node or Edge')}
+                    >
+                        cancel
+                    </button>,
+                    next: <button
+                        id='deleteNode'
+                        title='Delete Node'
+                        onClick={e => this.deleteNode(e, this.props.editingId)}
+                    >
+                        delete node
+                    </button>
+                },
+                {
+                    name: 'Edit Edge',
+                    prev: <button
+                        id='editEdgeCancel'
+                        title='Cancel'
+                        onClick={e => this.setStep(e, 'Add Node or Edge')}
+                    >
+                        cancel
+                    </button>,
+                    next: <div
+                        style={{
+                            display: 'inline-flex'
+                        }}
+                    >
+                        <button
+                            id='deleteEdge'
+                            title='Delete Edge'
+                            onClick={e => this.deleteEdge(e, this.props.editingId)}
+                        >
+                            delete edge
+                        </button>
+                        <button
+                            id='editEdge'
+                            title='Edit Edge'
+                            onClick={e => this.editGraphComponent(e, this.props.editEdge, this.state.editEdgeTemplate)}
+                        >
+                            edit edge
+                        </button>
+                    </div>
                 }
             ],
-            step: 'Add Node or Edge',
             nodeType: Nodes[0].id,
             nodeTemplate: {},
+            editNodeTemplate: {},
             edgeTemplate: {},
+            editEdgeTemplate: {},
             isFormValid: false,
             showNotStartedErrors: false,
             file: null
@@ -102,7 +152,6 @@ class GraphController extends React.Component {
         </div>
     }
 
-    //good bar css
     nodeTypeStage() {
         return <div>
             <label htmlFor='nodeOptions'>Node Type</label>
@@ -141,6 +190,18 @@ class GraphController extends React.Component {
         </div>
     }
 
+    //todo: maybe expand to allow change of node in edit => down the line a fair bit
+    editNodeStage() {
+        return <div>
+            <EditNodeForm
+                graphData={this.props.graphData}
+                editingId={this.props.editingId}
+                setEditEdgeTemplate={this.setEditNodeTemplate.bind(this)}
+            />
+        </div>
+    }
+
+    // todo: fix bug where when less than 2 nodes exist, useless edge gets drawn
     edgeStage() {
         return <div>
             <EdgeForm
@@ -151,9 +212,18 @@ class GraphController extends React.Component {
         </div>
     }
 
-    //rendering methods
+    editEdgeStage() {
+        return <div>
+            <EditEdgeForm
+                graphData={this.props.graphData}
+                editingId={this.props.editingId}
+                setEditEdgeTemplate={this.setEditEdgeTemplate.bind(this)}
+            />
+        </div>
+    }
+
     renderFormSection() {
-        let name = this.state.step;
+        let name = this.props.step;
         let step = this.state.steps.find(x => x.name === name);
 
         return <div>
@@ -188,6 +258,10 @@ class GraphController extends React.Component {
                 return this.nodeConfigStage();
             case 'Edge Configuration':
                 return this.edgeStage();
+            case 'Edit Edge':
+                return this.editEdgeStage();
+            case 'Edit Node':
+                return this.editNodeStage();
             case 'Add Node or Edge':
             default:
                 return this.initialStage();
@@ -199,8 +273,9 @@ class GraphController extends React.Component {
             e.preventDefault();
         }
 
+        this.props.setStep(step)
+
         this.setState({
-            step: step,
             showNotStartedErrors: false,
             isFormValid: false,
             file: null
@@ -213,15 +288,27 @@ class GraphController extends React.Component {
         });
     }
 
+    setEditNodeTemplate(obj) {
+        this.setState({
+            editNodeTemplate: obj
+        });
+    }
+
     setEdgeTemplate(obj) {
         this.setState({
             edgeTemplate: obj
         });
     }
 
-    setIsFormValid(isValid) {
+    setEditEdgeTemplate(obj) {
+        this.setState({
+            editEdgeTemplate: obj
+        });
+    }
+
+    async setIsFormValid(isValid) {
         for(const entry of Object.entries(isValid)) {
-            this.setState({
+            await this.setState({
                 isFormValid: entry[1] === 'valid'
             });
             if (!this.state.isFormValid) break;
@@ -243,6 +330,15 @@ class GraphController extends React.Component {
         return filename;
     }
 
+    editGraphComponent(e, editFunc, graphComponent) {
+        e.preventDefault();
+
+        editFunc(graphComponent);
+
+        this.setStep(e, 'Add Node or Edge');
+    }
+
+    //todo: bug around validation => join onRight allowed null... only once it has been blurred once
     submitGraphComponent(e, addFunc, graphComponent) {
         e.preventDefault();
 
@@ -259,6 +355,22 @@ class GraphController extends React.Component {
 
             this.setStep(e, 'Add Node or Edge');
         }
+    }
+
+    deleteEdge(e, edgeId) {
+        e.preventDefault();
+
+        this.props.deleteEdge(edgeId);
+
+        this.setStep(e, 'Add Node or Edge');
+    }
+
+    deleteNode(e, nodeId) {
+        e.preventDefault();
+
+        this.props.deleteNode(nodeId);
+
+        this.setStep(e, 'Add Node or Edge');
     }
 
     render() {

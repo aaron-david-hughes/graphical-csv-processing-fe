@@ -102,7 +102,6 @@ class EdgeForm extends React.Component {
                 <Input
                     title='Priority'
                     style={{width: '100%'}}
-                    required={true}
                     input={
                         <input
                             id='priority edge'

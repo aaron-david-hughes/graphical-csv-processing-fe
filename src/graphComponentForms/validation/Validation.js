@@ -3,7 +3,7 @@ function validateTextField(e) {
 }
 
 function validateEdgePairing(edgeObj, existingEdgeList) {
-    if (!existingEdgeList || !edgeObj) {
+    if (!existingEdgeList || !edgeObj || !edgeObj.from || !edgeObj.to) {
         return undefined;
     }
 
