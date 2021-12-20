@@ -7,7 +7,9 @@ class Graph extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            graphData: props.graphData
+            config: props.config,
+            graphData: props.graphData,
+            fromNode: null
         }
     }
 
@@ -23,7 +25,7 @@ class Graph extends React.Component {
 
     setNodeLabels(nodes) {
         nodes.labels().enabled(true);
-        nodes.labels().format('{%id}');
+        nodes.labels().format('{%operation}');
         nodes.labels().fontSize(12);
         nodes.labels().fontColor('#333333');
         nodes.labels().fontWeight(600);
@@ -40,18 +42,17 @@ class Graph extends React.Component {
     }
 
     setTooltip(chart) {
+        let config = this.state.config;
+
         chart.tooltip().useHtml(true);
         chart.tooltip().format(function() {
             if (this.type === 'node') {
                 switch(this.getData('operation')) {
                     case 'open_file':
-                        return GraphUtils.openFileTooltip(this);
-                    case 'join':
-                        return GraphUtils.joinTooltip(this);
-                    case 'filter':
-                        return GraphUtils.filterTooltip(this);
+                    case 'write_file':
+                        return GraphUtils.fileTooltip(this);
                     default:
-                        break;
+                        return GraphUtils.processTooltip(this, config);
                 }
             } else {
                 return this.getData("from") + " -> " + this.getData("to");
@@ -82,12 +83,80 @@ class Graph extends React.Component {
                 if (tag.type === 'node') {
                     setStep('Edit Node', tag.id);
                 }
+            }
+        });
+    }
 
+    deleteEdgeListener(chart) {
+        let deleteEdge = this.props.deleteEdge;
+        let props = this.props;
+
+        chart.listen('dblClick', function(e) {
+            let tag = e.domTarget.tag;
+
+            if (tag) {
                 if (tag.type === 'edge') {
-                    setStep('Edit Edge', tag.id);
+                    deleteEdge(tag.id);
+
+                    props.addBanner({
+                        msg: 'Edge deleted',
+                        type: 'success'
+                    })
                 }
             }
         });
+    }
+
+    edgeListener(chart) {
+        let state = this.state;
+        let props = this.props;
+        let setState = this.setState.bind(this);
+        let editEdges = this.editEdges;
+
+        chart.listen('click', function(e) {
+            let tag = e.domTarget.tag;
+
+            if (tag && tag.type === 'node') {
+                editEdges(state, tag, props, setState);
+            }
+        });
+    }
+
+    editEdges(state, tag, props, setState) {
+        if (state.fromNode) {
+            if (state.fromNode !== tag.id)  {
+                let edges = state.graphData.edges;
+                if (edges.filter(edge => edge.from === state.fromNode).filter(edge => edge.to === tag.id).length > 0) {
+                    props.addBanner({
+                        msg: `Edge already exists between ${state.fromNode} and ${tag.id}, you can double click the edge to delete it.`,
+                        type: 'failure'
+                    });
+                } else if (edges.filter(edge => edge.from === tag.id).filter(edge => edge.to === state.fromNode).length > 0) {
+                    props.addBanner({
+                        msg: `An edge between ${state.fromNode} and ${tag.id} already exists.`,
+                        type: 'warning'
+                    });
+                } else {
+                    props.addEdge({
+                        from: state.fromNode,
+                        to: tag.id
+                    });
+
+                    props.addBanner({
+                        msg: `Edge added from ${state.fromNode} to ${tag.id}`,
+                        type: 'success'
+                    });
+                }
+            }
+
+            setState({
+                fromNode: null
+            });
+        } else {
+            setState({
+                fromNode: tag.id
+            });
+        }
     }
 
     render() {
@@ -100,6 +169,9 @@ class Graph extends React.Component {
         this.setArrows(chart.edges());
         this.setZoom(chart);
         this.addClickListener(chart);
+        this.edgeListener(chart);
+        this.deleteEdgeListener(chart);
+        chart.interactivity(false);
 
         return <AnyChart
             id='graphCanvas'
@@ -109,4 +181,4 @@ class Graph extends React.Component {
     }
 }
 
-export default Graph;
+export default React.memo(Graph);

@@ -11,14 +11,13 @@ class ProcessForm extends React.Component {
         }
     }
 
-    //want to allow custom file types but if no . suffix .csv to the title inputted
     setTitle(title) {
         if (title.length <= 0) {
             title = DefaultFilename;
         }
 
-        if (!title.includes('.')) {
-            title = title + '.csv';
+        if (!title.endsWith('.zip')) {
+            title = title + '.zip';
         }
 
         this.setState({
@@ -34,20 +33,31 @@ class ProcessForm extends React.Component {
             }}
             onSubmit={e => this.props.onSubmitForm(e, this.state.title)}
         >
-            <div>
-                <Input
-                    title='Filename'
-                    style={{width: '100%'}}
-                    input={
-                        <input
-                            id='filename'
-                            type='text'
-                            onChange={e => this.setTitle(e.target.value)}
-                        />
-                    }
-                />
+            <div
+                style={{
+                    width: '100%'
+                }}
+            >
+                <div
+                    style={{
+                        width: '100%',
+                        display: 'inline-flex'
+                    }}
+                >
+                    <Input
+                        title='Filename'
+                        style={{width: '100%'}}
+                        input={
+                            <input
+                                id='filename'
+                                type='text'
+                                onChange={e => this.setTitle(e.target.value)}
+                            />
+                        }
+                    />
+                </div>
                 <div style={{margin: '5px'}}>
-                    <p>
+                    <p className='ow'>
                         <i className='fa fa-info-circle'/>
                         {` Filename to be used: ${this.state.title}`}
                     </p>
@@ -58,6 +68,6 @@ class ProcessForm extends React.Component {
     }
 }
 
-const DefaultFilename = 'Result.csv';
+const DefaultFilename = 'Result.zip';
 
 export default ProcessForm;

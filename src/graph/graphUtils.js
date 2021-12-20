@@ -1,18 +1,21 @@
-function openFileTooltip(graph) {
+function fileTooltip(graph) {
     return commonTooltip(graph) +
+        displayElement(graph, 'operation') +
         displayElement(graph, 'name');
 }
 
-function joinTooltip(graph) {
-    return commonTooltip(graph) +
-        displayElement(graph,'onLeft') +
-        displayElement(graph,'onRight') +
-        displayElement(graph, 'joinType');
-}
+function processTooltip(graph, config) {
+    let operation = graph.getData('operation');
 
-function filterTooltip(graph) {
-    return commonTooltip(graph) +
-        displayElement(graph,'condition');
+    let template = config.processing.operations
+        .find(op => op.operation === operation).template;
+    let str = commonTooltip(graph);
+
+    for (let attr of Object.keys(template)) {
+        str += displayElement(graph, attr);
+    }
+
+    return str;
 }
 
 function commonTooltip(graph) {
@@ -24,9 +27,8 @@ function displayElement(graph, id) {
 }
 
 const GraphUtils = {
-    openFileTooltip,
-    joinTooltip,
-    filterTooltip
+    fileTooltip,
+    processTooltip
 }
 
 export default GraphUtils;

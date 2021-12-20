@@ -32,7 +32,7 @@ class NodeForm extends React.Component {
         let validity = this.props.showNotStartedErrors ? 'invalid' : 'notStarted';
 
         switch (this.props.operation) {
-            case 'openFile':
+            case 'open_file':
                 return {
                     nodeObj: {
                         ...fileNodeConfig,
@@ -44,32 +44,44 @@ class NodeForm extends React.Component {
                         name: validity
                     }
                 };
-            case 'join':
+            case 'write_file':
                 return {
                     nodeObj: {
-                        ...processingNodeConfig,
-                        group: 'processing',
-                        operation: 'join',
-                        onLeft: null,
-                        onRight: null,
-                        joinType: 'left',
+                        ...fileNodeConfig,
+                        group: 'file',
+                        operation: 'write_file',
+                        name: null
                     },
                     inputValidity: {
-                        onLeft: validity,
-                        onRight: validity
+                        name: validity
                     }
                 };
-            case 'filter':
-                return {
-                    nodeObj: {},
-                    inputValidity: {}
-                };
             default:
+                let template = this.props.config.processing.operations
+                    .find(op => op.operation === this.props.operation).template;
                 return {
-                    nodeObj: {},
-                    inputValidity: {}
+                    nodeObj: {
+                        ...this.props.config.processing.generalTemplate,
+                        group: 'processing',
+                        ...template
+                    },
+                    inputValidity: {
+                        ...this.processingInputValidityStartState(template, validity)
+                    }
                 };
         }
+    }
+
+    processingInputValidityStartState(template, validity) {
+        let inputValidity = {};
+
+        for (let [key, value] of Object.entries(template)) {
+            if (value === null) {
+                inputValidity[key] = validity
+            }
+        }
+
+        return inputValidity;
     }
 
     setNodeObjKey(key, value) {
@@ -81,7 +93,6 @@ class NodeForm extends React.Component {
         });
     }
 
-    //redo - buggy as hell
     setInputValidity(id, isValid) {
         this.setState({
             inputValidity: {
@@ -128,116 +139,105 @@ class NodeForm extends React.Component {
         </div>
     }
 
-    joinForm() {
+    processElementContent() {
+        let operation = this.props.config.processing.operations.find(op => op.operation === this.props.operation);
+
         return <div
-            id='joinNodeForm'
+            id={'processingForm-' + this.props.operation}
             style={{
+                display: 'flex',
+                flexWrap: 'wrap',
                 width: '100%'
             }}
         >
-            <div
-                style={{
-                    display: 'inline-flex',
-                    width: '100%'
-                }}
-            >
-                <Input
-                    errorText='Please fill in this field.'
-                    title='On Left'
-                    isInvalid={this.state.inputValidity.onLeft === 'invalid'}
-                    style={{width: '50%'}}
-                    required={true}
-                    input={
-                        <input
-                            id='onLeft'
-                            type='text'
-                            onBlur={async e => {
-                                //validate content and set value if valid
-                                if (Validation.validateTextField(e)) {
-                                    await this.setNodeObjKey('onLeft', e.target.value)
-                                    this.props.setNodeTemplate(this.state.nodeObj);
-                                    this.setInputValidity('onLeft', 'valid');
-                                } else {
-                                    this.setInputValidity('onLeft', 'invalid');
-                                }
-                            }}
-                        />
-                    }
-                />
-                <Input
-                    errorText='Please fill in this field.'
-                    title='On Right'
-                    isInvalid={this.state.inputValidity.onRight === 'invalid'}
-                    style={{width: '50%'}}
-                    required={true}
-                    input={
-                        <input
-                            id='onRight'
-                            type='text'
-                            onBlur={async e => {
-                                //validate content and set value if valid
-                                if (Validation.validateTextField(e)) {
-                                    await this.setNodeObjKey('onRight', e.target.value)
-                                    this.props.setNodeTemplate(this.state.nodeObj);
-                                    this.setInputValidity('onRight', 'valid');
-                                } else {
-                                    this.setInputValidity('onRight', 'invalid');
-                                }
-                            }}
-                        />
-                    }
-                />
-            </div>
-            <div
-                style={{
-                    display: 'inline-flex',
-                    width: '100%'
-                }}
-            >
-                <Input
-                    title='Join Type'
-                    style={{width: '100%'}}
-                    required={true}
-                    input={
-                        <select
-                            id='joinType'
-                            style={{
-                                width: '100%',
-                                padding: '1px 2px'
-                            }}
-                            value={this.state.nodeObj.joinType}
-                            onChange={async e => {
-                                //validate content and set value if valid
-                                if (Validation.validateTextField(e)) {
-                                    await this.setNodeObjKey('joinType', e.target.value);
-                                    this.props.setNodeTemplate(this.state.nodeObj);
-                                }
-                            }}
-                        >
-                            {
-                                NodeList.find(x => x.id === 'join').type.map(function(type) {
-                                    return <option key={type} value={type}>
-                                        {type}
-                                    </option>
-                                })
-                            }
-                        </select>
-                    }
-                />
-            </div>
+            {
+                Object.keys(operation.template).filter(key => key !== 'operation').map(field =>
+                    this.generateField(field, operation[field])
+                )
+            }
         </div>
+    }
+
+    generateField(field, fieldConfig) {
+        switch (fieldConfig.input) {
+            case 'text':
+                return this.textField(field, fieldConfig);
+            case 'dropdown':
+                return this.dropdownField(field, fieldConfig);
+            default:
+                console.log('input unknown');
+        }
+    }
+
+    textField(field, fieldConfig) {
+        return <Input
+            key={field}
+            id={field}
+            errorText={fieldConfig.errorText ? fieldConfig.errorText : 'Please fill in this field.'}
+            title={fieldConfig.title}
+            isInvalid={this.state.inputValidity[field] === 'invalid'}
+            style={{width: fieldConfig.width ? fieldConfig.width : '100%'}}
+            required={fieldConfig.required}
+            input={
+                <input
+                    id={field}
+                    type='text'
+                    onBlur={async e => {
+                        if (Validation.validateTextField(e)) {
+                            await this.setNodeObjKey(field, e.target.value)
+                            this.props.setNodeTemplate(this.state.nodeObj);
+                            this.setInputValidity(field, 'valid');
+                        } else {
+                            this.setInputValidity(field, 'invalid');
+                        }
+                    }}
+                />
+            }
+        />
+    }
+
+    dropdownField(field, fieldConfig) {
+        return <Input
+            key={field}
+            id={field}
+            title={fieldConfig.title}
+            style={{width: fieldConfig.width ? fieldConfig.width : '100%'}}
+            required={fieldConfig.required}
+            input={
+                <select
+                    id={field}
+                    style={{
+                        width: '100%',
+                        padding: '1px 2px'
+                    }}
+                    value={fieldConfig.options[0]}
+                    onChange={async e => {
+                        if (Validation.validateTextField(e)) {
+                            await this.setNodeObjKey(field, e.target.value);
+                            this.props.setNodeTemplate(this.state.nodeObj);
+                        }
+                    }}
+                >
+                    {
+                        fieldConfig.options.map(function(type) {
+                            return <option key={type} value={type}>
+                                {type}
+                            </option>
+                        })
+                    }
+                </select>
+            }
+        />
     }
 
     renderFormContent() {
         switch(this.props.operation) {
-            case 'openFile':
+            case 'open_file':
                 return this.openFileForm();
-            case 'join':
-                return this.joinForm();
-            case 'filter':
-                return <div/>
+            case 'write_file':
+                return <div/>;
             default:
-                return <div/>
+                return this.processElementContent();
         }
     }
 
@@ -250,22 +250,12 @@ class NodeForm extends React.Component {
 
 export const NodeList = [
     {
-        id: 'openFile',
+        operation: 'open_file',
         name: 'Open File'
     },
     {
-        id: 'join',
-        name: 'Join',
-        type: [
-            'left',
-            'right',
-            'inner',
-            'outer'
-        ]
-    },
-    {
-        id: 'filter',
-        name: 'Filter'
+        operation: 'write_file',
+        name: 'Write File'
     }
 ];
 
@@ -283,24 +273,6 @@ const fileNodeConfig = {
     selected: {
         shape: "square",
         fill: "purple",
-        stroke: "3 #ffa000"
-    }
-};
-
-const processingNodeConfig = {
-    normal:   {
-        shape: "diamond",
-        fill: "turquoise",
-        stroke: null
-    },
-    hovered:  {
-        shape: "diamond",
-        fill: "turquoise",
-        stroke: "3 #ffa000"
-    },
-    selected: {
-        shape: "diamond",
-        fill: "turquoise",
         stroke: "3 #ffa000"
     }
 };

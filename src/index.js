@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Home from "./home/Home";
 
 ReactDOM.render(
-    <Home />,
+    <Home
+        config={JSON.parse(process.env.REACT_APP_CONFIG)}
+    />,
     document.getElementById('root')
 );

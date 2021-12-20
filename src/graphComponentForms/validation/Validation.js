@@ -20,9 +20,14 @@ function validateEdgePairing(edgeObj, existingEdgeList) {
     return 'valid';
 }
 
+function validateTextContent(str) {
+    return str && str.trim().length > 0;
+}
+
 let Validation = {
     validateTextField,
-    validateEdgePairing
+    validateEdgePairing,
+    validateTextContent
 };
 
 export default Validation;

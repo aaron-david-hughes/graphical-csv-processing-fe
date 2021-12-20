@@ -21,17 +21,16 @@ class ConfigPanel extends React.Component {
                 }}
             >
                 <GraphController
+                    config={this.props.config}
                     addNode={this.props.addNode}
                     editNode={this.props.editNode}
                     deleteNode={this.props.deleteNode}
-                    addEdge={this.props.addEdge}
-                    editEdge={this.props.editEdge}
-                    deleteEdge={this.props.deleteEdge}
                     addFile={this.props.addFile}
                     graphData={this.props.graphData}
                     setStep={this.props.setStep}
                     step={this.props.step}
                     editingId={this.props.editingId}
+                    addBanner={this.props.addBanner}
                 />
             </Collapsible>
 
@@ -42,7 +41,6 @@ class ConfigPanel extends React.Component {
                     marginBottom: '1rem'
                 }}
             >
-                {/*will have a file name option which will not be required*/}
                 <ProcessForm
                     onSubmitForm={this.props.onSubmitForm}
                 />

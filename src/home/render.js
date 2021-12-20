@@ -2,6 +2,7 @@ import Graph from '../graph/Graph'
 import ConfigPanel from '../configPanel/ConfigPanel';
 // import Switch from "../generalPurposeComponents/switch/Switch";
 import Popup from "../generalPurposeComponents/popup/Popup";
+import Banner from "../generalPurposeComponents/banner/Banner";
 import React from "react";
 
 function render(props, state) {
@@ -11,9 +12,10 @@ function render(props, state) {
             width: '100%'
         }}
     >
-        <div className='header'>
+        <div className='header' style={{backgroundColor: 'lightgray', borderBottom: '2px solid darkslategray'}}>
             <h1 className='title'>CSV Processor</h1>
             <button
+                className='headerButton'
                 style={{
                     border: 'none',
                     margin: '1rem'
@@ -29,6 +31,21 @@ function render(props, state) {
                     }}
                 />
             </button>
+        </div>
+
+        <div id='bannerSection' style={{width: '100%', position: 'fixed', zIndex: '1'}}>
+            {
+                state.banners.map(banner => {
+                    return <Banner
+                        key={banner.id}
+                        id={banner.id}
+                        msg={banner.msg}
+                        type={banner.type}
+                        timeToLive={banner.timeToLive ? banner.timeToLive : '5000'}
+                        removeBanner={props.removeBanner}
+                    />
+                })
+            }
         </div>
 
         <div
@@ -48,8 +65,12 @@ function render(props, state) {
                  }}
             >
                 <Graph
+                    config={state.config}
                     graphData={state.graphData}
                     setStep={props.setStep}
+                    addEdge={props.addEdge}
+                    deleteEdge={props.deleteEdge}
+                    addBanner={props.addBanner}
                 />
             </div>
 
@@ -60,18 +81,17 @@ function render(props, state) {
                     display: 'block',
                     margin: '1rem'
                 }}
+                config={state.config}
                 graphData={state.graphData}
                 onSubmitForm={props.onSubmitForm}
                 addFile={props.addFile}
                 addNode={props.addNode}
                 editNode={props.editNode}
                 deleteNode={props.deleteNode}
-                addEdge={props.addEdge}
-                editEdge={props.editEdge}
-                deleteEdge={props.deleteEdge}
                 setStep={props.setStep}
                 step={state.step}
                 editingId={state.editingId}
+                addBanner={props.addBanner}
             />
         </div>
 
@@ -96,5 +116,4 @@ function render(props, state) {
     </div>
 }
 
-//put form in the id=control section -> then test the click event listener for graph
 export default render;

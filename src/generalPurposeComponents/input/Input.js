@@ -5,7 +5,6 @@ class Input extends React.Component {
     render() {
         return <div
             id={this.props.input.props.id + '-inputDiv'}
-            className='formInput'
             style={this.props.isInvalid
                 ? {...this.props.style, borderColor: 'red !important', color: 'red'}
                 : {...this.props.style}

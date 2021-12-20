@@ -1,9 +1,9 @@
 import Axios from "axios";
 
-export function graphicalCsvProcessingAPI(formContent, fileName) {
+export function graphicalCsvProcessingAPI(formContent, fileName, addBanner) {
     const link = document.createElement("a");
     link.target = "_blank";
-    link.download = fileName ? fileName : 'CsvProcessingResults.csv';
+    link.download = fileName;
 
     const formData = new FormData();
     formContent.files.forEach(file => {
@@ -19,12 +19,26 @@ export function graphicalCsvProcessingAPI(formContent, fileName) {
         responseType: 'blob'
     }
 
-    Axios.post('http://localhost:8080/process', formData, config).then(response => {
-        link.href = URL.createObjectURL(
-            new Blob([response.data])
-        );
-        link.click();
-    }).catch(error => {
-        console.log(error);
-    });
+    if (formContent && formContent.files && formContent.files.length > 0 && formContent.graphData &&
+        formContent.graphData.nodes && formContent.graphData.nodes.length > 0) {
+        Axios.post(process.env.REACT_APP_CONFIG.backend, formData, config).then(response => {
+            link.href = URL.createObjectURL(
+                response.data
+            );
+            link.click();
+        }).catch(async error => {
+            if (error.response) {
+                let text = await error.response.data.text();
+                addBanner({
+                    msg: `Response code ${error.response.status}: ${text}`,
+                    type: 'failure'
+                });
+            } else {
+                addBanner({
+                    msg: 'An internal error has occurred',
+                    type: 'failure'
+                });
+            }
+        });
+    }
 }

@@ -1,0 +1,59 @@
+{
+  "backend": "http://localhost:8080/process",
+  "processing": {
+    "generalTemplate": {
+      "normal":   {
+        "shape": "diamond",
+        "fill": "turquoise",
+        "stroke": null
+      },
+      "hovered":  {
+        "shape": "diamond",
+        "fill": "turquoise",
+        "stroke": "3 #ffa000"
+      },
+      "selected": {
+        "shape": "diamond",
+        "fill": "turquoise",
+        "stroke": "3 #ffa000"
+      },
+      "group": "processing"
+    },
+    "operations": [
+      {
+        "operation": "join",
+        "name": "Join",
+        "template" : {
+          "operation": "join",
+          "onLeft": null,
+          "onRight": null,
+          "joinType": "left"
+        },
+        "onLeft": {
+          "input": "text",
+          "title": "On Left",
+          "width": "50%",
+          "required": true
+        },
+        "onRight": {
+          "input": "text",
+          "title": "On Right",
+          "width": "50%",
+          "required": true
+        },
+        "joinType": {
+          "input": "dropdown",
+          "title": "Join Type",
+          "width": "100%",
+          "required": true,
+          "options": [
+            "left",
+            "right",
+            "inner",
+            "outer"
+          ]
+        }
+      }
+    ]
+  }
+}

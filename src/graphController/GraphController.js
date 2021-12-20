@@ -1,7 +1,5 @@
 import React from 'react';
 import NodeForm, {NodeList as Nodes} from "../graphComponentForms/NodeForm";
-import EdgeForm from "../graphComponentForms/EdgeForm";
-import EditEdgeForm from "../graphComponentForms/EditEdgeForm";
 import EditNodeForm from "../graphComponentForms/EditNodeForm";
 
 class GraphController extends React.Component {
@@ -9,22 +7,21 @@ class GraphController extends React.Component {
     constructor(props) {
         super(props);
 
+        let nodeTypes = [
+            ...Nodes.map(node => {
+                return {name: node.name, operation: node.operation}
+            }),
+            ...props.config.processing.operations.map(node => {
+                return {name: node.name, operation: node.operation}
+            })
+        ];
+
         this.state = {
+            config: props.config,
             steps: [
                 {
-                    name: 'Add Node or Edge',
-                    prev: null,
-                    next: null
-                },
-                {
                     name: 'Node Type',
-                    prev: <button
-                        id='prev'
-                        title='prev'
-                        onClick={e => this.setStep(e, 'Add Node or Edge')}
-                    >
-                        prev
-                    </button>,
+                    prev: null,
                     next: <button
                         id='next'
                         title='next'
@@ -51,28 +48,11 @@ class GraphController extends React.Component {
                     </button>
                 },
                 {
-                    name: 'Edge Configuration',
-                    prev: <button
-                        id='prev'
-                        title='prev'
-                        onClick={e => this.setStep(e, 'Add Node or Edge')}
-                    >
-                        prev
-                    </button>,
-                    next: <button
-                        id='addNode'
-                        title='Add Node'
-                        onClick={e => this.submitGraphComponent(e, this.props.addEdge, this.state.edgeTemplate)}
-                    >
-                        add edge
-                    </button>
-                },
-                {
                     name: 'Edit Node',
                     prev: <button
                         id='editNodeCancel'
                         title='Cancel'
-                        onClick={e => this.setStep(e, 'Add Node or Edge')}
+                        onClick={e => this.setStep(e, 'Node Type')}
                     >
                         cancel
                     </button>,
@@ -83,73 +63,16 @@ class GraphController extends React.Component {
                     >
                         delete node
                     </button>
-                },
-                {
-                    name: 'Edit Edge',
-                    prev: <button
-                        id='editEdgeCancel'
-                        title='Cancel'
-                        onClick={e => this.setStep(e, 'Add Node or Edge')}
-                    >
-                        cancel
-                    </button>,
-                    next: <div
-                        style={{
-                            display: 'inline-flex'
-                        }}
-                    >
-                        <button
-                            id='deleteEdge'
-                            title='Delete Edge'
-                            onClick={e => this.deleteEdge(e, this.props.editingId)}
-                        >
-                            delete edge
-                        </button>
-                        <button
-                            id='editEdge'
-                            title='Edit Edge'
-                            onClick={e => this.editGraphComponent(e, this.props.editEdge, this.state.editEdgeTemplate)}
-                        >
-                            edit edge
-                        </button>
-                    </div>
                 }
             ],
-            nodeType: Nodes[0].id,
+            nodeTypes: nodeTypes,
+            nodeType: Nodes[0].operation,
             nodeTemplate: {},
             editNodeTemplate: {},
-            edgeTemplate: {},
-            editEdgeTemplate: {},
             isFormValid: false,
             showNotStartedErrors: false,
             file: null
         };
-    }
-
-    //good bar css
-    initialStage() {
-        return <div id='initialFormStage' style={{display: 'inline-flex', width: '100%'}}>
-            <button
-                id='nodeBtn'
-                onClick={e => this.setStep(e, 'Node Type')}
-                style={{
-                    width: '50%',
-                    margin: '1rem'
-                }}
-            >
-                Add Node
-            </button>
-            <button
-                id='edgeBtn'
-                onClick={e => this.setStep(e, 'Edge Configuration')}
-                style={{
-                    width: '50%',
-                    margin: '1rem'
-                }}
-            >
-                Add Edge
-            </button>
-        </div>
     }
 
     nodeTypeStage() {
@@ -162,8 +85,8 @@ class GraphController extends React.Component {
                 value={this.state.nodeType}
             >
                 {
-                    Nodes.map(function(type) {
-                        return <option key={type.id} value={type.id}>
+                    this.state.nodeTypes.map(function(type) {
+                        return <option key={type.operation} value={type.operation}>
                             {type.name}
                         </option>
                     })
@@ -181,6 +104,7 @@ class GraphController extends React.Component {
     nodeConfigStage() {
         return <div>
             <NodeForm
+                config={this.state.config}
                 operation={this.state.nodeType}
                 setNodeTemplate={this.setNodeTemplate.bind(this)}
                 setIsFormValid={this.setIsFormValid.bind(this)}
@@ -196,28 +120,7 @@ class GraphController extends React.Component {
             <EditNodeForm
                 graphData={this.props.graphData}
                 editingId={this.props.editingId}
-                setEditEdgeTemplate={this.setEditNodeTemplate.bind(this)}
-            />
-        </div>
-    }
-
-    // todo: fix bug where when less than 2 nodes exist, useless edge gets drawn
-    edgeStage() {
-        return <div>
-            <EdgeForm
-                setEdgeTemplate={this.setEdgeTemplate.bind(this)}
-                setIsFormValid={this.setIsFormValid.bind(this)}
-                graphData={this.props.graphData}
-            />
-        </div>
-    }
-
-    editEdgeStage() {
-        return <div>
-            <EditEdgeForm
-                graphData={this.props.graphData}
-                editingId={this.props.editingId}
-                setEditEdgeTemplate={this.setEditEdgeTemplate.bind(this)}
+                setEditNodeTemplate={this.setEditNodeTemplate.bind(this)}
             />
         </div>
     }
@@ -241,10 +144,10 @@ class GraphController extends React.Component {
                 }
             >
                 {
-                    step.prev
+                    step.prev ? step.prev : <div/>
                 }
                 {
-                    step.next
+                    step.next ? step.next : <div/>
                 }
             </div>
         </div>
@@ -252,19 +155,13 @@ class GraphController extends React.Component {
 
     stepComponentSwitch(step) {
         switch(step) {
-            case 'Node Type':
-                return this.nodeTypeStage();
             case 'Node Configuration':
                 return this.nodeConfigStage();
-            case 'Edge Configuration':
-                return this.edgeStage();
-            case 'Edit Edge':
-                return this.editEdgeStage();
             case 'Edit Node':
                 return this.editNodeStage();
-            case 'Add Node or Edge':
+            case 'Node Type':
             default:
-                return this.initialStage();
+                return this.nodeTypeStage();
         }
     }
 
@@ -294,18 +191,6 @@ class GraphController extends React.Component {
         });
     }
 
-    setEdgeTemplate(obj) {
-        this.setState({
-            edgeTemplate: obj
-        });
-    }
-
-    setEditEdgeTemplate(obj) {
-        this.setState({
-            editEdgeTemplate: obj
-        });
-    }
-
     async setIsFormValid(isValid) {
         for(const entry of Object.entries(isValid)) {
             await this.setState({
@@ -322,6 +207,17 @@ class GraphController extends React.Component {
 
         if (element && element.files && element.files.item(0) && element.files.item(0).name) {
             filename = element.files.item(0).name;
+
+            if (this.props.graphData.nodes
+                .filter(node => node.operation === 'open_file')
+                .find(node => node.name === filename)
+            ) {
+                this.props.addBanner({
+                    msg: `Multiple files with filename '${filename}' may cause unexpected behaviour`,
+                    type: 'warning'
+                });
+            }
+
             this.setState({
                 file: element.files.item(0)
             });
@@ -335,7 +231,7 @@ class GraphController extends React.Component {
 
         editFunc(graphComponent);
 
-        this.setStep(e, 'Add Node or Edge');
+        this.setStep(e, 'Add Node');
     }
 
     //todo: bug around validation => join onRight allowed null... only once it has been blurred once
@@ -353,24 +249,16 @@ class GraphController extends React.Component {
                 this.props.addFile(this.state.file);
             }
 
-            this.setStep(e, 'Add Node or Edge');
+            this.setStep(e, 'Node Type');
         }
-    }
-
-    deleteEdge(e, edgeId) {
-        e.preventDefault();
-
-        this.props.deleteEdge(edgeId);
-
-        this.setStep(e, 'Add Node or Edge');
     }
 
     deleteNode(e, nodeId) {
         e.preventDefault();
 
-        this.props.deleteNode(nodeId);
-
-        this.setStep(e, 'Add Node or Edge');
+        // this.props.deleteNode(nodeId);
+        //
+        // this.setStep(e, 'Node Type');
     }
 
     render() {
