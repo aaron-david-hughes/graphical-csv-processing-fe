@@ -14,7 +14,6 @@ class Banner extends React.Component {
     }
 
     componentDidMount() {
-        console.log('banner timeout set ' + this.props.msg)
         setTimeout(() => this.props.removeBanner(this.state.id), this.state.timeToLive);
     }
 

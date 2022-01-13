@@ -3,49 +3,82 @@ import AnyChart from 'anychart-react/dist/anychart-react.min';
 import anychart from 'anychart';
 import GraphUtils from './graphUtils';
 
+let graph;
+let fromNode = null;
+
 class Graph extends React.Component {
+
     constructor(props) {
         super(props);
+
         this.state = {
             config: props.config,
-            graphData: props.graphData,
-            fromNode: null
+            graphData: Graph.determineNodeBorderColor(props.graphData, props.invalidNodes)
         }
     }
 
     static getDerivedStateFromProps(props, state) {
-        if (props.graphData !== state.graphData) {
+        if (graph && graph.da) {
+            Graph.saveCoordinates(props.graphData);
+
             return {
                 ...state,
-                graphData: props.graphData
+                graphData: Graph.determineNodeBorderColor(props.graphData, props.invalidNodes)
             };
         }
+
         return null;
+    }
+
+    static determineNodeBorderColor(graphData, invalidNodes) {
+        for (let i in graphData.nodes) {
+            if (!graphData.nodes.hasOwnProperty(i)) continue;
+
+            let strokeColor = invalidNodes.find(id => id === graphData.nodes[i].id) ? '3 #FF272A' : '3 #686868';
+
+            graphData.nodes[i].normal.stroke = strokeColor;
+            graphData.nodes[i].hovered.stroke = strokeColor;
+            graphData.nodes[i].selected.stroke = strokeColor;
+        }
+
+        return graphData;
+    }
+
+    static saveCoordinates(graphData) {
+        if (graph && graph.da) {
+            for (let node of graphData.nodes) {
+                let coordinates = graph.da.find(n => n.id === node.id);
+
+                if (coordinates && coordinates.position) {
+                    node.x = coordinates.position.x;
+                    node.y = coordinates.position.y;
+                }
+            }
+        }
     }
 
     setNodeLabels(nodes) {
         nodes.labels().enabled(true);
-        nodes.labels().format('{%operation}');
+        nodes.labels().format('{%id}: {%operation}');
         nodes.labels().fontSize(12);
         nodes.labels().fontColor('#333333');
         nodes.labels().fontWeight(600);
     }
 
     setNodeAppearance(nodes) {
-        nodes.normal().stroke("#333333", 1);
-        nodes.hovered().stroke("#333333", 2);
-        nodes.selected().stroke("#333333", 3);
-
         nodes.normal().height(35);
         nodes.hovered().height(40);
         nodes.selected().height(45);
+
+        nodes.normal().stroke()
     }
 
-    setTooltip(chart) {
+    //TODO: indicate problem in node
+    setTooltip() {
         let config = this.state.config;
 
-        chart.tooltip().useHtml(true);
-        chart.tooltip().format(function() {
+        graph.tooltip().useHtml(true);
+        graph.tooltip().format(function() {
             if (this.type === 'node') {
                 switch(this.getData('operation')) {
                     case 'open_file':
@@ -66,32 +99,37 @@ class Graph extends React.Component {
         arrows.size(15);
     }
 
-    setZoom(chart) {
+    setZoom() {
         let zoomController = anychart.ui.zoom();
-        zoomController.target(chart);
+        zoomController.target(graph);
         zoomController.render();
     }
 
-    addClickListener(chart) {
-        let setStep = this.props.setStep;
+    editNodeListener() {
+        let setEditNode = this.props.setEditNode;
+        let props = this.props;
+        let listenerCoordinateSave = Graph.saveCoordinates.bind(this);
 
-        //todo: currently rerender loses graph position (store x,y on each node) => not critical but would be nice
-        chart.listen('dblClick', function(e) {
+        graph.listen('dblClick', function(e) {
             let tag = e.domTarget.tag;
+            fromNode = null;
 
             if (tag) {
                 if (tag.type === 'node') {
-                    setStep('Edit Node', tag.id);
+                    setEditNode(tag.id);
                 }
             }
+
+            listenerCoordinateSave(props.graphData);
         });
     }
 
-    deleteEdgeListener(chart) {
+    deleteEdgeListener() {
         let deleteEdge = this.props.deleteEdge;
         let props = this.props;
+        let listenerCoordinateSave = Graph.saveCoordinates.bind(this);
 
-        chart.listen('dblClick', function(e) {
+        graph.listen('dblClick', function(e) {
             let tag = e.domTarget.tag;
 
             if (tag) {
@@ -104,78 +142,92 @@ class Graph extends React.Component {
                     })
                 }
             }
+
+            listenerCoordinateSave(props.graphData);
         });
     }
 
-    edgeListener(chart) {
+    edgeListener() {
         let state = this.state;
         let props = this.props;
-        let setState = this.setState.bind(this);
         let editEdges = this.editEdges;
+        let listenerCoordinateSave = Graph.saveCoordinates.bind(this);
 
-        chart.listen('click', function(e) {
+        graph.listen('click', function(e) {
             let tag = e.domTarget.tag;
 
             if (tag && tag.type === 'node') {
-                editEdges(state, tag, props, setState);
+                setTimeout(() => {
+                    editEdges(state, tag, props);
+                    listenerCoordinateSave(props.graphData);
+                }, 1000);
+            } else {
+                listenerCoordinateSave(props.graphData);
             }
         });
     }
 
-    editEdges(state, tag, props, setState) {
-        if (state.fromNode) {
-            if (state.fromNode !== tag.id)  {
+    editEdges(state, tag, props) {
+        //check that if coords change dont do edge logic
+        for (let node of state.graphData.nodes) {
+            let graphNode = graph.da.find(n => n.id === node.id);
+
+            if (graphNode && graphNode.position && (node.x !== graphNode.position.x || node.y !== graphNode.position.y)) {
+                return;
+            }
+        }
+
+        if (fromNode) {
+            if (fromNode !== tag.id)  {
                 let edges = state.graphData.edges;
-                if (edges.filter(edge => edge.from === state.fromNode).filter(edge => edge.to === tag.id).length > 0) {
+                if (edges.filter(edge => edge.from === fromNode).filter(edge => edge.to === tag.id).length > 0) {
                     props.addBanner({
-                        msg: `Edge already exists between ${state.fromNode} and ${tag.id}, you can double click the edge to delete it.`,
+                        msg: `Edge already exists between ${fromNode} and ${tag.id}, you can double click the edge to delete it.`,
                         type: 'failure'
                     });
-                } else if (edges.filter(edge => edge.from === tag.id).filter(edge => edge.to === state.fromNode).length > 0) {
+                } else if (edges.filter(edge => edge.from === tag.id).filter(edge => edge.to === fromNode).length > 0) {
                     props.addBanner({
-                        msg: `An edge between ${state.fromNode} and ${tag.id} already exists.`,
-                        type: 'warning'
+                        msg: `An edge between ${fromNode} and ${tag.id} already exists.`,
+                        type: 'failure'
                     });
                 } else {
                     props.addEdge({
-                        from: state.fromNode,
+                        from: fromNode,
                         to: tag.id
                     });
 
                     props.addBanner({
-                        msg: `Edge added from ${state.fromNode} to ${tag.id}`,
+                        msg: `Edge added from ${fromNode} to ${tag.id}`,
                         type: 'success'
                     });
                 }
             }
 
-            setState({
-                fromNode: null
-            });
+            fromNode = null;
         } else {
-            setState({
-                fromNode: tag.id
-            });
+            fromNode = tag.id;
         }
+
+        console.log(fromNode);
     }
 
     render() {
-        let chart = anychart.graph();
+        graph = anychart.graph();
 
-        chart.contextMenu(false);
-        this.setNodeLabels(chart.nodes());
-        this.setNodeAppearance(chart.nodes());
-        this.setTooltip(chart);
-        this.setArrows(chart.edges());
-        this.setZoom(chart);
-        this.addClickListener(chart);
-        this.edgeListener(chart);
-        this.deleteEdgeListener(chart);
-        chart.interactivity(false);
+        graph.contextMenu(false);
+        this.setNodeLabels(graph.nodes());
+        this.setNodeAppearance(graph.nodes());
+        this.setArrows(graph.edges());
+        this.setZoom();
+        this.setTooltip();
+        this.editNodeListener();
+        this.edgeListener();
+        this.deleteEdgeListener();
+        graph.layout().type('fixed');
 
         return <AnyChart
             id='graphCanvas'
-            instance={chart}
+            instance={graph}
             data={this.state.graphData}
         />;
     }

@@ -4,18 +4,15 @@
     "generalTemplate": {
       "normal":   {
         "shape": "diamond",
-        "fill": "turquoise",
-        "stroke": null
+        "fill": "#686868"
       },
       "hovered":  {
         "shape": "diamond",
-        "fill": "turquoise",
-        "stroke": "3 #ffa000"
+        "fill": "#686868"
       },
       "selected": {
         "shape": "diamond",
-        "fill": "turquoise",
-        "stroke": "3 #ffa000"
+        "fill": "#686868"
       },
       "group": "processing"
     },

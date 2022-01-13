@@ -1,87 +1,63 @@
 import React from 'react';
 import Input from "../generalPurposeComponents/input/Input";
 import Validation from "./validation/Validation";
+import FormContentGenerator from "../formContentGenerator/FormContentGenerator";
+import {nodeDependentState} from './utils/FileNodes';
 
 class NodeForm extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = this.setOperationDependantState();
+        this.state = nodeDependentState(
+            !!this.props.node,
+            this.props.showNotStartedErrors,
+            this.props.config,
+            this.props.operation
+        );
     }
 
     static getDerivedStateFromProps(props, state) {
-        if (props.showNotStartedErrors) {
-            let obj = state.inputValidity;
+        let inputValidity = null;
 
-            for (const [key, value] of Object.entries(obj)) {
+        if (props.showNotStartedErrors) {
+            inputValidity = state.inputValidity;
+
+            for (const [key, value] of Object.entries(inputValidity)) {
                 if (value === 'notStarted') {
-                    obj[key] = 'invalid';
+                    inputValidity[key] = 'invalid';
                 }
             }
+        }
 
-            return {
+        let newOperationState = null
+
+        if (props.operation !== state.nodeObj.operation) {
+            newOperationState = nodeDependentState(
+                !!props.node,
+                props.showNotStartedErrors,
+                props.config,
+                props.operation
+            );
+        }
+
+        let returnState = null;
+
+        if (newOperationState) {
+            returnState = {
                 ...state,
-                inputValidity: obj
-            }
-        }
-        return null;
-    }
-
-    setOperationDependantState() {
-        let validity = this.props.showNotStartedErrors ? 'invalid' : 'notStarted';
-
-        switch (this.props.operation) {
-            case 'open_file':
-                return {
-                    nodeObj: {
-                        ...fileNodeConfig,
-                        group: 'file',
-                        operation: 'open_file',
-                        name: null
-                    },
-                    inputValidity: {
-                        name: validity
-                    }
-                };
-            case 'write_file':
-                return {
-                    nodeObj: {
-                        ...fileNodeConfig,
-                        group: 'file',
-                        operation: 'write_file',
-                        name: null
-                    },
-                    inputValidity: {
-                        name: validity
-                    }
-                };
-            default:
-                let template = this.props.config.processing.operations
-                    .find(op => op.operation === this.props.operation).template;
-                return {
-                    nodeObj: {
-                        ...this.props.config.processing.generalTemplate,
-                        group: 'processing',
-                        ...template
-                    },
-                    inputValidity: {
-                        ...this.processingInputValidityStartState(template, validity)
-                    }
-                };
-        }
-    }
-
-    processingInputValidityStartState(template, validity) {
-        let inputValidity = {};
-
-        for (let [key, value] of Object.entries(template)) {
-            if (value === null) {
-                inputValidity[key] = validity
+                ...newOperationState
             }
         }
 
-        return inputValidity;
+        if (inputValidity) {
+            returnState = {
+                ...returnState,
+                inputValidity
+            }
+        }
+
+        return returnState;
     }
 
     setNodeObjKey(key, value) {
@@ -112,10 +88,25 @@ class NodeForm extends React.Component {
         >
             <div
                 style={{
-                    display: 'inline-flex',
+                    display: 'flex',
+                    flexWrap: 'wrap',
                     width: '100%'
                 }}
             >
+                {
+                    this.props.node && this.props.node.operation === this.props.operation
+                        ? <div
+                            style={{
+                                width: '100%'
+                            }}
+                        >
+                            <p>
+                                Currently using <strong>{this.props.node.name}</strong>.
+                                Supply a file below and save changes to change.
+                            </p>
+                        </div>
+                        : null
+                }
                 <Input
                     errorText='Please supply a csv file.'
                     title='File'
@@ -128,9 +119,9 @@ class NodeForm extends React.Component {
                             type='file'
                             accept='text/csv'
                             onChange={async e => {
-                                await this.setNodeObjKey('name', this.props.getFileAndName(e));
+                                await this.setNodeObjKey('name', this.getFileAndName(e));
                                 this.props.setNodeTemplate(this.state.nodeObj);
-                                this.setInputValidity('name', 'valid')
+                                this.setInputValidity('name', this.props.file.file ? 'valid' : 'invalid')
                             }}
                         />
                     }
@@ -139,95 +130,37 @@ class NodeForm extends React.Component {
         </div>
     }
 
-    processElementContent() {
-        let operation = this.props.config.processing.operations.find(op => op.operation === this.props.operation);
-
+    writeFileForm() {
         return <div
-            id={'processingForm-' + this.props.operation}
+            id='writeFileNodeForm'
             style={{
-                display: 'flex',
-                flexWrap: 'wrap',
                 width: '100%'
             }}
         >
-            {
-                Object.keys(operation.template).filter(key => key !== 'operation').map(field =>
-                    this.generateField(field, operation[field])
-                )
-            }
-        </div>
-    }
-
-    generateField(field, fieldConfig) {
-        switch (fieldConfig.input) {
-            case 'text':
-                return this.textField(field, fieldConfig);
-            case 'dropdown':
-                return this.dropdownField(field, fieldConfig);
-            default:
-                console.log('input unknown');
-        }
-    }
-
-    textField(field, fieldConfig) {
-        return <Input
-            key={field}
-            id={field}
-            errorText={fieldConfig.errorText ? fieldConfig.errorText : 'Please fill in this field.'}
-            title={fieldConfig.title}
-            isInvalid={this.state.inputValidity[field] === 'invalid'}
-            style={{width: fieldConfig.width ? fieldConfig.width : '100%'}}
-            required={fieldConfig.required}
-            input={
-                <input
-                    id={field}
-                    type='text'
-                    onBlur={async e => {
-                        if (Validation.validateTextField(e)) {
-                            await this.setNodeObjKey(field, e.target.value)
-                            this.props.setNodeTemplate(this.state.nodeObj);
-                            this.setInputValidity(field, 'valid');
-                        } else {
-                            this.setInputValidity(field, 'invalid');
-                        }
-                    }}
-                />
-            }
-        />
-    }
-
-    dropdownField(field, fieldConfig) {
-        return <Input
-            key={field}
-            id={field}
-            title={fieldConfig.title}
-            style={{width: fieldConfig.width ? fieldConfig.width : '100%'}}
-            required={fieldConfig.required}
-            input={
-                <select
-                    id={field}
-                    style={{
-                        width: '100%',
-                        padding: '1px 2px'
-                    }}
-                    value={fieldConfig.options[0]}
-                    onChange={async e => {
-                        if (Validation.validateTextField(e)) {
-                            await this.setNodeObjKey(field, e.target.value);
-                            this.props.setNodeTemplate(this.state.nodeObj);
-                        }
-                    }}
-                >
-                    {
-                        fieldConfig.options.map(function(type) {
-                            return <option key={type} value={type}>
-                                {type}
-                            </option>
-                        })
+            <div
+                style={{
+                    display: 'inline-flex',
+                    width: '100%'
+                }}
+            >
+                <Input
+                    id={'nameTextField'}
+                    errorText={'Please fill in this field.'}
+                    title={'Filename'}
+                    isInvalid={this.state.inputValidity.name === 'invalid'}
+                    style={{width: '100%'}}
+                    required={true}
+                    input={
+                        <input
+                            id={'nameTextInput'}
+                            type='text'
+                            defaultValue={this.props.node && this.props.node.operation === 'write_file' ? this.props.node.name : null}
+                            onBlur={async e => this.textOnBlur.bind(this)(e, 'name')}
+                        />
                     }
-                </select>
-            }
-        />
+                />
+            </div>
+        </div>
     }
 
     renderFormContent() {
@@ -235,10 +168,67 @@ class NodeForm extends React.Component {
             case 'open_file':
                 return this.openFileForm();
             case 'write_file':
-                return <div/>;
+                return this.writeFileForm();
             default:
-                return this.processElementContent();
+                return <FormContentGenerator
+                    config={this.props.config}
+                    inputValidity={this.state.inputValidity}
+                    nodeOperation={this.props.operation}
+                    node={this.props.node}
+                    inputActionFunctions={{
+                        text: {
+                            onBlur: this.textOnBlur.bind(this)
+                        },
+                        dropdown: {
+                            onChange: this.dropdownOnChange.bind(this)
+                        }
+                    }}
+                />
         }
+    }
+
+    async textOnBlur(e, field) {
+        if (Validation.validateTextField(e)) {
+            await this.setNodeObjKey(field, e.target.value)
+            this.props.setNodeTemplate(this.state.nodeObj);
+            this.setInputValidity(field, 'valid');
+        } else {
+            this.setInputValidity(field, 'invalid');
+        }
+    }
+
+    async dropdownOnChange(e, field) {
+        if (Validation.validateTextField(e)) {
+            await this.setNodeObjKey(field, e.target.value);
+            this.props.setNodeTemplate(this.state.nodeObj);
+        }
+    }
+
+    getFileAndName(e) {
+        let id = e.target.id;
+        let element = document.getElementById(id);
+        let filename = '';
+        let file = null;
+
+        if (element && element.files && element.files.item(0) && element.files.item(0).name) {
+            filename = element.files.item(0).name;
+
+            if (this.props.graphData.nodes
+                .filter(node => node.operation === 'open_file')
+                .find(node => node.name === filename)
+            ) {
+                this.props.addBanner({
+                    msg: `Multiple files with filename '${filename}' may cause unexpected behaviour`,
+                    type: 'warning'
+                });
+            }
+
+            file = element.files.item(0);
+        }
+
+        this.props.setFileAndName(file, filename);
+
+        return filename;
     }
 
     render() {
@@ -247,34 +237,5 @@ class NodeForm extends React.Component {
         </div>
     }
 }
-
-export const NodeList = [
-    {
-        operation: 'open_file',
-        name: 'Open File'
-    },
-    {
-        operation: 'write_file',
-        name: 'Write File'
-    }
-];
-
-const fileNodeConfig = {
-    normal:   {
-        shape: "square",
-        fill: "purple",
-        stroke: null
-    },
-    hovered:  {
-        shape: "square",
-        fill: "purple",
-        stroke: "3 #ffa000"
-    },
-    selected: {
-        shape: "square",
-        fill: "purple",
-        stroke: "3 #ffa000"
-    }
-};
 
 export default NodeForm;

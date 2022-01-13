@@ -1,9 +1,10 @@
 import Graph from '../graph/Graph'
 import ConfigPanel from '../configPanel/ConfigPanel';
-// import Switch from "../generalPurposeComponents/switch/Switch";
 import Popup from "../generalPurposeComponents/popup/Popup";
 import Banner from "../generalPurposeComponents/banner/Banner";
 import React from "react";
+import EditNodeController from "../graphController/EditNodeController";
+import Input from "../generalPurposeComponents/input/Input";
 
 function render(props, state) {
     return <div
@@ -67,11 +68,50 @@ function render(props, state) {
                 <Graph
                     config={state.config}
                     graphData={state.graphData}
-                    setStep={props.setStep}
                     addEdge={props.addEdge}
+                    setEditNode={props.setEditNode}
                     deleteEdge={props.deleteEdge}
                     addBanner={props.addBanner}
+                    invalidNodes={state.invalidNodes}
                 />
+
+                <div id='graphButtons'
+                     style={{width: '100%', display: 'inline-flex'}}
+                >
+                    <div
+                        style={{width: '50%', display: 'flex', justifyContent: 'left'}}
+                    >
+                        <button
+                            className='freeButton'
+                            id='saveButton'
+                            title='Save Graph'
+                            onClick={props.switchSavePopup}
+                        >
+                            save graph
+                        </button>
+                        <button
+                            className='freeButton'
+                            id='loadButton'
+                            title='Load Graph'
+                            onClick={props.switchLoadPopup}
+                        >
+                            load graph
+                        </button>
+                    </div>
+
+                    <div
+                        style={{width: '50%', display: 'flex', justifyContent: 'right'}}
+                    >
+                        <button
+                            className='freeButton'
+                            id='clearButton'
+                            title='Clear Graph'
+                            onClick={props.clearGraph}
+                        >
+                            clear graph
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <ConfigPanel
@@ -86,20 +126,50 @@ function render(props, state) {
                 onSubmitForm={props.onSubmitForm}
                 addFile={props.addFile}
                 addNode={props.addNode}
-                editNode={props.editNode}
-                deleteNode={props.deleteNode}
-                setStep={props.setStep}
-                step={state.step}
-                editingId={state.editingId}
                 addBanner={props.addBanner}
+                graphValid={state.graphValid}
             />
         </div>
 
-        <div id='saveLoad'>
-            <button className='freeButton'>Save Graph</button>
-            <button className='freeButton'>Save Graph with Config</button>
-            <button className='freeButton'>Load Graph</button>
-        </div>
+        {/*<div id='buttonRow' style={{width: '100%'}}>*/}
+        {/*    <div id='graphButtons'*/}
+        {/*         style={{display: 'inline-flex'}}*/}
+        {/*    >*/}
+        {/*        <div*/}
+        {/*            style={{width: '50%', justifyContent: 'left'}}*/}
+        {/*        >*/}
+        {/*            <button*/}
+        {/*                className='freeButton'*/}
+        {/*                id='saveButton'*/}
+        {/*                title='Save Graph'*/}
+        {/*                onClick={props.switchSavePopup}*/}
+        {/*            >*/}
+        {/*                Save Graph*/}
+        {/*            </button>*/}
+        {/*            <button*/}
+        {/*                className='freeButton'*/}
+        {/*                id='loadButton'*/}
+        {/*                title='Load Graph'*/}
+        {/*                onClick={props.switchLoadPopup}*/}
+        {/*            >*/}
+        {/*                Load Graph*/}
+        {/*            </button>*/}
+        {/*        </div>*/}
+
+        {/*        <div*/}
+        {/*            style={{width: '50%', justifyContent: 'right'}}*/}
+        {/*        >*/}
+        {/*            <button*/}
+        {/*                className='freeButton'*/}
+        {/*                id='clearButton'*/}
+        {/*                title='Clear Graph'*/}
+        {/*                onClick={props.clearGraph}*/}
+        {/*            >*/}
+        {/*                Clear Graph*/}
+        {/*            </button>*/}
+        {/*        </div>*/}
+        {/*    </div>*/}
+        {/*</div>*/}
 
         <Popup
             id='settingsPopup'
@@ -113,6 +183,170 @@ function render(props, state) {
             <br />
             <p>world!</p>
         </Popup>
+
+        {
+            state.savePopup ?
+                <Popup
+                    id='savePopup'
+                    title='Save Graph'
+                    isOpen={true}
+                    close={props.switchSavePopup}
+                    width='35%'
+                    height='35%'
+                >
+                    {
+                        !props.canSaveGraph()
+                            ? <p className='ow' style={{color: 'red'}}>
+                                <i className='fa fa-info-circle'/>
+                                {` You cannot save an invalid graph`}
+                            </p>
+                            : null
+                    }
+                    {
+                        state.graphData.nodes.length <= 0
+                            ? <p className='ow' style={{color: 'red'}}>
+                                <i className='fa fa-info-circle'/>
+                                {` No graph to save`}
+                            </p>
+                            : null
+                    }
+                    <div
+                        style={{
+                            width: '100%'
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: '100%',
+                                display: 'inline-flex'
+                            }}
+                        >
+                            <Input
+                                title='Graph Save Name'
+                                style={{width: '100%'}}
+                                input={
+                                    <input
+                                        id='graphSaveFilename'
+                                        disabled={!props.canSaveGraph() || state.graphData.nodes.length <= 0}
+                                        type='text'
+                                        onChange={e => props.setSaveGraphFilename(e.target.value)}
+                                    />
+                                }
+                            />
+                        </div>
+                        <div style={{margin: '5px'}}>
+                            <p className='ow'>
+                                <i className='fa fa-info-circle'/>
+                                {` Using filename: ${state.saveGraphFilename}`}
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        style={{
+                            display: 'inline-flex',
+                            width: '100%',
+                            justifyContent: 'space-evenly'
+                        }}
+                    >
+                        <button
+                            id='saveWithConfigButton'
+                            title='Save with Config'
+                            disabled={!props.canSaveGraph() || state.graphData.nodes.length <= 0}
+                            onClick={e => {
+                                e.preventDefault();
+                                props.saveGraphWithConfig(state.saveGraphFilename);
+                            }}
+                            style={{
+                                width: '30%'
+                            }}
+                        >
+                            <strong><h4 style={{textDecoration: 'underline'}}>Save with Config</h4></strong>
+                            <p>Saves each nodes configuration as it stands, along with the files supplied.</p>
+                        </button>
+                        <button
+                            id='saveConfigTemplateButton'
+                            title='Save Config Template'
+                            disabled={!props.canSaveGraph() || state.graphData.nodes.length <= 0}
+                            onClick={e => {
+                                e.preventDefault();
+                                props.saveGraphConfigTemplate(state.saveGraphFilename);
+                            }}
+                            style={{
+                                width: '30%'
+                            }}
+                        >
+                            <strong><h4 style={{textDecoration: 'underline'}}>Save Config Template</h4></strong>
+                            <p>Saves all but input files, enabling for template ease of use for repetitive processes.</p>
+                        </button>
+                        <button
+                            id='saveTemplateButton'
+                            title='Save Template'
+                            disabled={!props.canSaveGraph() || state.graphData.nodes.length <= 0}
+                            onClick={e => {
+                                e.preventDefault();
+                                props.saveGraphTemplate(state.saveGraphFilename);
+                            }}
+                            style={{
+                                width: '30%'
+                            }}
+                        >
+                            <strong><h4 style={{textDecoration: 'underline'}}>Save Template</h4></strong>
+                            <p>Saves the layout of nodes and edges, without node configuration.</p>
+                        </button>
+                    </div>
+                </Popup>
+                : null
+        }
+
+        {
+            state.loadPopup ?
+                <Popup
+                    id='loadPopup'
+                    title='Load Graph'
+                    isOpen={true}
+                    close={props.switchLoadPopup}
+                    width='35%'
+                    height='35%'
+                >
+                    <input
+                        id='loadGraphFileInput'
+                        type='file'
+                        accept='application/json'
+                        onChange={e => {
+                            e.preventDefault();
+                            props.loadGraph(e);
+                        }}
+                    />
+                </Popup>
+                : null
+        }
+
+        {
+            state.editingNode ?
+                <Popup
+                    id='editNodePopup'
+                    title='Edit Node'
+                    isOpen={true}
+                    close={props.unsetEditNode}
+                    width='35%'
+                    height='35%'
+                >
+                    <EditNodeController
+                        graphData={state.graphData}
+                        config={state.config}
+                        editNode={props.editNode}
+                        deleteNode={props.deleteNode}
+                        close={props.unsetEditNode}
+                        addFile={props.addFile}
+                        removeFile={props.removeFile}
+                        addBanner={props.addBanner}
+                        node={state.editingNode}
+                        invalidNodes={state.invalidNodes}
+                        setValidNode={props.setValidNode}
+                    />
+                </Popup>
+                : null
+        }
     </div>
 }
 

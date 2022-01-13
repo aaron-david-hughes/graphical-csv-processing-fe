@@ -1,6 +1,6 @@
 import React from 'react';
 import Collapsible from "../generalPurposeComponents/collapsible/Collapsible";
-import GraphController from "../graphController/GraphController";
+import AddNodeController from "../graphController/AddNodeController";
 import ProcessForm from "../processForm/ProcessForm";
 
 class ConfigPanel extends React.Component {
@@ -14,22 +14,17 @@ class ConfigPanel extends React.Component {
             }}
         >
             <Collapsible
-                title='Edit Graph'
+                title='Nodes'
                 id='nodeAndEdgeEditingCollapsible'
                 style={{
                     marginBottom: '1rem'
                 }}
             >
-                <GraphController
+                <AddNodeController
                     config={this.props.config}
                     addNode={this.props.addNode}
-                    editNode={this.props.editNode}
-                    deleteNode={this.props.deleteNode}
                     addFile={this.props.addFile}
                     graphData={this.props.graphData}
-                    setStep={this.props.setStep}
-                    step={this.props.step}
-                    editingId={this.props.editingId}
                     addBanner={this.props.addBanner}
                 />
             </Collapsible>
@@ -43,6 +38,8 @@ class ConfigPanel extends React.Component {
             >
                 <ProcessForm
                     onSubmitForm={this.props.onSubmitForm}
+                    graphData={this.props.graphData}
+                    graphValid={this.props.graphValid}
                 />
             </Collapsible>
         </div>;

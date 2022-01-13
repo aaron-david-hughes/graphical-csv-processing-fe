@@ -1,20 +1,13 @@
 import React from 'react';
-import NodeForm, {NodeList as Nodes} from "../graphComponentForms/NodeForm";
-import EditNodeForm from "../graphComponentForms/EditNodeForm";
+import NodeForm from "../graphComponentForms/NodeForm";
+import FileNodes, {AllNodeTypes} from '../graphComponentForms/utils/FileNodes';
 
-class GraphController extends React.Component {
+class AddNodeController extends React.Component {
 
     constructor(props) {
         super(props);
 
-        let nodeTypes = [
-            ...Nodes.map(node => {
-                return {name: node.name, operation: node.operation}
-            }),
-            ...props.config.processing.operations.map(node => {
-                return {name: node.name, operation: node.operation}
-            })
-        ];
+        let nodeTypes = AllNodeTypes(props.config);
 
         this.state = {
             config: props.config,
@@ -46,29 +39,12 @@ class GraphController extends React.Component {
                     >
                         add node
                     </button>
-                },
-                {
-                    name: 'Edit Node',
-                    prev: <button
-                        id='editNodeCancel'
-                        title='Cancel'
-                        onClick={e => this.setStep(e, 'Node Type')}
-                    >
-                        cancel
-                    </button>,
-                    next: <button
-                        id='deleteNode'
-                        title='Delete Node'
-                        onClick={e => this.deleteNode(e, this.props.editingId)}
-                    >
-                        delete node
-                    </button>
                 }
             ],
+            step: 'Node Type',
             nodeTypes: nodeTypes,
-            nodeType: Nodes[0].operation,
+            nodeType: FileNodes["Open File"].operation,
             nodeTemplate: {},
-            editNodeTemplate: {},
             isFormValid: false,
             showNotStartedErrors: false,
             file: null
@@ -109,24 +85,16 @@ class GraphController extends React.Component {
                 setNodeTemplate={this.setNodeTemplate.bind(this)}
                 setIsFormValid={this.setIsFormValid.bind(this)}
                 showNotStartedErrors={this.state.showNotStartedErrors}
-                getFileAndName={this.getFileAndName.bind(this)}
-            />
-        </div>
-    }
-
-    //todo: maybe expand to allow change of node in edit => down the line a fair bit
-    editNodeStage() {
-        return <div>
-            <EditNodeForm
+                setFileAndName={this.setFileAndName.bind(this)}
+                addBanner={this.props.addBanner}
                 graphData={this.props.graphData}
-                editingId={this.props.editingId}
-                setEditNodeTemplate={this.setEditNodeTemplate.bind(this)}
+                file={this.state.file}
             />
         </div>
     }
 
     renderFormSection() {
-        let name = this.props.step;
+        let name = this.state.step;
         let step = this.state.steps.find(x => x.name === name);
 
         return <div>
@@ -157,8 +125,6 @@ class GraphController extends React.Component {
         switch(step) {
             case 'Node Configuration':
                 return this.nodeConfigStage();
-            case 'Edit Node':
-                return this.editNodeStage();
             case 'Node Type':
             default:
                 return this.nodeTypeStage();
@@ -170,9 +136,8 @@ class GraphController extends React.Component {
             e.preventDefault();
         }
 
-        this.props.setStep(step)
-
         this.setState({
+            step,
             showNotStartedErrors: false,
             isFormValid: false,
             file: null
@@ -181,13 +146,11 @@ class GraphController extends React.Component {
 
     setNodeTemplate(obj) {
         this.setState({
-            nodeTemplate: obj
-        });
-    }
-
-    setEditNodeTemplate(obj) {
-        this.setState({
-            editNodeTemplate: obj
+            nodeTemplate: {
+                ...obj,
+                inputCardinality: 0,
+                outputCardinality: 0
+            }
         });
     }
 
@@ -200,41 +163,14 @@ class GraphController extends React.Component {
         }
     }
 
-    getFileAndName(e) {
-        let id = e.target.id;
-        let element = document.getElementById(id);
-        let filename = '';
-
-        if (element && element.files && element.files.item(0) && element.files.item(0).name) {
-            filename = element.files.item(0).name;
-
-            if (this.props.graphData.nodes
-                .filter(node => node.operation === 'open_file')
-                .find(node => node.name === filename)
-            ) {
-                this.props.addBanner({
-                    msg: `Multiple files with filename '${filename}' may cause unexpected behaviour`,
-                    type: 'warning'
-                });
+    setFileAndName(file, name) {
+        this.setState({
+            file: {
+                name, file
             }
-
-            this.setState({
-                file: element.files.item(0)
-            });
-        }
-
-        return filename;
+        });
     }
 
-    editGraphComponent(e, editFunc, graphComponent) {
-        e.preventDefault();
-
-        editFunc(graphComponent);
-
-        this.setStep(e, 'Add Node');
-    }
-
-    //todo: bug around validation => join onRight allowed null... only once it has been blurred once
     submitGraphComponent(e, addFunc, graphComponent) {
         e.preventDefault();
 
@@ -253,19 +189,11 @@ class GraphController extends React.Component {
         }
     }
 
-    deleteNode(e, nodeId) {
-        e.preventDefault();
-
-        // this.props.deleteNode(nodeId);
-        //
-        // this.setStep(e, 'Node Type');
-    }
-
     render() {
-        return <form id='graphControllerForm'>
+        return <form id='addControllerForm'>
             {this.renderFormSection()}
         </form>
     }
 }
 
-export default GraphController;
+export default AddNodeController;

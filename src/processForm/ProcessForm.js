@@ -62,7 +62,13 @@ class ProcessForm extends React.Component {
                         {` Filename to be used: ${this.state.title}`}
                     </p>
                 </div>
-                <button>Process</button>
+                <button
+                    id='processButton'
+                    title='process'
+                    disabled={!this.props.graphValid || this.props.graphData.nodes.length <= 0}
+                >
+                    process
+                </button>
             </div>
         </form>
     }
