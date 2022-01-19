@@ -1,10 +1,21 @@
+let validConfig;
+
 function fileTooltip(graph) {
-    return commonTooltip(graph) +
+    validConfig = true;
+
+    let str = commonTooltip(graph) +
         displayElement(graph, 'operation') +
-        displayElement(graph, 'name');
+        displayElement(graph, 'name') +
+        displayElement(graph, 'expectedInputs') +
+        invalidInputCardinality(graph);
+
+    str += validConfig ? "" : invalidConfig();
+
+    return str;
 }
 
 function processTooltip(graph, config) {
+    validConfig = true;
     let operation = graph.getData('operation');
 
     let template = config.processing.operations
@@ -15,6 +26,10 @@ function processTooltip(graph, config) {
         str += displayElement(graph, attr);
     }
 
+    str += validConfig ? "" : invalidConfig();
+
+    str += invalidInputCardinality(graph);
+
     return str;
 }
 
@@ -23,7 +38,26 @@ function commonTooltip(graph) {
 }
 
 function displayElement(graph, id) {
-    return "<br>" + id + ": " + graph.getData(id);
+    let value = graph.getData(id);
+
+    if (value === null) validConfig = false;
+
+    return "<br>" + id + ": " + value;
+}
+
+function invalidInputCardinality(graph) {
+    let inputCardinality = graph.getData('inputCardinality');
+    let expectedInputs = graph.getData('expectedInputs');
+
+    if (inputCardinality !== expectedInputs) {
+        return "<br><p style='color: #FF272A'>Invalid number of inputs: " + inputCardinality + ", must be: " + expectedInputs + ".</p>";
+    }
+
+    return "";
+}
+
+function invalidConfig() {
+    return "<br><p style='color: #FF272A'>Invalid config, edit this node to have valid configuration.</p>"
 }
 
 const GraphUtils = {

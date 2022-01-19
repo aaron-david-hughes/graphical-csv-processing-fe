@@ -74,6 +74,7 @@ function render(props, state) {
                     addBanner={props.addBanner}
                     invalidNodes={state.invalidNodes}
                     invalidNodeCardinalities={state.invalidNodeCardinalities}
+                    edgeCounter={state.edgeCounter}
                 />
 
                 <div id='graphButtons'

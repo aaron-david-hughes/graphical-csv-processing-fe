@@ -41,9 +41,13 @@ class Home extends React.Component {
         });
     }
 
-    setEditNode(id) {
+    setEditNode(id, restoreEdgeDetails) {
         this.setState({
-            editingNode: this.state.graphData.nodes.find(node => node.id === id)
+            editingNode: this.state.graphData.nodes.find(node => node.id === id),
+            graphData: restoreEdgeDetails.graphData,
+            edgeCounter: restoreEdgeDetails.edgeCounter,
+            invalidNodeCardinalities: restoreEdgeDetails.invalidNodeCardinalities,
+            banners: []
         });
     }
 

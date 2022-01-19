@@ -2,11 +2,13 @@ import React from 'react';
 import AnyChart from 'anychart-react/dist/anychart-react.min';
 import anychart from 'anychart';
 import GraphUtils from './graphUtils';
+import deepClone from 'lodash.clonedeep';
 
 let graph;
 let fromNode = null;
 let green = "3 #58CD36";
-let red = "3 #FF272A"
+let red = "3 #FF272A";
+let prevEdgeState = null;
 
 class Graph extends React.Component {
 
@@ -113,12 +115,15 @@ class Graph extends React.Component {
         let listenerCoordinateSave = Graph.saveCoordinates.bind(this);
 
         graph.listen('dblClick', function(e) {
+            let prevEdgeStateClone = deepClone(prevEdgeState);
+
             let tag = e.domTarget.tag;
             fromNode = null;
 
             if (tag) {
-                if (tag.type === 'node') {
-                    setEditNode(tag.id);
+                if (tag.type === 'node' && prevEdgeStateClone) {
+                    //some restore edge details
+                    setEditNode(tag.id, prevEdgeStateClone);
                 }
             }
 
@@ -158,10 +163,18 @@ class Graph extends React.Component {
         graph.listen('click', function(e) {
             let tag = e.domTarget.tag;
 
-            if (tag && tag.type === 'node') {
+            if (tag && tag.type === 'node' && !prevEdgeState) {
+                prevEdgeState = {
+                    graphData: deepClone(state.graphData),
+                    edgeCounter: props.edgeCounter,
+                    invalidNodeCardinalities: deepClone(props.invalidNodeCardinalities)
+                };
+
+                editEdges(state, tag, props);
+                listenerCoordinateSave(props.graphData);
+
                 setTimeout(() => {
-                    editEdges(state, tag, props);
-                    listenerCoordinateSave(props.graphData);
+                    prevEdgeState = null;
                 }, 1000);
             } else {
                 listenerCoordinateSave(props.graphData);
