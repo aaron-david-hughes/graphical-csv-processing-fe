@@ -129,7 +129,7 @@ class EditNodeController extends React.Component {
                 operation={this.state.nodeType}
                 setNodeTemplate={this.setNodeTemplate.bind(this)}
                 setIsFormValid={this.setIsFormValid.bind(this)}
-                showNotStartedErrors={this.state.showNotStartedErrors}
+                showNotStartedErrors={true}
                 setFileAndName={this.setFileAndName.bind(this)}
                 addBanner={this.props.addBanner}
                 graphData={this.props.graphData}

@@ -1,15 +1,17 @@
+import deepClone from 'lodash.clonedeep';
+
 const fileNodeConfig = {
     normal:   {
         shape: "square",
-        fill: "#686868"
+        fill: "purple"
     },
     hovered:  {
         shape: "square",
-        fill: "#686868"
+        fill: "purple"
     },
     selected: {
         shape: "square",
-        fill: "#686868"
+        fill: "purple"
     }
 };
 
@@ -18,12 +20,14 @@ const FileNodes = {
         ...fileNodeConfig,
         group: 'file',
         operation: 'open_file',
+        expectedInputs: 0,
         name: null
     },
     'Write File': {
         ...fileNodeConfig,
         group: 'file',
         operation: 'write_file',
+        expectedInputs: 1,
         name: null
     }
 }
@@ -47,14 +51,14 @@ export function nodeDependentState(valid, showNotStartedErrors, config, operatio
     switch (operation) {
         case 'open_file':
             return {
-                nodeObj: FileNodes["Open File"],
+                nodeObj: deepClone(FileNodes["Open File"]),    //need to deep clone
                 inputValidity: {
                     name: validity
                 }
             };
         case 'write_file':
             return {
-                nodeObj: FileNodes["Write File"],
+                nodeObj: deepClone(FileNodes["Write File"]),   //need to deep clone
                 inputValidity: {
                     name: validity
                 }
@@ -64,7 +68,7 @@ export function nodeDependentState(valid, showNotStartedErrors, config, operatio
                 .find(op => op.operation === operation).template;
             return {
                 nodeObj: {
-                    ...config.processing.generalTemplate,
+                    ...deepClone(config.processing.generalTemplate),   //need to deep clone
                     group: 'processing',
                     ...template
                 },

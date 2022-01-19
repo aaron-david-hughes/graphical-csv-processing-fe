@@ -5,6 +5,8 @@ import GraphUtils from './graphUtils';
 
 let graph;
 let fromNode = null;
+let green = "3 #58CD36";
+let red = "3 #FF272A"
 
 class Graph extends React.Component {
 
@@ -13,7 +15,7 @@ class Graph extends React.Component {
 
         this.state = {
             config: props.config,
-            graphData: Graph.determineNodeBorderColor(props.graphData, props.invalidNodes)
+            graphData: Graph.determineNodeBorderColor(props.graphData, props.invalidNodes, props.invalidNodeCardinalities)
         }
     }
 
@@ -23,23 +25,23 @@ class Graph extends React.Component {
 
             return {
                 ...state,
-                graphData: Graph.determineNodeBorderColor(props.graphData, props.invalidNodes)
+                graphData: Graph.determineNodeBorderColor(props.graphData, props.invalidNodes, props.invalidNodeCardinalities)
             };
         }
 
         return null;
     }
 
-    static determineNodeBorderColor(graphData, invalidNodes) {
-        for (let i in graphData.nodes) {
-            if (!graphData.nodes.hasOwnProperty(i)) continue;
+    static determineNodeBorderColor(graphData, invalidNodes, invalidNodeCardinalities) {
+        graphData.nodes.forEach(node => {
+            let strokeColor = invalidNodes.filter(id => id === node.id).length > 0 ||
+                invalidNodeCardinalities.filter(id => id === node.id).length > 0
+            ? red : green;
 
-            let strokeColor = invalidNodes.find(id => id === graphData.nodes[i].id) ? '3 #FF272A' : '3 #686868';
-
-            graphData.nodes[i].normal.stroke = strokeColor;
-            graphData.nodes[i].hovered.stroke = strokeColor;
-            graphData.nodes[i].selected.stroke = strokeColor;
-        }
+            node.normal.stroke = strokeColor;
+            node.hovered.stroke = strokeColor;
+            node.selected.stroke = strokeColor;
+        });
 
         return graphData;
     }

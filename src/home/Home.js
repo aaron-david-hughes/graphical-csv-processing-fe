@@ -24,17 +24,19 @@ class Home extends React.Component {
             saveGraphFilename: 'SaveGraph.json',
             savePopup: false,
             loadPopup: false,
-            graphValid: true,
-            invalidNodes: []
+            invalidNodes: [],
+            invalidNodeCardinalities: []
         }
     }
 
     addNode(node) {
+        let nodeWithId = {id: `${this.state.counter}`, ...node};
         this.setState({
             graphData: {
-                nodes: [...this.state.graphData.nodes, {id: `${this.state.counter}`, ...node}],
+                nodes: [...this.state.graphData.nodes, nodeWithId],
                 edges: [...this.state.graphData.edges]
             },
+            invalidNodeCardinalities: this.validateInputs(nodeWithId),
             counter: this.state.counter + 1
         });
     }
@@ -51,17 +53,15 @@ class Home extends React.Component {
         });
     }
 
-    //todo: definitely some bugs here... look into this
     editNode(node) {
         let graphData = this.state.graphData;
         let idx = graphData.nodes.findIndex(n => node.id === n.id);
         graphData.nodes[idx] = node;
 
         this.setState({
-            graphData
+            graphData,
+            invalidNodeCardinalities: this.validateInputs(node)
         });
-
-        console.log(this.state.graphData);
     }
 
     async deleteNode(nodeId) {
@@ -77,7 +77,8 @@ class Home extends React.Component {
                     return graphNode.id !== nodeId
                 }),
                 edges: this.state.graphData.edges
-            }
+            },
+            invalidNodeCardinalities: this.state.invalidNodeCardinalities.filter(id => id !== nodeId)
         });
     }
 
@@ -94,7 +95,8 @@ class Home extends React.Component {
                 nodes: [...nodes],
                 edges: [...this.state.graphData.edges, {id: `${this.state.edgeCounter}`, ...edge}]
             },
-            edgeCounter: this.state.edgeCounter + 1
+            edgeCounter: this.state.edgeCounter + 1,
+            invalidNodeCardinalities: this.validateInputs(to)
         });
     }
 
@@ -113,8 +115,22 @@ class Home extends React.Component {
                 edges: this.state.graphData.edges.filter((graphEdge) => {
                     return graphEdge.id !== edgeId
                 })
-            }
+            },
+            invalidNodeCardinalities: this.validateInputs(to)
         });
+    }
+
+    validateInputs(node) {
+        let invalidNodeCardinalities = this.state.invalidNodeCardinalities;
+        if (node.inputCardinality !== node.expectedInputs) {
+            if (invalidNodeCardinalities.filter(id => id === node.id).length === 0)
+                return [...invalidNodeCardinalities, node.id];
+        } else {
+            if (invalidNodeCardinalities.filter(id => id === node.id).length > 0)
+                return invalidNodeCardinalities.filter(id => id !== node.id);
+        }
+
+        return this.state.invalidNodeCardinalities;
     }
 
     addBanner(banner) {
@@ -191,8 +207,10 @@ class Home extends React.Component {
         });
     }
 
-    canSaveGraph() {
-        return !!this.state.graphValid;
+    isGraphValid() {
+        return this.state.graphData.nodes.length > 0 &&
+            this.state.invalidNodes.length === 0 &&
+            this.state.invalidNodeCardinalities.length === 0;
     }
 
     saveGraphWithConfig(filename) {
@@ -202,7 +220,7 @@ class Home extends React.Component {
         save.type = 1;
         save.graphData = this.state.graphData;
         save.counter = this.state.counter;
-        save.edgeCount = this.state.edgeCounter;
+        save.edgeCounter = this.state.edgeCounter;
         save.files = {};
 
         for (let file of this.state.files) {
@@ -330,7 +348,6 @@ class Home extends React.Component {
             this.clearGraph();
 
             this.setState({
-                graphValid: true,
                 counter: loadGraph.counter,
                 edgeCounter: loadGraph.edgeCounter,
                 graphData: loadGraph.graphData,
@@ -367,7 +384,6 @@ class Home extends React.Component {
             this.clearGraph();
 
             this.setState({
-                graphValid: false,
                 counter: loadGraph.counter,
                 edgeCounter: loadGraph.edgeCounter,
                 graphData: loadGraph.graphData,
@@ -392,7 +408,6 @@ class Home extends React.Component {
             this.clearGraph();
 
             this.setState({
-                graphValid: false,
                 counter: loadGraph.counter,
                 edgeCounter: loadGraph.edgeCounter,
                 graphData: loadGraph.graphData,
@@ -424,7 +439,8 @@ class Home extends React.Component {
             counter: 0,
             edgeCounter: 0,
             graphValid: true,
-            invalidNodes: []
+            invalidNodes: [],
+            invalidNodeCardinalities: []
         })
     }
 
@@ -449,7 +465,7 @@ class Home extends React.Component {
                 switchSavePopup: this.switchSavePopup.bind(this),
                 switchLoadPopup: this.switchLoadPopup.bind(this),
                 setSaveGraphFilename: this.setSaveGraphFilename.bind(this),
-                canSaveGraph: this.canSaveGraph.bind(this),
+                isGraphValid: this.isGraphValid.bind(this),
                 saveGraphWithConfig: this.saveGraphWithConfig.bind(this),
                 saveGraphTemplate: this.saveGraphTemplate.bind(this),
                 saveGraphConfigTemplate: this.saveGraphConfigTemplate.bind(this),

@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from "../generalPurposeComponents/input/Input";
+import Switch from "../generalPurposeComponents/switch/Switch";
 
 class FormContentGenerator extends React.Component {
 
@@ -19,6 +20,8 @@ class FormContentGenerator extends React.Component {
                 return this.textField(field, fieldConfig, this.state.inputActionFunctions['text'].onBlur);
             case 'dropdown':
                 return this.dropdownField(field, fieldConfig, this.state.inputActionFunctions['dropdown'].onChange);
+            case 'switch':
+                return this.switchField(field, fieldConfig, this.state.inputActionFunctions['switch'].onChange);
             default:
                 console.log('input unknown');
         }
@@ -73,6 +76,22 @@ class FormContentGenerator extends React.Component {
         />
     }
 
+    switchField(field, fieldConfig, onChange) {
+        return <Input
+            key={field}
+            id={field}
+            title={fieldConfig.title}
+            style={{width: fieldConfig.width ? fieldConfig.width : '100%'}}
+            required={fieldConfig.required}
+            input={
+                <Switch
+                    isChecked={this.props.nodeObj[field]}
+                    onChange={async e => onChange(e, field)}
+                />
+            }
+        />
+    }
+
     processElementContent() {
         let operationConfig = this.state.config.processing.operations.find(op => op.operation === this.state.nodeOperation);
 
@@ -85,9 +104,9 @@ class FormContentGenerator extends React.Component {
             }}
         >
             {
-                Object.keys(operationConfig.template).filter(key => key !== 'operation').map(field =>
-                    this.generateField(field, operationConfig[field])
-                )
+                Object.keys(operationConfig.template)
+                    .filter(key => key !== 'operation' && key !== 'expectedInputs')
+                    .map(field => this.generateField(field, operationConfig[field]))
             }
         </div>
     }

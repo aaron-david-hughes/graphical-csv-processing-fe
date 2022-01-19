@@ -65,7 +65,7 @@ class ProcessForm extends React.Component {
                 <button
                     id='processButton'
                     title='process'
-                    disabled={!this.props.graphValid || this.props.graphData.nodes.length <= 0}
+                    disabled={!this.props.isGraphValid()}
                 >
                     process
                 </button>

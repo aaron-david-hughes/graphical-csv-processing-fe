@@ -4,15 +4,15 @@
     "generalTemplate": {
       "normal":   {
         "shape": "diamond",
-        "fill": "#686868"
+        "fill": "blue"
       },
       "hovered":  {
         "shape": "diamond",
-        "fill": "#686868"
+        "fill": "blue"
       },
       "selected": {
         "shape": "diamond",
-        "fill": "#686868"
+        "fill": "blue"
       },
       "group": "processing"
     },
@@ -24,7 +24,8 @@
           "operation": "join",
           "onLeft": null,
           "onRight": null,
-          "joinType": "left"
+          "joinType": "left",
+          "expectedInputs": 2
         },
         "onLeft": {
           "input": "text",
@@ -49,6 +50,80 @@
             "inner",
             "outer"
           ]
+        }
+      },
+      {
+        "operation": "filter",
+        "name": "Filter",
+        "template" : {
+          "operation": "filter",
+          "column": null,
+          "condition": null,
+          "equal": true,
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "condition": {
+          "input": "text",
+          "title": "Condition",
+          "width": "100%",
+          "required": true
+        },
+        "equal": {
+          "input": "switch",
+          "title": "Equal",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "drop_columns",
+        "name": "Drop Column(s)",
+        "template" : {
+          "operation": "drop_columns",
+          "columns": null,
+          "expectedInputs": 1
+        },
+        "columns": {
+          "input": "text",
+          "title": "Column(s)",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "take_columns",
+        "name": "Take Column(s)",
+        "template" : {
+          "operation": "take_columns",
+          "columns": null,
+          "expectedInputs": 2
+        },
+        "columns": {
+          "input": "text",
+          "title": "Column(s)",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "alias",
+        "name": "Alias",
+        "template" : {
+          "operation": "alias",
+          "alias": null,
+          "expectedInputs": 2
+        },
+        "alias": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
         }
       }
     ]

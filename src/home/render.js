@@ -73,6 +73,7 @@ function render(props, state) {
                     deleteEdge={props.deleteEdge}
                     addBanner={props.addBanner}
                     invalidNodes={state.invalidNodes}
+                    invalidNodeCardinalities={state.invalidNodeCardinalities}
                 />
 
                 <div id='graphButtons'
@@ -127,49 +128,9 @@ function render(props, state) {
                 addFile={props.addFile}
                 addNode={props.addNode}
                 addBanner={props.addBanner}
-                graphValid={state.graphValid}
+                isGraphValid={props.isGraphValid}
             />
         </div>
-
-        {/*<div id='buttonRow' style={{width: '100%'}}>*/}
-        {/*    <div id='graphButtons'*/}
-        {/*         style={{display: 'inline-flex'}}*/}
-        {/*    >*/}
-        {/*        <div*/}
-        {/*            style={{width: '50%', justifyContent: 'left'}}*/}
-        {/*        >*/}
-        {/*            <button*/}
-        {/*                className='freeButton'*/}
-        {/*                id='saveButton'*/}
-        {/*                title='Save Graph'*/}
-        {/*                onClick={props.switchSavePopup}*/}
-        {/*            >*/}
-        {/*                Save Graph*/}
-        {/*            </button>*/}
-        {/*            <button*/}
-        {/*                className='freeButton'*/}
-        {/*                id='loadButton'*/}
-        {/*                title='Load Graph'*/}
-        {/*                onClick={props.switchLoadPopup}*/}
-        {/*            >*/}
-        {/*                Load Graph*/}
-        {/*            </button>*/}
-        {/*        </div>*/}
-
-        {/*        <div*/}
-        {/*            style={{width: '50%', justifyContent: 'right'}}*/}
-        {/*        >*/}
-        {/*            <button*/}
-        {/*                className='freeButton'*/}
-        {/*                id='clearButton'*/}
-        {/*                title='Clear Graph'*/}
-        {/*                onClick={props.clearGraph}*/}
-        {/*            >*/}
-        {/*                Clear Graph*/}
-        {/*            </button>*/}
-        {/*        </div>*/}
-        {/*    </div>*/}
-        {/*</div>*/}
 
         <Popup
             id='settingsPopup'
@@ -195,18 +156,10 @@ function render(props, state) {
                     height='35%'
                 >
                     {
-                        !props.canSaveGraph()
+                        !props.isGraphValid()
                             ? <p className='ow' style={{color: 'red'}}>
                                 <i className='fa fa-info-circle'/>
                                 {` You cannot save an invalid graph`}
-                            </p>
-                            : null
-                    }
-                    {
-                        state.graphData.nodes.length <= 0
-                            ? <p className='ow' style={{color: 'red'}}>
-                                <i className='fa fa-info-circle'/>
-                                {` No graph to save`}
                             </p>
                             : null
                     }
@@ -227,7 +180,7 @@ function render(props, state) {
                                 input={
                                     <input
                                         id='graphSaveFilename'
-                                        disabled={!props.canSaveGraph() || state.graphData.nodes.length <= 0}
+                                        disabled={!props.isGraphValid()}
                                         type='text'
                                         onChange={e => props.setSaveGraphFilename(e.target.value)}
                                     />
@@ -251,7 +204,7 @@ function render(props, state) {
                         <button
                             id='saveWithConfigButton'
                             title='Save with Config'
-                            disabled={!props.canSaveGraph() || state.graphData.nodes.length <= 0}
+                            disabled={!props.isGraphValid()}
                             onClick={e => {
                                 e.preventDefault();
                                 props.saveGraphWithConfig(state.saveGraphFilename);
@@ -266,7 +219,7 @@ function render(props, state) {
                         <button
                             id='saveConfigTemplateButton'
                             title='Save Config Template'
-                            disabled={!props.canSaveGraph() || state.graphData.nodes.length <= 0}
+                            disabled={!props.isGraphValid()}
                             onClick={e => {
                                 e.preventDefault();
                                 props.saveGraphConfigTemplate(state.saveGraphFilename);
@@ -281,7 +234,7 @@ function render(props, state) {
                         <button
                             id='saveTemplateButton'
                             title='Save Template'
-                            disabled={!props.canSaveGraph() || state.graphData.nodes.length <= 0}
+                            disabled={!props.isGraphValid()}
                             onClick={e => {
                                 e.preventDefault();
                                 props.saveGraphTemplate(state.saveGraphFilename);

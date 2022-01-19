@@ -1,5 +1,5 @@
 function validateTextField(e) {
-    return e && e.target && e.target.value && e.target.value.length > 0;
+    return e && e.target && e.target.value && e.target.value.length > 0 && /\S/.test(e.target.value);
 }
 
 function validateTextContent(str) {

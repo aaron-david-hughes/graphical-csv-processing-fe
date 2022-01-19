@@ -15,6 +15,10 @@ class NodeForm extends React.Component {
             this.props.config,
             this.props.operation
         );
+
+        if (this.props.node) {
+            this.state.nodeObj = this.props.node;
+        }
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -175,12 +179,16 @@ class NodeForm extends React.Component {
                     inputValidity={this.state.inputValidity}
                     nodeOperation={this.props.operation}
                     node={this.props.node}
+                    nodeObj={this.state.nodeObj}
                     inputActionFunctions={{
                         text: {
                             onBlur: this.textOnBlur.bind(this)
                         },
                         dropdown: {
                             onChange: this.dropdownOnChange.bind(this)
+                        },
+                        switch: {
+                            onChange: this.switchOnChange.bind(this)
                         }
                     }}
                 />
@@ -189,7 +197,7 @@ class NodeForm extends React.Component {
 
     async textOnBlur(e, field) {
         if (Validation.validateTextField(e)) {
-            await this.setNodeObjKey(field, e.target.value)
+            await this.setNodeObjKey(field, e.target.value.trim())
             this.props.setNodeTemplate(this.state.nodeObj);
             this.setInputValidity(field, 'valid');
         } else {
@@ -200,6 +208,13 @@ class NodeForm extends React.Component {
     async dropdownOnChange(e, field) {
         if (Validation.validateTextField(e)) {
             await this.setNodeObjKey(field, e.target.value);
+            this.props.setNodeTemplate(this.state.nodeObj);
+        }
+    }
+
+    async switchOnChange(e, field) {
+        if (e !== null) {
+            await this.setNodeObjKey(field, e);
             this.props.setNodeTemplate(this.state.nodeObj);
         }
     }
