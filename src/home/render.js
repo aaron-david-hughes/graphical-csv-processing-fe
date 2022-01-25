@@ -245,7 +245,7 @@ function render(props, state) {
                             }}
                         >
                             <strong><h4 style={{textDecoration: 'underline'}}>Save Template</h4></strong>
-                            <p>Saves the layout of nodes and edges, without node configuration.</p>
+                            <p>Saves the layout of nodes types and edges, without node configuration of each node.</p>
                         </button>
                     </div>
                 </Popup>

@@ -36,7 +36,7 @@ class NodeForm extends React.Component {
 
         let newOperationState = null
 
-        if (props.operation !== state.nodeObj.operation) {
+        if (props.operation !== state.nodeObj.specificOperation && props.operation !== state.nodeObj.operation) {
             newOperationState = nodeDependentState(
                 !!props.node,
                 props.showNotStartedErrors,
@@ -47,17 +47,17 @@ class NodeForm extends React.Component {
 
         let returnState = null;
 
-        if (newOperationState) {
-            returnState = {
-                ...state,
-                ...newOperationState
-            }
-        }
-
         if (inputValidity) {
             returnState = {
                 ...returnState,
                 inputValidity
+            }
+        }
+
+        if (newOperationState) {
+            returnState = {
+                ...state,
+                ...newOperationState
             }
         }
 
@@ -73,8 +73,8 @@ class NodeForm extends React.Component {
         });
     }
 
-    setInputValidity(id, isValid) {
-        this.setState({
+    async setInputValidity(id, isValid) {
+        await this.setState({
             inputValidity: {
                 ...this.state.inputValidity,
                 [id]: isValid
@@ -125,7 +125,7 @@ class NodeForm extends React.Component {
                             onChange={async e => {
                                 await this.setNodeObjKey('name', this.getFileAndName(e));
                                 this.props.setNodeTemplate(this.state.nodeObj);
-                                this.setInputValidity('name', this.props.file.file ? 'valid' : 'invalid')
+                                await this.setInputValidity('name', this.props.file.file ? 'valid' : 'invalid')
                             }}
                         />
                     }
@@ -184,6 +184,12 @@ class NodeForm extends React.Component {
                         text: {
                             onBlur: this.textOnBlur.bind(this)
                         },
+                        numeric: {
+                            onBlur: this.numericOnBlur.bind(this)
+                        },
+                        integer: {
+                            onBlur: this.integerOnBlur.bind(this)
+                        },
                         dropdown: {
                             onChange: this.dropdownOnChange.bind(this)
                         },
@@ -199,9 +205,29 @@ class NodeForm extends React.Component {
         if (Validation.validateTextField(e)) {
             await this.setNodeObjKey(field, e.target.value.trim())
             this.props.setNodeTemplate(this.state.nodeObj);
-            this.setInputValidity(field, 'valid');
+            await this.setInputValidity(field, 'valid');
         } else {
-            this.setInputValidity(field, 'invalid');
+            await this.setInputValidity(field, 'invalid');
+        }
+    }
+
+    async numericOnBlur(e, field) {
+        if (Validation.validateNumericField(e)) {
+            await this.setNodeObjKey(field, e.target.value.trim())
+            this.props.setNodeTemplate(this.state.nodeObj);
+            await this.setInputValidity(field, 'valid');
+        } else {
+            await this.setInputValidity(field, 'invalid');
+        }
+    }
+
+    async integerOnBlur(e, field) {
+        if (Validation.validateIntegerField(e)) {
+            await this.setNodeObjKey(field, e.target.value.trim())
+            this.props.setNodeTemplate(this.state.nodeObj);
+            await this.setInputValidity(field, 'valid');
+        } else {
+            await this.setInputValidity(field, 'invalid');
         }
     }
 

@@ -2,6 +2,8 @@ import React from 'react';
 import {graphicalCsvProcessingAPI, saveFile} from '../ajax/requests';
 import './resources/Home.css';
 import HomeTemplate from './render';
+import {isValidFromStart} from '../graphComponentForms/utils/FileNodes';
+import deepClone from 'lodash.clonedeep';
 
 class Home extends React.Component {
 
@@ -58,6 +60,7 @@ class Home extends React.Component {
     }
 
     editNode(node) {
+        console.log(node);
         let graphData = this.state.graphData;
         let idx = graphData.nodes.findIndex(n => node.id === n.id);
         graphData.nodes[idx] = node;
@@ -222,7 +225,7 @@ class Home extends React.Component {
         let state = this.state;
 
         save.type = 1;
-        save.graphData = this.state.graphData;
+        save.graphData = deepClone(this.state.graphData);
         save.counter = this.state.counter;
         save.edgeCounter = this.state.edgeCounter;
         save.files = {};
@@ -252,7 +255,7 @@ class Home extends React.Component {
             let save = {};
 
             save.type = 2;
-            save.graphData = this.state.graphData;
+            save.graphData = deepClone(this.state.graphData);
             save.counter = this.state.counter;
             save.edgeCounter = this.state.edgeCounter;
 
@@ -273,7 +276,7 @@ class Home extends React.Component {
             let save = {};
 
             save.type = 3;
-            save.graphData = this.state.graphData;
+            save.graphData = deepClone(this.state.graphData);
             save.counter = this.state.counter;
             save.edgeCounter = this.state.edgeCounter;
 
@@ -292,11 +295,22 @@ class Home extends React.Component {
     stripConfig(node) {
         if (node.group === 'file') node.name = null;
         else {
-            let template = this.state.config.processing.operations
-                .find(op => op.operation === node.operation).template;
+            let operation = this.state.config.processing.operations
+                .find(op => op.operation === node.specificOperation);
+
+            if (!operation) {
+                operation = this.state.config.processing.operations
+                    .find(op => op.operation === node.operation);
+            }
+
+            let template = operation.template;
 
             for (let entry of Object.entries(template)) {
-                if (entry[0] !== 'operation') node[entry[0]] = null;
+                if (
+                    entry[0] !== 'operation' &&
+                    entry[0] !== 'specificOperation' &&
+                    entry[0] !== 'expectedInputs'
+                ) node[entry[0]] = null;
             }
         }
     }
@@ -407,7 +421,13 @@ class Home extends React.Component {
             loadGraph.counter &&
             loadGraph.edgeCounter
         ) {
-            let nodeIds = loadGraph.graphData.nodes.map(node => node.id);
+            let invalidNodes = loadGraph.graphData.nodes.filter(node => {
+                if (node.specificOperation) {
+                    return !isValidFromStart(this.state.config, node.specificOperation);
+                }
+
+                return !isValidFromStart(this.state.config, node.operation);
+            }).map(node => node.id);
 
             this.clearGraph();
 
@@ -415,7 +435,7 @@ class Home extends React.Component {
                 counter: loadGraph.counter,
                 edgeCounter: loadGraph.edgeCounter,
                 graphData: loadGraph.graphData,
-                invalidNodes: nodeIds
+                invalidNodes: invalidNodes
             });
         } else {
             this.addBanner({

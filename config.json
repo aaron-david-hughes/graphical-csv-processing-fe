@@ -53,12 +53,14 @@
         }
       },
       {
-        "operation": "filter",
-        "name": "Filter",
+        "operation": "string_filter",
+        "name": "String Equality Filter",
         "template" : {
           "operation": "filter",
+          "specificOperation": "string_filter",
           "column": null,
           "condition": null,
+          "filterType": "string_equality",
           "equal": true,
           "expectedInputs": 1
         },
@@ -77,6 +79,137 @@
         "equal": {
           "input": "switch",
           "title": "Equal",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "numeric_filter",
+        "name": "Numeric Equality Filter",
+        "template" : {
+          "operation": "filter",
+          "specificOperation": "numeric_filter",
+          "column": null,
+          "condition": null,
+          "filterType": "numeric_equality",
+          "equal": true,
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "condition": {
+          "input": "numeric",
+          "title": "Condition",
+          "width": "100%",
+          "required": true
+        },
+        "equal": {
+          "input": "switch",
+          "title": "Equal",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "greater_than_filter",
+        "name": "Greater Than Filter",
+        "template" : {
+          "operation": "filter",
+          "specificOperation": "greater_than_filter",
+          "column": null,
+          "condition": null,
+          "filterType": "greater_than",
+          "equal": true,
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "condition": {
+          "input": "numeric",
+          "title": "Condition",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "greater_than_or_equal_filter",
+        "name": "Greater Than or Equal Filter",
+        "template" : {
+          "operation": "filter",
+          "specificOperation": "greater_than_or_equal_filter",
+          "column": null,
+          "condition": null,
+          "filterType": "greater_than_or_equal",
+          "equal": true,
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "condition": {
+          "input": "numeric",
+          "title": "Condition",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "less_than_filter",
+        "name": "Less Than Filter",
+        "template" : {
+          "operation": "filter",
+          "specificOperation": "less_than_filter",
+          "column": null,
+          "condition": null,
+          "filterType": "less_than",
+          "equal": true,
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "condition": {
+          "input": "numeric",
+          "title": "Condition",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "less_than_or_equal_filter",
+        "name": "Less Than or Equal Filter",
+        "template" : {
+          "operation": "filter",
+          "specificOperation": "less_than_or_equal_filter",
+          "column": null,
+          "condition": null,
+          "filterType": "less_than_or_equal",
+          "equal": true,
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "condition": {
+          "input": "numeric",
+          "title": "Condition",
           "width": "100%",
           "required": true
         }
@@ -102,7 +235,7 @@
         "template" : {
           "operation": "take_columns",
           "columns": null,
-          "expectedInputs": 2
+          "expectedInputs": 1
         },
         "columns": {
           "input": "text",
@@ -117,13 +250,120 @@
         "template" : {
           "operation": "alias",
           "alias": null,
-          "expectedInputs": 2
+          "expectedInputs": 1
         },
         "alias": {
+          "input": "text",
+          "title": "Alias",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "rename_column",
+        "name": "Rename Column",
+        "template" : {
+          "operation": "rename_column",
+          "column": null,
+          "newName": null,
+          "expectedInputs": 1
+        },
+        "column": {
           "input": "text",
           "title": "Column",
           "width": "100%",
           "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "merge_columns",
+        "name": "Merge Columns",
+        "template" : {
+          "operation": "merge_columns",
+          "column1": null,
+          "column2": null,
+          "mergeColName": null,
+          "mergeType": "string_equality",
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column 1",
+          "width": "100%",
+          "required": true
+        },
+        "column2": {
+          "input": "text",
+          "title": "Column 2",
+          "width": "100%",
+          "required": true
+        },
+        "mergeColName": {
+          "input": "text",
+          "title": "Merged Column Name",
+          "width": "100%",
+          "required": true
+        },
+        "mergeType": {
+          "input": "dropdown",
+          "title": "Merge Type",
+          "width": "100%",
+          "required": true,
+          "options": [
+            "string_equality",
+            "numeric_equality"
+          ]
+        }
+      },
+      {
+        "operation": "merge_rows",
+        "name": "Merge Rows",
+        "template" : {
+          "operation": "merge_rows",
+          "column": null,
+          "value": null,
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "text",
+          "title": "Value",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "limit",
+        "name": "Limit",
+        "template" : {
+          "operation": "limit",
+          "limit": null,
+          "expectedInputs": 1
+        },
+        "limit": {
+          "input": "integer",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "concat_tables",
+        "name": "Concat Tables",
+        "template" : {
+          "operation": "concat_tables",
+          "expectedInputs": 2
         }
       }
     ]

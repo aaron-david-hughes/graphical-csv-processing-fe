@@ -1,9 +1,11 @@
 import React from 'react';
-import FileNodes from "../graphComponentForms/utils/FileNodes";
+import FileNodes, {getNodeObjTemplate, isValidFromStart} from "../graphComponentForms/utils/FileNodes";
 import NodeForm from "../graphComponentForms/NodeForm";
 
 class EditNodeController extends React.Component {
     constructor(props) {
+        super(props);
+
         let nodeTypes = [
             ...Object.keys(FileNodes).map(fileOpName => {
                 return {name: fileOpName, operation: FileNodes[fileOpName].operation}
@@ -13,16 +15,20 @@ class EditNodeController extends React.Component {
             })
         ];
 
-        super(props);
+        let nodeType = null;
+
+        if (props.node) {
+            nodeType = props.node.specificOperation ? props.node.specificOperation : props.node.operation;
+        }
 
         this.state = {
             config: props.config,
             node: props.node,
             nodeTemplate: props.node,
             nodeTypes,
-            nodeType: props.node ? props.node.operation : null,
-            isFormValid: !props.invalidNodes.find(id => id === props.node.id) && props.node.operation !== 'open_file',
-            showNotStartedErrors: false,
+            nodeType: nodeType,
+            isFormValid: (!props.invalidNodes.find(id => id === props.node.id) && props.node.operation !== 'open_file'),
+            showNotStartedErrors: true,
             invalidNodes: props.invalidNodes,
             file: null
         }
@@ -51,7 +57,16 @@ class EditNodeController extends React.Component {
     onNodeTypeChange(e) {
         this.setState({
             nodeType: e.target.value,
-            isFormValid: e.target.value === this.props.node.operation
+            showNotStartedErrors: e.target.value === this.props.node.specificOperation || e.target.value === this.props.node.operation,
+            isFormValid: e.target.value === this.props.node.specificOperation || e.target.value === this.props.node.operation || isValidFromStart(this.props.config, e.target.value),
+            nodeTemplate:
+                e.target.value === this.props.node.specificOperation || e.target.value === this.props.node.operation
+                    ? this.state.node
+                    : {
+                        ...getNodeObjTemplate(this.props.config, e.target.value),
+                        inputCardinality: this.state.node.inputCardinality,
+                        outputCardinality: this.state.node.outputCardinality
+                    }
         });
     }
 
@@ -66,10 +81,11 @@ class EditNodeController extends React.Component {
     }
 
     async setIsFormValid(isValid) {
-        for(const entry of Object.entries(isValid)) {
+        for (const entry of Object.entries(isValid)) {
             await this.setState({
                 isFormValid: entry[1] === 'valid'
             });
+
             if (!this.state.isFormValid) break;
         }
     }
@@ -98,8 +114,9 @@ class EditNodeController extends React.Component {
                 await this.props.addFile(this.state.file);
             }
 
+            //found the bug lol
             this.props.editNode({
-                ...this.state.node,
+                id: this.state.node.id,
                 ...this.state.nodeTemplate
             });
 
@@ -123,18 +140,22 @@ class EditNodeController extends React.Component {
     render() {
         return <form id='editGraphForm'>
             {this.nodeTypeOptions()}
-            <NodeForm
-                config={this.state.config}
-                node={this.state.node}
-                operation={this.state.nodeType}
-                setNodeTemplate={this.setNodeTemplate.bind(this)}
-                setIsFormValid={this.setIsFormValid.bind(this)}
-                showNotStartedErrors={true}
-                setFileAndName={this.setFileAndName.bind(this)}
-                addBanner={this.props.addBanner}
-                graphData={this.props.graphData}
-                file={this.state.file}
-            />
+            {
+                !isValidFromStart(this.props.config, this.state.nodeType)
+                    ? <NodeForm
+                        config={this.state.config}
+                        node={this.state.node}
+                        operation={this.state.nodeType}
+                        setNodeTemplate={this.setNodeTemplate.bind(this)}
+                        setIsFormValid={this.setIsFormValid.bind(this)}
+                        showNotStartedErrors={this.state.showNotStartedErrors}
+                        setFileAndName={this.setFileAndName.bind(this)}
+                        addBanner={this.props.addBanner}
+                        graphData={this.props.graphData}
+                        file={this.state.file}
+                    />
+                    : null
+            }
             <div
                 style={{
                     display: 'inline-flex',

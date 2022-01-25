@@ -16,7 +16,9 @@ function fileTooltip(graph) {
 
 function processTooltip(graph, config) {
     validConfig = true;
-    let operation = graph.getData('operation');
+    let operation = graph.getData('specificOperation');
+
+    if (!operation) operation = graph.getData('operation');
 
     let template = config.processing.operations
         .find(op => op.operation === operation).template;
@@ -50,14 +52,16 @@ function invalidInputCardinality(graph) {
     let expectedInputs = graph.getData('expectedInputs');
 
     if (inputCardinality !== expectedInputs) {
-        return "<br><p style='color: #FF272A'>Invalid number of inputs: " + inputCardinality + ", must be: " + expectedInputs + ".</p>";
+        return "<br><p style='background-color: #FF272A !important; margin: 2px; padding: 5px; border-radius: 8px;'>" +
+            "Invalid number of inputs: " + inputCardinality + ", must be: " + expectedInputs + ".</p>";
     }
 
     return "";
 }
 
 function invalidConfig() {
-    return "<br><p style='color: #FF272A'>Invalid config, edit this node to have valid configuration.</p>"
+    return "<br><p style='background-color: #FF272A !important; margin: 2px; padding: 5px; border-radius: 8px;'>" +
+        "Invalid config, double click to edit the configuration.</p>"
 }
 
 const GraphUtils = {

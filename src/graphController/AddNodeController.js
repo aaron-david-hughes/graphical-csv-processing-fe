@@ -1,6 +1,6 @@
 import React from 'react';
 import NodeForm from "../graphComponentForms/NodeForm";
-import FileNodes, {AllNodeTypes} from '../graphComponentForms/utils/FileNodes';
+import FileNodes, {AllNodeTypes, isValidFromStart, getNodeObjTemplate} from '../graphComponentForms/utils/FileNodes';
 
 class AddNodeController extends React.Component {
 
@@ -73,24 +73,27 @@ class AddNodeController extends React.Component {
 
     onNodeTypeChange(e) {
         this.setState({
-            nodeType: e.target.value
+            nodeType: e.target.value,
+            isFormValid: isValidFromStart(this.props.config, e.target.value)
         });
     }
 
     nodeConfigStage() {
-        return <div>
-            <NodeForm
-                config={this.state.config}
-                operation={this.state.nodeType}
-                setNodeTemplate={this.setNodeTemplate.bind(this)}
-                setIsFormValid={this.setIsFormValid.bind(this)}
-                showNotStartedErrors={this.state.showNotStartedErrors}
-                setFileAndName={this.setFileAndName.bind(this)}
-                addBanner={this.props.addBanner}
-                graphData={this.props.graphData}
-                file={this.state.file}
-            />
-        </div>
+        return !isValidFromStart(this.props.config, this.state.nodeType)
+            ? <div>
+                <NodeForm
+                    config={this.state.config}
+                    operation={this.state.nodeType}
+                    setNodeTemplate={this.setNodeTemplate.bind(this)}
+                    setIsFormValid={this.setIsFormValid.bind(this)}
+                    showNotStartedErrors={this.state.showNotStartedErrors}
+                    setFileAndName={this.setFileAndName.bind(this)}
+                    addBanner={this.props.addBanner}
+                    graphData={this.props.graphData}
+                    file={this.state.file}
+                />
+            </div>
+            : null;
     }
 
     renderFormSection() {
@@ -139,7 +142,12 @@ class AddNodeController extends React.Component {
         this.setState({
             step,
             showNotStartedErrors: false,
-            isFormValid: false,
+            isFormValid: isValidFromStart(this.props.config, this.state.nodeType),
+            nodeTemplate: {
+                ...getNodeObjTemplate(this.props.config, this.state.nodeType),
+                inputCardinality: 0,
+                outputCardinality: 0
+            },
             file: null
         });
     }

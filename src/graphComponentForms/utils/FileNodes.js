@@ -32,6 +32,16 @@ const FileNodes = {
     }
 }
 
+export function isValidFromStart(config, operation) {
+    if (operation === 'open_file' || operation === 'write_file') return false;
+
+    let template = config.processing.operations
+        .find(op => op.operation === operation).template;
+
+    return Object.keys(template)
+        .filter(key => key !== 'operation' && key !== 'specificOperation' && key !== 'expectedInputs').length === 0;
+}
+
 export function AllNodeTypes(processingNodeConfig) {
     return [
         ...Object.keys(FileNodes).map(fileOpName => {
@@ -43,6 +53,23 @@ export function AllNodeTypes(processingNodeConfig) {
     ];
 }
 
+export function getNodeObjTemplate(config, operation) {
+    switch(operation) {
+        case 'open_file':
+            return deepClone(FileNodes["Open File"]);
+        case 'write_file':
+            return deepClone(FileNodes["Write File"]);
+        default:
+            let template = config.processing.operations
+                .find(op => op.operation === operation).template;
+            return {
+                ...deepClone(config.processing.generalTemplate),
+                group: 'processing',
+                ...template
+            };
+    }
+}
+
 export function nodeDependentState(valid, showNotStartedErrors, config, operation) {
     let validity = valid ? 'valid' : 'invalid';
 
@@ -50,15 +77,9 @@ export function nodeDependentState(valid, showNotStartedErrors, config, operatio
 
     switch (operation) {
         case 'open_file':
-            return {
-                nodeObj: deepClone(FileNodes["Open File"]),    //need to deep clone
-                inputValidity: {
-                    name: validity
-                }
-            };
         case 'write_file':
             return {
-                nodeObj: deepClone(FileNodes["Write File"]),   //need to deep clone
+                nodeObj: getNodeObjTemplate(config, operation),
                 inputValidity: {
                     name: validity
                 }
@@ -67,17 +88,14 @@ export function nodeDependentState(valid, showNotStartedErrors, config, operatio
             let template = config.processing.operations
                 .find(op => op.operation === operation).template;
             return {
-                nodeObj: {
-                    ...deepClone(config.processing.generalTemplate),   //need to deep clone
-                    group: 'processing',
-                    ...template
-                },
+                nodeObj: getNodeObjTemplate(config, operation),
                 inputValidity: {
                     ...processingInputValidityStartState(template, validity)
                 }
             };
     }
 }
+
 function processingInputValidityStartState(template, validity) {
     let inputValidity = {};
 

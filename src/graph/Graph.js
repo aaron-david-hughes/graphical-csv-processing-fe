@@ -216,11 +216,20 @@ class Graph extends React.Component {
                         type: 'success'
                     });
                 }
+            } else {
+                props.addBanner({
+                    msg: `Unselected node ${fromNode}`,
+                    type: 'success'
+                });
             }
 
             fromNode = null;
         } else {
             fromNode = tag.id;
+            props.addBanner({
+                msg: `Selected node ${fromNode}`,
+                type: 'success'
+            });
         }
 
         console.log(fromNode);

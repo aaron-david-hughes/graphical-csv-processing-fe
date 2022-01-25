@@ -14,10 +14,25 @@ class FormContentGenerator extends React.Component {
         }
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if (props.nodeOperation !== state.nodeOperation) {
+            return {
+                ...state,
+                nodeOperation: props.nodeOperation
+            }
+        }
+
+        return null;
+    }
+
     generateField(field, fieldConfig) {
         switch (fieldConfig.input) {
             case 'text':
                 return this.textField(field, fieldConfig, this.state.inputActionFunctions['text'].onBlur);
+            case 'numeric':
+                return this.numericField(field, fieldConfig, this.state.inputActionFunctions['numeric'].onBlur);
+            case 'integer':
+                return this.integerField(field, fieldConfig, this.state.inputActionFunctions['integer'].onBlur);
             case 'dropdown':
                 return this.dropdownField(field, fieldConfig, this.state.inputActionFunctions['dropdown'].onChange);
             case 'switch':
@@ -32,6 +47,46 @@ class FormContentGenerator extends React.Component {
             key={field}
             id={field}
             errorText={fieldConfig.errorText ? fieldConfig.errorText : 'Please fill in this field.'}
+            title={fieldConfig.title}
+            isInvalid={this.props.inputValidity[field] === 'invalid'}
+            style={{width: fieldConfig.width ? fieldConfig.width : '100%'}}
+            required={fieldConfig.required}
+            input={
+                <input
+                    id={field}
+                    type='text'
+                    defaultValue={this.props.node ? this.props.node[field] : null}
+                    onBlur={async e => onBlur(e, field)}
+                />
+            }
+        />
+    }
+
+    numericField(field, fieldConfig, onBlur) {
+        return <Input
+            key={field}
+            id={field}
+            errorText={fieldConfig.errorText ? fieldConfig.errorText : 'Please supply a number.'}
+            title={fieldConfig.title}
+            isInvalid={this.props.inputValidity[field] === 'invalid'}
+            style={{width: fieldConfig.width ? fieldConfig.width : '100%'}}
+            required={fieldConfig.required}
+            input={
+                <input
+                    id={field}
+                    type='text'
+                    defaultValue={this.props.node ? this.props.node[field] : null}
+                    onBlur={async e => onBlur(e, field)}
+                />
+            }
+        />
+    }
+
+    integerField(field, fieldConfig, onBlur) {
+        return <Input
+            key={field}
+            id={field}
+            errorText={fieldConfig.errorText ? fieldConfig.errorText : 'Please supply a integer.'}
             title={fieldConfig.title}
             isInvalid={this.props.inputValidity[field] === 'invalid'}
             style={{width: fieldConfig.width ? fieldConfig.width : '100%'}}
@@ -105,7 +160,8 @@ class FormContentGenerator extends React.Component {
         >
             {
                 Object.keys(operationConfig.template)
-                    .filter(key => key !== 'operation' && key !== 'expectedInputs')
+                    .filter(field => field !== 'operation' && field !== 'expectedInputs')
+                    .filter(field => operationConfig[field] !== undefined)
                     .map(field => this.generateField(field, operationConfig[field]))
             }
         </div>
