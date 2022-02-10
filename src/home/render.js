@@ -133,6 +133,7 @@ function render(props, state) {
             />
         </div>
 
+        {/*should be making a settings component*/}
         <Popup
             id='settingsPopup'
             title='Settings'
@@ -141,9 +142,22 @@ function render(props, state) {
             width='30%'
             height='30%'
         >
-            <p>hello</p>
-            <br />
-            <p>world!</p>
+            <div
+                style={{
+                    width: '90%',
+                    height: '90%'
+                }}
+            >
+                <textarea
+                    rows={10}
+                    defaultValue={JSON.stringify(state.config)}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        resize: 'none'
+                    }}
+                />
+            </div>
         </Popup>
 
         {

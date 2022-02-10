@@ -19,6 +19,11 @@ class NodeForm extends React.Component {
         if (this.props.node) {
             this.state.nodeObj = this.props.node;
         }
+
+        if (Object.entries(this.state.inputValidity).filter(entry => entry[1] === 'valid').length ===
+            Object.entries(this.state.inputValidity).length) {
+            props.setIsFormValid(this.state.inputValidity);
+        }
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -43,6 +48,10 @@ class NodeForm extends React.Component {
                 props.config,
                 props.operation
             );
+
+            if (props.node && (props.node.specificOperation === props.operation || props.node.operation === props.operation)) {
+                newOperationState.nodeObj = props.node;
+            }
         }
 
         let returnState = null;
@@ -159,7 +168,7 @@ class NodeForm extends React.Component {
                             id={'nameTextInput'}
                             type='text'
                             defaultValue={this.props.node && this.props.node.operation === 'write_file' ? this.props.node.name : null}
-                            onBlur={async e => this.textOnBlur.bind(this)(e, 'name')}
+                            onBlur={async e => this.textOnBlur.bind(this)(e, 'name', true)}
                         />
                     }
                 />
@@ -201,8 +210,17 @@ class NodeForm extends React.Component {
         }
     }
 
-    async textOnBlur(e, field) {
-        if (Validation.validateTextField(e)) {
+    async textOnBlur(e, field, required) {
+        if (!required && !/\S/.test(e.target.value)) {
+            let defaultValue = this.props.config.processing.operations
+                .find(op => {
+                    console.log(op);
+                    return op.operation === this.props.operation
+                }).template[field];
+            await this.setNodeObjKey(field, defaultValue)
+            this.props.setNodeTemplate(this.state.nodeObj);
+            await this.setInputValidity(field, 'valid');
+        } else if (Validation.validateTextField(e)) {
             await this.setNodeObjKey(field, e.target.value.trim())
             this.props.setNodeTemplate(this.state.nodeObj);
             await this.setInputValidity(field, 'valid');
@@ -211,8 +229,17 @@ class NodeForm extends React.Component {
         }
     }
 
-    async numericOnBlur(e, field) {
-        if (Validation.validateNumericField(e)) {
+    async numericOnBlur(e, field, required) {
+        if (!required && !/\S/.test(e.target.value)) {
+            let defaultValue = this.props.config.processing.operations
+                .find(op => {
+                    console.log(op);
+                    return op.operation === this.props.operation
+                }).template[field];
+            await this.setNodeObjKey(field, defaultValue)
+            this.props.setNodeTemplate(this.state.nodeObj);
+            await this.setInputValidity(field, 'valid');
+        } else if (Validation.validateNumericField(e)) {
             await this.setNodeObjKey(field, e.target.value.trim())
             this.props.setNodeTemplate(this.state.nodeObj);
             await this.setInputValidity(field, 'valid');
@@ -221,8 +248,17 @@ class NodeForm extends React.Component {
         }
     }
 
-    async integerOnBlur(e, field) {
-        if (Validation.validateIntegerField(e)) {
+    async integerOnBlur(e, field, required) {
+        if (!required && !/\S/.test(e.target.value)) {
+            let defaultValue = this.props.config.processing.operations
+                .find(op => {
+                    console.log(op);
+                    return op.operation === this.props.operation
+                }).template[field];
+            await this.setNodeObjKey(field, defaultValue)
+            this.props.setNodeTemplate(this.state.nodeObj);
+            await this.setInputValidity(field, 'valid');
+        } else if (Validation.validateIntegerField(e)) {
             await this.setNodeObjKey(field, e.target.value.trim())
             this.props.setNodeTemplate(this.state.nodeObj);
             await this.setInputValidity(field, 'valid');

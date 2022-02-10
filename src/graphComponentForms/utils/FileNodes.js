@@ -85,23 +85,27 @@ export function nodeDependentState(valid, showNotStartedErrors, config, operatio
                 }
             };
         default:
-            let template = config.processing.operations
-                .find(op => op.operation === operation).template;
+            let operationConfig = config.processing.operations
+                .find(op => op.operation === operation);
             return {
                 nodeObj: getNodeObjTemplate(config, operation),
                 inputValidity: {
-                    ...processingInputValidityStartState(template, validity)
+                    ...processingInputValidityStartState(operationConfig, validity)
                 }
             };
     }
 }
 
-function processingInputValidityStartState(template, validity) {
+function processingInputValidityStartState(operationConfig, validity) {
     let inputValidity = {};
 
-    for (let [key, value] of Object.entries(template)) {
+    for (let [key, value] of Object.entries(operationConfig.template)) {
         if (value === null) {
             inputValidity[key] = validity
+        }
+
+        if (key !== 'operation' && operationConfig[key] && !operationConfig[key].required) {
+            inputValidity[key] = 'valid';
         }
     }
 

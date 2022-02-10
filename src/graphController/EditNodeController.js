@@ -22,7 +22,6 @@ class EditNodeController extends React.Component {
         }
 
         this.state = {
-            config: props.config,
             node: props.node,
             nodeTemplate: props.node,
             nodeTypes,
@@ -143,7 +142,7 @@ class EditNodeController extends React.Component {
             {
                 !isValidFromStart(this.props.config, this.state.nodeType)
                     ? <NodeForm
-                        config={this.state.config}
+                        config={this.props.config}
                         node={this.state.node}
                         operation={this.state.nodeType}
                         setNodeTemplate={this.setNodeTemplate.bind(this)}

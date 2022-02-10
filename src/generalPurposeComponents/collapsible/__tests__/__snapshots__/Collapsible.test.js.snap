@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collapsible tests Collapsible render tests should match snapshot when set to closed 1`] = `
+<TitleBox
+  icon={
+    <i
+      className="fa fa-chevron-down"
+      style={
+        Object {
+          "color": "darkslategray",
+          "fontSize": "24px",
+        }
+      }
+    />
+  }
+  iconTitle="Expand"
+  id="collapsibleId-collapsible"
+  isCollapsible={[Function]}
+  open={false}
+  style="style"
+  title="collapsibleTitle"
+>
+  children
+</TitleBox>
+`;
+
+exports[`Collapsible tests Collapsible render tests should match snapshot when set to open 1`] = `
+<TitleBox
+  icon={
+    <i
+      className="fa fa-chevron-up"
+      style={
+        Object {
+          "color": "darkslategray",
+          "fontSize": "24px",
+        }
+      }
+    />
+  }
+  iconTitle="Close"
+  id="collapsibleId-collapsible"
+  isCollapsible={[Function]}
+  open={true}
+  style="style"
+  title="collapsibleTitle"
+>
+  children
+</TitleBox>
+`;

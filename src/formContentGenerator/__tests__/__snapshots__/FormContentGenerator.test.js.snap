@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormContentGenerator tests FormContentGenerator render tests should match snapshot 1`] = `
+<div
+  id="processingForm-testOp"
+  style={
+    Object {
+      "display": "flex",
+      "flexWrap": "wrap",
+      "width": "100%",
+    }
+  }
+>
+  <Input
+    errorText="Please fill in this field."
+    id="textFieldName"
+    input={
+      <input
+        defaultValue={null}
+        id="textFieldName-input"
+        onBlur={[Function]}
+        type="text"
+      />
+    }
+    isInvalid={false}
+    key="textFieldName"
+    required={true}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+    title="Text Field Name"
+  />
+  <Input
+    errorText="Please supply a number."
+    id="numericFieldName"
+    input={
+      <input
+        defaultValue={null}
+        id="numericFieldName-input"
+        onBlur={[Function]}
+        type="text"
+      />
+    }
+    isInvalid={false}
+    key="numericFieldName"
+    required={true}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+    title="Numeric Field Name"
+  />
+  <Input
+    errorText="Please supply a integer."
+    id="integerFieldName"
+    input={
+      <input
+        defaultValue={null}
+        id="integerFieldName-input"
+        onBlur={[Function]}
+        type="text"
+      />
+    }
+    isInvalid={false}
+    key="integerFieldName"
+    required={true}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+    title="Integer Field Name"
+  />
+  <Input
+    id="dropdownFieldName"
+    input={
+      <select
+        defaultValue="first"
+        id="dropdownFieldName-input"
+        onChange={[Function]}
+        style={
+          Object {
+            "padding": "1px 2px",
+            "width": "100%",
+          }
+        }
+      >
+        <option
+          value="first"
+        >
+          first
+        </option>
+        <option
+          value="second"
+        >
+          second
+        </option>
+        <option
+          value="third"
+        >
+          third
+        </option>
+      </select>
+    }
+    key="dropdownFieldName"
+    required={true}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+    title="Dropdown Field Name"
+  />
+  <Input
+    id="switchFieldName"
+    input={
+      <Switch
+        id="switchFieldName-input"
+        isChecked={true}
+        onChange={[Function]}
+      />
+    }
+    key="switchFieldName"
+    required={true}
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+    title="Switch Field Name"
+  />
+</div>
+`;

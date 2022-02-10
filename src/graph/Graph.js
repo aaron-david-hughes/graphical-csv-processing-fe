@@ -16,7 +16,6 @@ class Graph extends React.Component {
         super(props);
 
         this.state = {
-            config: props.config,
             graphData: Graph.determineNodeBorderColor(props.graphData, props.invalidNodes, props.invalidNodeCardinalities)
         }
     }
@@ -79,7 +78,7 @@ class Graph extends React.Component {
 
     //TODO: indicate problem in node
     setTooltip() {
-        let config = this.state.config;
+        let config = this.props.config;
 
         graph.tooltip().useHtml(true);
         graph.tooltip().format(function() {

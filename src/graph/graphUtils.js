@@ -20,12 +20,12 @@ function processTooltip(graph, config) {
 
     if (!operation) operation = graph.getData('operation');
 
-    let template = config.processing.operations
-        .find(op => op.operation === operation).template;
+    let operationConfig = config.processing.operations
+        .find(op => op.operation === operation);
     let str = commonTooltip(graph);
 
-    for (let attr of Object.keys(template)) {
-        str += displayElement(graph, attr);
+    for (let attr of Object.keys(operationConfig.template)) {
+        str += displayElement(graph, attr, operationConfig[attr]);
     }
 
     str += validConfig ? "" : invalidConfig();
@@ -39,10 +39,11 @@ function commonTooltip(graph) {
     return "<span style='font-weight:bold'>" + graph.id + "</span><br>";
 }
 
-function displayElement(graph, id) {
+function displayElement(graph, id, idConfig) {
     let value = graph.getData(id);
 
-    if (value === null) validConfig = false;
+    //if null and required field
+    if (value === null && idConfig && idConfig.required) validConfig = false;
 
     return "<br>" + id + ": " + value;
 }

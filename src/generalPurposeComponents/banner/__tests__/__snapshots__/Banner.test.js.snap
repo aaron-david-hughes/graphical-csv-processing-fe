@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Banner tests Banner render tests should match snapshot when failure 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "#ffcccc",
+      "border": "1px solid darkred",
+      "color": "darkred",
+      "height": "5%",
+      "textAlign": "center",
+      "width": "100%",
+    }
+  }
+>
+  <p
+    style={
+      Object {
+        "margin": "unset",
+        "padding": "5px",
+      }
+    }
+  >
+    test message
+  </p>
+</div>
+`;
+
+exports[`Banner tests Banner render tests should match snapshot when neutral 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "#bfbfbf",
+      "border": "1px solid black",
+      "color": "black",
+      "height": "5%",
+      "textAlign": "center",
+      "width": "100%",
+    }
+  }
+>
+  <p
+    style={
+      Object {
+        "margin": "unset",
+        "padding": "5px",
+      }
+    }
+  >
+    test message
+  </p>
+</div>
+`;
+
+exports[`Banner tests Banner render tests should match snapshot when success 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "#ccffcc",
+      "border": "1px solid green",
+      "color": "green",
+      "height": "5%",
+      "textAlign": "center",
+      "width": "100%",
+    }
+  }
+>
+  <p
+    style={
+      Object {
+        "margin": "unset",
+        "padding": "5px",
+      }
+    }
+  >
+    test message
+  </p>
+</div>
+`;
+
+exports[`Banner tests Banner render tests should match snapshot when warning 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "#ffe3b3",
+      "border": "1px solid darkorange",
+      "color": "darkorange",
+      "height": "5%",
+      "textAlign": "center",
+      "width": "100%",
+    }
+  }
+>
+  <p
+    style={
+      Object {
+        "margin": "unset",
+        "padding": "5px",
+      }
+    }
+  >
+    test message
+  </p>
+</div>
+`;

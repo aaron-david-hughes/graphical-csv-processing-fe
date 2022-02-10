@@ -11,6 +11,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
             config: props.config,
+            initialConfig: props.config,
             graphData: {
                 nodes: [],
                 edges: []
@@ -453,6 +454,20 @@ class Home extends React.Component {
         });
     }
 
+    updateConfig(newConfig) {
+        //someValidation
+
+        this.setState({
+            config: newConfig
+        }, this.clearGraph);
+    }
+
+    revertConfig() {
+        this.setState({
+            config: this.state.initialConfig
+        }, this.clearGraph);
+    }
+
     clearGraph() {
         this.setState({
             files: [],
@@ -495,6 +510,8 @@ class Home extends React.Component {
                 saveGraphConfigTemplate: this.saveGraphConfigTemplate.bind(this),
                 loadGraph: this.loadGraph.bind(this),
                 setValidNode: this.setValidNode.bind(this),
+                updateConfig: this.updateConfig.bind(this),
+                revertConfig: this.revertConfig.bind(this),
                 clearGraph: this.clearGraph.bind(this)
             },
             this.state

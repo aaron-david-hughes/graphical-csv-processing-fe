@@ -8,7 +8,7 @@ class Collapsible extends React.Component {
 
         this.state = {
             title: props.title,
-            open: props.open ? props.open : true,
+            open: props.open !== undefined ? props.open : true,
             id: props.id
         }
 

@@ -3,6 +3,7 @@ import React from 'react';
 class Input extends React.Component {
 
     render() {
+        console.log(this.props.input);
         return <div
             id={this.props.input.props.id + '-inputDiv'}
             style={this.props.isInvalid

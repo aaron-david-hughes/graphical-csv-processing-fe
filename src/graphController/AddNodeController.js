@@ -10,7 +10,6 @@ class AddNodeController extends React.Component {
         let nodeTypes = AllNodeTypes(props.config);
 
         this.state = {
-            config: props.config,
             steps: [
                 {
                     name: 'Node Type',
@@ -82,7 +81,7 @@ class AddNodeController extends React.Component {
         return !isValidFromStart(this.props.config, this.state.nodeType)
             ? <div>
                 <NodeForm
-                    config={this.state.config}
+                    config={this.props.config}
                     operation={this.state.nodeType}
                     setNodeTemplate={this.setNodeTemplate.bind(this)}
                     setIsFormValid={this.setIsFormValid.bind(this)}

@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`input component tests render tests when input invalid should render to match error snapshot 1`] = `
+<div
+  id="htmlInputOption-inputDiv"
+  style={
+    Object {
+      "borderColor": "red !important",
+      "color": "red",
+    }
+  }
+>
+  <label
+    htmlFor="htmlInputOption"
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+  >
+    inputTest*
+  </label>
+  <Component
+    id="htmlInputOption"
+  />
+  <p
+    style={
+      Object {
+        "fontSize": "12px",
+        "margin": "3px",
+        "textAlign": "right",
+      }
+    }
+  >
+    <i
+      className="fa fa-exclamation-circle"
+    />
+     there is an error
+  </p>
+</div>
+`;
+
+exports[`input component tests render tests when input valid should render to match non error snapshot 1`] = `
+<div
+  id="htmlInputOption-inputDiv"
+  style={
+    Object {
+      "borderColor": "unset",
+      "color": "black",
+    }
+  }
+>
+  <label
+    htmlFor="htmlInputOption"
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+  >
+    inputTest*
+  </label>
+  <Component
+    id="htmlInputOption"
+  />
+</div>
+`;

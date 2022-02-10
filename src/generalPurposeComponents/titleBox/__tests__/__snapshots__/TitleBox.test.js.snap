@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TitleBox component tests render tests should match closed snapshot when open is false 1`] = `
+<div
+  id="testTitleBoxId"
+  style="testStyle"
+>
+  <div
+    id="testTitleBoxId-header"
+    onClick={true}
+    style={
+      Object {
+        "backgroundColor": "white",
+        "border": "2px solid darkslategray",
+        "borderBottom": "2px solid darkslategray",
+        "borderBottomLeftRadius": "10px",
+        "borderBottomRightRadius": "10px",
+        "borderTopLeftRadius": "10px",
+        "borderTopRightRadius": "10px",
+        "display": "inline-flex",
+        "justifyContent": "space-between",
+        "width": "100%",
+      }
+    }
+  >
+    <h3
+      style={
+        Object {
+          "marginLeft": "1rem",
+        }
+      }
+    >
+      testTitleBoxTitle
+    </h3>
+    <button
+      onClick={[MockFunction]}
+      style={
+        Object {
+          "border": "none",
+        }
+      }
+      title="testIconTitle"
+    >
+      testIcon
+    </button>
+  </div>
+  <div
+    id="testTitleBoxId-body"
+    style={
+      Object {
+        "backgroundColor": "white",
+        "border": "2px solid darkslategray",
+        "borderBottomLeftRadius": "10px",
+        "borderBottomRightRadius": "10px",
+        "display": "none",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "margin": "1rem",
+        }
+      }
+    >
+      titleBoxContent
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TitleBox component tests render tests should match open snapshot when open is true 1`] = `
+<div
+  id="testTitleBoxId"
+  style="testStyle"
+>
+  <div
+    id="testTitleBoxId-header"
+    onClick={true}
+    style={
+      Object {
+        "backgroundColor": "white",
+        "border": "2px solid darkslategray",
+        "borderBottom": "0px",
+        "borderBottomLeftRadius": "0px",
+        "borderBottomRightRadius": "0px",
+        "borderTopLeftRadius": "10px",
+        "borderTopRightRadius": "10px",
+        "display": "inline-flex",
+        "justifyContent": "space-between",
+        "width": "100%",
+      }
+    }
+  >
+    <h3
+      style={
+        Object {
+          "marginLeft": "1rem",
+        }
+      }
+    >
+      testTitleBoxTitle
+    </h3>
+    <button
+      onClick={[MockFunction]}
+      style={
+        Object {
+          "border": "none",
+        }
+      }
+      title="testIconTitle"
+    >
+      testIcon
+    </button>
+  </div>
+  <div
+    id="testTitleBoxId-body"
+    style={
+      Object {
+        "backgroundColor": "white",
+        "border": "2px solid darkslategray",
+        "borderBottomLeftRadius": "10px",
+        "borderBottomRightRadius": "10px",
+        "display": "block",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "margin": "1rem",
+        }
+      }
+    >
+      titleBoxContent
+    </div>
+  </div>
+</div>
+`;

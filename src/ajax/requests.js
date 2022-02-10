@@ -5,7 +5,9 @@ export function graphicalCsvProcessingAPI(formContent, filename, addBanner, back
     formContent.files.forEach(file => {
         formData.append('csvFiles', file.file);
     });
-    formData.append('graph', JSON.stringify(formContent.graphData));
+    formData.append('graph', JSON.stringify({
+        ...formContent.graphData, defaultValues: {}
+    }));
 
     const config = {
         headers: {
@@ -15,8 +17,12 @@ export function graphicalCsvProcessingAPI(formContent, filename, addBanner, back
         responseType: 'blob'
     }
 
-    if (formContent && formContent.files && formContent.files.length > 0 && formContent.graphData &&
-        formContent.graphData.nodes && formContent.graphData.nodes.length > 0) {
+    if (
+        formContent &&
+        formContent.files && formContent.files.length > 0 &&
+        formContent.graphData &&
+        formContent.graphData.nodes && formContent.graphData.nodes.length > 0
+    ) {
         Axios.post(backend, formData, config).then(response => {
             saveFile(response.data, filename);
         }).catch(async error => {

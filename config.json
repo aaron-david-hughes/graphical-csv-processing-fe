@@ -54,7 +54,7 @@
       },
       {
         "operation": "string_filter",
-        "name": "String Equality Filter",
+        "name": "Filter String Equality",
         "template" : {
           "operation": "filter",
           "specificOperation": "string_filter",
@@ -85,7 +85,7 @@
       },
       {
         "operation": "numeric_filter",
-        "name": "Numeric Equality Filter",
+        "name": "Filter Numeric Equality",
         "template" : {
           "operation": "filter",
           "specificOperation": "numeric_filter",
@@ -116,7 +116,7 @@
       },
       {
         "operation": "greater_than_filter",
-        "name": "Greater Than Filter",
+        "name": "Filter Greater Than",
         "template" : {
           "operation": "filter",
           "specificOperation": "greater_than_filter",
@@ -141,11 +141,11 @@
       },
       {
         "operation": "greater_than_or_equal_filter",
-        "name": "Greater Than or Equal Filter",
+        "name": "Filter Greater Than or Equal",
         "template" : {
           "operation": "filter",
           "specificOperation": "greater_than_or_equal_filter",
-          "column": null,
+          "column": "student number",
           "condition": null,
           "filterType": "greater_than_or_equal",
           "equal": true,
@@ -155,7 +155,7 @@
           "input": "text",
           "title": "Column",
           "width": "100%",
-          "required": true
+          "required": false
         },
         "condition": {
           "input": "numeric",
@@ -166,7 +166,7 @@
       },
       {
         "operation": "less_than_filter",
-        "name": "Less Than Filter",
+        "name": "Filter Less Than",
         "template" : {
           "operation": "filter",
           "specificOperation": "less_than_filter",
@@ -191,7 +191,7 @@
       },
       {
         "operation": "less_than_or_equal_filter",
-        "name": "Less Than or Equal Filter",
+        "name": "Filter Less Than or Equal",
         "template" : {
           "operation": "filter",
           "specificOperation": "less_than_or_equal_filter",
@@ -364,6 +364,361 @@
         "template" : {
           "operation": "concat_tables",
           "expectedInputs": 2
+        }
+      },
+      {
+        "operation": "unique_column",
+        "name": "Unique Column",
+        "template" : {
+          "operation": "unique_column",
+          "column": null,
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "or",
+        "name": "Or",
+        "template" : {
+          "operation": "or",
+          "column": null,
+          "expectedInputs": 2
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "order_alphabetical_asc",
+        "name": "Order Alphabetical Ascending",
+        "template" : {
+          "operation": "order_column",
+          "specificOperation": "order_alphabetical_asc",
+          "column": null,
+          "orderType": "alphabetical_order_asc",
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "order_alphabetical_desc",
+        "name": "Order Alphabetical Descending",
+        "template" : {
+          "operation": "order_column",
+          "specificOperation": "order_alphabetical_desc",
+          "column": null,
+          "orderType": "alphabetical_order_desc",
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "order_numerical_asc",
+        "name": "Order Numerically Ascending",
+        "template" : {
+          "operation": "order_column",
+          "specificOperation": "order_numerical_asc",
+          "column": null,
+          "orderType": "numeric_order_asc",
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "order_numerical_desc",
+        "name": "Order Numerically Descending",
+        "template" : {
+          "operation": "order_column",
+          "specificOperation": "order_numerical_desc",
+          "column": null,
+          "orderType": "numeric_order_desc",
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "drop_alias",
+        "name": "Drop Alias",
+        "template" : {
+          "operation": "drop_alias",
+          "expectedInputs": 1
+        }
+      },
+      {
+        "operation": "set_compliment",
+        "name": "Set Compliment",
+        "template" : {
+          "operation": "set_compliment",
+          "keyHeader": null,
+          "expectedInputs": 2
+        },
+        "keyHeader": {
+          "input": "text",
+          "title": "Key Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "concat_columns",
+        "name": "Concat Columns",
+        "template" : {
+          "operation": "concat_columns",
+          "column1": null,
+          "column2": null,
+          "concatHeader": null,
+          "expectedInputs": 2
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column 1",
+          "width": "100%",
+          "required": true
+        },
+        "column2": {
+          "input": "text",
+          "title": "Column 2",
+          "width": "100%",
+          "required": true
+        },
+        "concatHeader": {
+          "input": "text",
+          "title": "Concat Column Header",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "row_average",
+        "name": "Row Average",
+        "template" : {
+          "operation": "row_math",
+          "specificOperation": "row_average",
+          "columns": null,
+          "newName": null,
+          "mathOperation": "average",
+          "expectedInputs": 1
+        },
+        "columns": {
+          "input": "text",
+          "title": "Columns",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "row_count",
+        "name": "Row Count",
+        "template" : {
+          "operation": "row_math",
+          "specificOperation": "row_count",
+          "columns": null,
+          "newName": null,
+          "mathOperation": "count",
+          "expectedInputs": 1
+        },
+        "columns": {
+          "input": "text",
+          "title": "Columns",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "row_max",
+        "name": "Row Max",
+        "template" : {
+          "operation": "row_math",
+          "specificOperation": "row_max",
+          "columns": null,
+          "newName": null,
+          "mathOperation": "max",
+          "expectedInputs": 1
+        },
+        "columns": {
+          "input": "text",
+          "title": "Columns",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "row_min",
+        "name": "Row Min",
+        "template" : {
+          "operation": "row_math",
+          "specificOperation": "row_min",
+          "columns": null,
+          "newName": null,
+          "mathOperation": "min",
+          "expectedInputs": 1
+        },
+        "columns": {
+          "input": "text",
+          "title": "Columns",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "row_sum",
+        "name": "Row Sum",
+        "template" : {
+          "operation": "row_math",
+          "specificOperation": "row_sum",
+          "columns": null,
+          "newName": null,
+          "mathOperation": "sum",
+          "expectedInputs": 1
+        },
+        "columns": {
+          "input": "text",
+          "title": "Columns",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "column_average",
+        "name": "Column Average",
+        "template" : {
+          "operation": "column_math",
+          "specificOperation": "column_average",
+          "column": null,
+          "mathOperation": "average",
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "column_count",
+        "name": "Column Count",
+        "template" : {
+          "operation": "column_math",
+          "specificOperation": "column_count",
+          "column": null,
+          "mathOperation": "count",
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "column_max",
+        "name": "Column Max",
+        "template" : {
+          "operation": "column_math",
+          "specificOperation": "column_max",
+          "column": null,
+          "mathOperation": "max",
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "column_min",
+        "name": "Column Min",
+        "template" : {
+          "operation": "column_math",
+          "specificOperation": "column_min",
+          "column": null,
+          "mathOperation": "min",
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "column_sum",
+        "name": "Column Sum",
+        "template" : {
+          "operation": "column_math",
+          "specificOperation": "column_sum",
+          "column": null,
+          "mathOperation": "sum",
+          "expectedInputs": 1
+        },
+        "column": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
         }
       }
     ]

@@ -8,7 +8,6 @@ class FormContentGenerator extends React.Component {
         super(props);
 
         this.state = {
-            config: props.config,
             nodeOperation: props.nodeOperation,
             inputActionFunctions: props.inputActionFunctions
         }
@@ -43,9 +42,22 @@ class FormContentGenerator extends React.Component {
     }
 
     textField(field, fieldConfig, onBlur) {
+        let id = this.props.nodeOperation + '-' + field;
+        let defaultValue = null;
+
+        if (this.props.node) {
+            defaultValue = this.props.node[field]
+        }
+
+        if (this.props.nodeObj) {
+            defaultValue = this.props.nodeObj[field]
+        }
+
+        console.log(field + ' default: ' + defaultValue);
+
         return <Input
-            key={field}
-            id={field}
+            key={id}
+            id={id}
             errorText={fieldConfig.errorText ? fieldConfig.errorText : 'Please fill in this field.'}
             title={fieldConfig.title}
             isInvalid={this.props.inputValidity[field] === 'invalid'}
@@ -53,19 +65,35 @@ class FormContentGenerator extends React.Component {
             required={fieldConfig.required}
             input={
                 <input
-                    id={field}
+                    id={id + '-input'}
                     type='text'
-                    defaultValue={this.props.node ? this.props.node[field] : null}
-                    onBlur={async e => onBlur(e, field)}
+                    defaultValue={this.logTest(field, defaultValue)}
+                    onBlur={async e => onBlur(e, field, fieldConfig.required)}
                 />
             }
         />
     }
 
+    logTest(field, defaultValue) {
+        console.log(field + ' render: ' + defaultValue);
+        return defaultValue;
+    }
+
     numericField(field, fieldConfig, onBlur) {
+        let id = this.props.nodeOperation + '-' + field;
+        let defaultValue = null;
+
+        if (this.props.node) {
+            defaultValue = this.props.node[field]
+        }
+
+        if (this.props.nodeObj) {
+            defaultValue = this.props.nodeObj[field]
+        }
+
         return <Input
-            key={field}
-            id={field}
+            key={id}
+            id={id}
             errorText={fieldConfig.errorText ? fieldConfig.errorText : 'Please supply a number.'}
             title={fieldConfig.title}
             isInvalid={this.props.inputValidity[field] === 'invalid'}
@@ -73,19 +101,30 @@ class FormContentGenerator extends React.Component {
             required={fieldConfig.required}
             input={
                 <input
-                    id={field}
+                    id={id + '-input'}
                     type='text'
-                    defaultValue={this.props.node ? this.props.node[field] : null}
-                    onBlur={async e => onBlur(e, field)}
+                    defaultValue={defaultValue}
+                    onBlur={async e => onBlur(e, field, fieldConfig.required)}
                 />
             }
         />
     }
 
     integerField(field, fieldConfig, onBlur) {
+        let id = this.props.nodeOperation + '-' + field;
+        let defaultValue = null;
+
+        if (this.props.node) {
+            defaultValue = this.props.node[field]
+        }
+
+        if (this.props.nodeObj) {
+            defaultValue = this.props.nodeObj[field]
+        }
+
         return <Input
-            key={field}
-            id={field}
+            key={id}
+            id={id}
             errorText={fieldConfig.errorText ? fieldConfig.errorText : 'Please supply a integer.'}
             title={fieldConfig.title}
             isInvalid={this.props.inputValidity[field] === 'invalid'}
@@ -93,30 +132,41 @@ class FormContentGenerator extends React.Component {
             required={fieldConfig.required}
             input={
                 <input
-                    id={field}
+                    id={id + '-input'}
                     type='text'
-                    defaultValue={this.props.node ? this.props.node[field] : null}
-                    onBlur={async e => onBlur(e, field)}
+                    defaultValue={defaultValue}
+                    onBlur={async e => onBlur(e, field, fieldConfig.required)}
                 />
             }
         />
     }
 
     dropdownField(field, fieldConfig, onChange) {
+        let id = this.props.nodeOperation + '-' + field;
+        let defaultValue = fieldConfig.options[0];
+
+        if (this.props.node) {
+            defaultValue = this.props.node[field]
+        }
+
+        if (this.props.nodeObj) {
+            defaultValue = this.props.nodeObj[field]
+        }
+
         return <Input
-            key={field}
-            id={field}
+            key={id}
+            id={id}
             title={fieldConfig.title}
             style={{width: fieldConfig.width ? fieldConfig.width : '100%'}}
             required={fieldConfig.required}
             input={
                 <select
-                    id={field}
+                    id={id + '-input'}
                     style={{
                         width: '100%',
                         padding: '1px 2px'
                     }}
-                    defaultValue={this.props.node ? this.props.node[field] : fieldConfig.options[0]}
+                    defaultValue={defaultValue}
                     onChange={async e => onChange(e, field)}
                 >
                     {
@@ -132,14 +182,16 @@ class FormContentGenerator extends React.Component {
     }
 
     switchField(field, fieldConfig, onChange) {
+        let id = this.props.nodeOperation + '-' + field;
         return <Input
-            key={field}
-            id={field}
+            key={id}
+            id={id}
             title={fieldConfig.title}
             style={{width: fieldConfig.width ? fieldConfig.width : '100%'}}
             required={fieldConfig.required}
             input={
                 <Switch
+                    id={id + '-input'}
                     isChecked={this.props.nodeObj[field]}
                     onChange={async e => onChange(e, field)}
                 />
@@ -148,7 +200,7 @@ class FormContentGenerator extends React.Component {
     }
 
     processElementContent() {
-        let operationConfig = this.state.config.processing.operations.find(op => op.operation === this.state.nodeOperation);
+        let operationConfig = this.props.config.processing.operations.find(op => op.operation === this.state.nodeOperation);
 
         return <div
             id={'processingForm-' + this.state.nodeOperation}

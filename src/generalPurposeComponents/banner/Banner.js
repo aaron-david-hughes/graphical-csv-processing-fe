@@ -8,7 +8,6 @@ class Banner extends React.Component {
         this.state = {
             id: props.id,
             msg: props.msg,
-            color: props.color,
             timeToLive: props.timeToLive
         }
     }
