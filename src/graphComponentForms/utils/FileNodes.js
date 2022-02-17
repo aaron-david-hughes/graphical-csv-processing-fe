@@ -96,7 +96,7 @@ export function nodeDependentState(valid, showNotStartedErrors, config, operatio
     }
 }
 
-function processingInputValidityStartState(operationConfig, validity) {
+export function processingInputValidityStartState(operationConfig, validity) {
     let inputValidity = {};
 
     for (let [key, value] of Object.entries(operationConfig.template)) {

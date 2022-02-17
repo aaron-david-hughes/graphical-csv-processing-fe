@@ -43,13 +43,16 @@ class TitleBox extends React.Component {
                 style={{
                     display: this.props.open ? 'block' : 'none',
                     width: '100%',
+                    height: this.props.fitContent ? '' : '100%',
+                    maxHeight: this.props.fitContent ? '' : '100%',
                     border: '2px solid darkslategray',
                     borderBottomLeftRadius: '10px',
                     borderBottomRightRadius: '10px',
                     backgroundColor: 'white',
+                    overflowY: this.props.scrollable ? 'scroll' : 'hidden'
                 }}
             >
-                <div style={{margin: '1rem'}}>
+                <div style={{padding: '1rem', width: '100%', height: '100%'}}>
                     {this.props.children}
                 </div>
             </div>

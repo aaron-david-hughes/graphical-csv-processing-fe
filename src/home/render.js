@@ -5,6 +5,7 @@ import Banner from "../generalPurposeComponents/banner/Banner";
 import React from "react";
 import EditNodeController from "../graphController/EditNodeController";
 import Input from "../generalPurposeComponents/input/Input";
+import SettingsPanel from "../settingsPanel/SettingsPanel";
 
 function render(props, state) {
     return <div
@@ -66,7 +67,7 @@ function render(props, state) {
                  }}
             >
                 <Graph
-                    config={state.config}
+                    config={state.defaultsEnabled ? state.config : state.initialConfig}
                     graphData={state.graphData}
                     addEdge={props.addEdge}
                     setEditNode={props.setEditNode}
@@ -123,7 +124,7 @@ function render(props, state) {
                     display: 'block',
                     margin: '1rem'
                 }}
-                config={state.config}
+                config={state.defaultsEnabled ? state.config : state.initialConfig}
                 graphData={state.graphData}
                 onSubmitForm={props.onSubmitForm}
                 addFile={props.addFile}
@@ -133,32 +134,19 @@ function render(props, state) {
             />
         </div>
 
-        {/*should be making a settings component*/}
-        <Popup
-            id='settingsPopup'
-            title='Settings'
-            isOpen={state.isSettings}
-            close={props.closeSettings}
-            width='30%'
-            height='30%'
-        >
-            <div
-                style={{
-                    width: '90%',
-                    height: '90%'
-                }}
-            >
-                <textarea
-                    rows={10}
-                    defaultValue={JSON.stringify(state.config)}
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                        resize: 'none'
-                    }}
+        {
+            state.isSettings
+                ? <SettingsPanel
+                    defaultsEnabled={state.defaultsEnabled}
+                    config={state.config}
+                    initialConfig={state.initialConfig}
+                    close={props.closeSettings}
+                    setDefaultsEnabled={props.setDefaultsEnabled}
+                    updateConfig={props.updateConfig}
+                    revertConfig={props.revertConfig}
                 />
-            </div>
-        </Popup>
+                : null
+        }
 
         {
             state.savePopup ?
@@ -169,6 +157,7 @@ function render(props, state) {
                     close={props.switchSavePopup}
                     width='35%'
                     height='35%'
+                    fitContent={true}
                 >
                     {
                         !props.isGraphValid()
@@ -274,7 +263,8 @@ function render(props, state) {
                     isOpen={true}
                     close={props.switchLoadPopup}
                     width='35%'
-                    height='35%'
+                    height='10%'
+                    fitContent={true}
                 >
                     <input
                         id='loadGraphFileInput'
@@ -298,10 +288,11 @@ function render(props, state) {
                     close={props.unsetEditNode}
                     width='35%'
                     height='35%'
+                    fitContent={true}
                 >
                     <EditNodeController
                         graphData={state.graphData}
-                        config={state.config}
+                        config={state.defaultsEnabled ? state.config : state.initialConfig}
                         editNode={props.editNode}
                         deleteNode={props.deleteNode}
                         close={props.unsetEditNode}

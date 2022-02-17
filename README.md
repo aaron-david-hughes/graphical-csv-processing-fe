@@ -68,3 +68,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### docker run
+`docker run -d -p 3000:3000 --volume=${absolute-path}/config.json:/app/src/config.json graphical-csv-processing-fe`  
+note: the volume is optional, and a default config is stored within the image
+
+dropdown config eg:
+"joinType": {
+"input": "dropdown",
+"title": "Join Type",
+"width": "100%",
+"required": true,
+"options": [
+"left",
+"right",
+"inner",
+"outer"
+]
+}

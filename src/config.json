@@ -18,10 +18,11 @@
     },
     "operations": [
       {
-        "operation": "join",
-        "name": "Join",
+        "operation": "join_left",
+        "name": "Join Left",
         "template" : {
           "operation": "join",
+          "specificOperation": "join_left",
           "onLeft": null,
           "onRight": null,
           "joinType": "left",
@@ -38,18 +39,78 @@
           "title": "On Right",
           "width": "50%",
           "required": true
+        }
+      },
+      {
+        "operation": "join_right",
+        "name": "Join Right",
+        "template" : {
+          "operation": "join",
+          "specificOperation": "join_right",
+          "onLeft": null,
+          "onRight": null,
+          "joinType": "right",
+          "expectedInputs": 2
         },
-        "joinType": {
-          "input": "dropdown",
-          "title": "Join Type",
-          "width": "100%",
-          "required": true,
-          "options": [
-            "left",
-            "right",
-            "inner",
-            "outer"
-          ]
+        "onLeft": {
+          "input": "text",
+          "title": "On Left",
+          "width": "50%",
+          "required": true
+        },
+        "onRight": {
+          "input": "text",
+          "title": "On Right",
+          "width": "50%",
+          "required": true
+        }
+      },
+      {
+        "operation": "join_inner",
+        "name": "Join Inner",
+        "template" : {
+          "operation": "join",
+          "specificOperation": "join_inner",
+          "onLeft": null,
+          "onRight": null,
+          "joinType": "inner",
+          "expectedInputs": 2
+        },
+        "onLeft": {
+          "input": "text",
+          "title": "On Left",
+          "width": "50%",
+          "required": true
+        },
+        "onRight": {
+          "input": "text",
+          "title": "On Right",
+          "width": "50%",
+          "required": true
+        }
+      },
+      {
+        "operation": "join_outer",
+        "name": "Join Outer",
+        "template" : {
+          "operation": "join",
+          "specificOperation": "join_outer",
+          "onLeft": null,
+          "onRight": null,
+          "joinType": "outer",
+          "expectedInputs": 2
+        },
+        "onLeft": {
+          "input": "text",
+          "title": "On Left",
+          "width": "50%",
+          "required": true
+        },
+        "onRight": {
+          "input": "text",
+          "title": "On Right",
+          "width": "50%",
+          "required": true
         }
       },
       {
@@ -282,10 +343,11 @@
         }
       },
       {
-        "operation": "merge_columns",
-        "name": "Merge Columns",
+        "operation": "merge_columns_string",
+        "name": "Merge Columns String Equality",
         "template" : {
           "operation": "merge_columns",
+          "specificOperation": "merge_columns_string",
           "column1": null,
           "column2": null,
           "mergeColName": null,
@@ -309,16 +371,37 @@
           "title": "Merged Column Name",
           "width": "100%",
           "required": true
+        }
+      },
+      {
+        "operation": "merge_columns_numeric",
+        "name": "Merge Columns Numeric Equality",
+        "template" : {
+          "operation": "merge_columns",
+          "specificOperation": "merge_columns_numeric",
+          "column1": null,
+          "column2": null,
+          "mergeColName": null,
+          "mergeType": "numeric_equality",
+          "expectedInputs": 1
         },
-        "mergeType": {
-          "input": "dropdown",
-          "title": "Merge Type",
+        "column1": {
+          "input": "text",
+          "title": "Column 1",
           "width": "100%",
-          "required": true,
-          "options": [
-            "string_equality",
-            "numeric_equality"
-          ]
+          "required": true
+        },
+        "column2": {
+          "input": "text",
+          "title": "Column 2",
+          "width": "100%",
+          "required": true
+        },
+        "mergeColName": {
+          "input": "text",
+          "title": "Merged Column Name",
+          "width": "100%",
+          "required": true
         }
       },
       {

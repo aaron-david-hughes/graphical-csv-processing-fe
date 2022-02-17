@@ -6,9 +6,7 @@ class Popup extends React.Component {
         return <div
             className='popup'
             style={{
-                display: this.props.isOpen ? 'block' : 'none',
-                width: '100%',
-                height: '100%'
+                display: this.props.isOpen ? 'block' : 'none'
             }}
         >
             <div
@@ -45,6 +43,8 @@ class Popup extends React.Component {
                 }
                 iconOnClick={this.props.close}
                 iconTitle='Close'
+                fitContent={this.props.fitContent}
+                scrollable={this.props.scrollable}
             >
                 {this.props.children}
             </TitleBox>

@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from "./home/Home";
+import Config from "./config.json";
 
 ReactDOM.render(
     <Home
-        config={JSON.parse(process.env.REACT_APP_CONFIG)}
+        config={Config}
     />,
     document.getElementById('root')
 );

@@ -21,8 +21,8 @@ class Home extends React.Component {
             counter: 0,
             edgeCounter: 0,
             files: [],
-            switchTitle: 'CSC1026',
             isSettings: false,
+            defaultsEnabled: false,
             editingNode: null,
             saveGraphFilename: 'SaveGraph.json',
             savePopup: false,
@@ -455,17 +455,15 @@ class Home extends React.Component {
     }
 
     updateConfig(newConfig) {
-        //someValidation
-
         this.setState({
             config: newConfig
-        }, this.clearGraph);
+        });
     }
 
     revertConfig() {
         this.setState({
             config: this.state.initialConfig
-        }, this.clearGraph);
+        });
     }
 
     clearGraph() {
@@ -481,6 +479,12 @@ class Home extends React.Component {
             invalidNodes: [],
             invalidNodeCardinalities: []
         })
+    }
+
+    setDefaultsEnabled(status) {
+        this.setState({
+            defaultsEnabled: status
+        });
     }
 
     render() {
@@ -512,7 +516,8 @@ class Home extends React.Component {
                 setValidNode: this.setValidNode.bind(this),
                 updateConfig: this.updateConfig.bind(this),
                 revertConfig: this.revertConfig.bind(this),
-                clearGraph: this.clearGraph.bind(this)
+                clearGraph: this.clearGraph.bind(this),
+                setDefaultsEnabled: this.setDefaultsEnabled.bind(this)
             },
             this.state
         );

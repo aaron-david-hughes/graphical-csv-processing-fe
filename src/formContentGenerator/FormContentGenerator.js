@@ -9,7 +9,8 @@ class FormContentGenerator extends React.Component {
 
         this.state = {
             nodeOperation: props.nodeOperation,
-            inputActionFunctions: props.inputActionFunctions
+            inputActionFunctions: props.inputActionFunctions,
+            isSettings: !!props.isSettings
         }
     }
 
@@ -27,21 +28,33 @@ class FormContentGenerator extends React.Component {
     generateField(field, fieldConfig) {
         switch (fieldConfig.input) {
             case 'text':
-                return this.textField(field, fieldConfig, this.state.inputActionFunctions['text'].onBlur);
+                return this.textField(field, fieldConfig);
             case 'numeric':
-                return this.numericField(field, fieldConfig, this.state.inputActionFunctions['numeric'].onBlur);
+                return this.numericField(field, fieldConfig);
             case 'integer':
-                return this.integerField(field, fieldConfig, this.state.inputActionFunctions['integer'].onBlur);
+                return this.integerField(field, fieldConfig);
             case 'dropdown':
-                return this.dropdownField(field, fieldConfig, this.state.inputActionFunctions['dropdown'].onChange);
+                return this.dropdownField(field, fieldConfig);
             case 'switch':
-                return this.switchField(field, fieldConfig, this.state.inputActionFunctions['switch'].onChange);
+                return this.switchField(field, fieldConfig);
             default:
                 console.log('input unknown');
         }
     }
 
-    textField(field, fieldConfig, onBlur) {
+    async onBlur(onBlur, e, field, fieldConfig) {
+        return this.state.isSettings
+            ? onBlur(e, this.props.nodeOperation, field)
+            : onBlur(e, field, fieldConfig.required)
+    }
+
+    async onChange(onChange, e, field) {
+        this.state.isSettings
+            ? onChange(e, this.props.nodeOperation, field)
+            : onChange(e, field)
+    }
+
+    textField(field, fieldConfig) {
         let id = this.props.nodeOperation + '-' + field;
         let defaultValue = null;
 
@@ -52,8 +65,6 @@ class FormContentGenerator extends React.Component {
         if (this.props.nodeObj) {
             defaultValue = this.props.nodeObj[field]
         }
-
-        console.log(field + ' default: ' + defaultValue);
 
         return <Input
             key={id}
@@ -67,19 +78,14 @@ class FormContentGenerator extends React.Component {
                 <input
                     id={id + '-input'}
                     type='text'
-                    defaultValue={this.logTest(field, defaultValue)}
-                    onBlur={async e => onBlur(e, field, fieldConfig.required)}
+                    defaultValue={defaultValue}
+                    onBlur={async e => this.onBlur(this.state.inputActionFunctions['text'].onBlur, e, field, fieldConfig)}
                 />
             }
         />
     }
 
-    logTest(field, defaultValue) {
-        console.log(field + ' render: ' + defaultValue);
-        return defaultValue;
-    }
-
-    numericField(field, fieldConfig, onBlur) {
+    numericField(field, fieldConfig) {
         let id = this.props.nodeOperation + '-' + field;
         let defaultValue = null;
 
@@ -104,13 +110,13 @@ class FormContentGenerator extends React.Component {
                     id={id + '-input'}
                     type='text'
                     defaultValue={defaultValue}
-                    onBlur={async e => onBlur(e, field, fieldConfig.required)}
+                    onBlur={async e => this.onBlur(this.state.inputActionFunctions['numeric'].onBlur, e, field, fieldConfig)}
                 />
             }
         />
     }
 
-    integerField(field, fieldConfig, onBlur) {
+    integerField(field, fieldConfig) {
         let id = this.props.nodeOperation + '-' + field;
         let defaultValue = null;
 
@@ -135,13 +141,13 @@ class FormContentGenerator extends React.Component {
                     id={id + '-input'}
                     type='text'
                     defaultValue={defaultValue}
-                    onBlur={async e => onBlur(e, field, fieldConfig.required)}
+                    onBlur={async e => this.onBlur(this.state.inputActionFunctions['integer'].onBlur, e, field, fieldConfig)}
                 />
             }
         />
     }
 
-    dropdownField(field, fieldConfig, onChange) {
+    dropdownField(field, fieldConfig) {
         let id = this.props.nodeOperation + '-' + field;
         let defaultValue = fieldConfig.options[0];
 
@@ -167,7 +173,7 @@ class FormContentGenerator extends React.Component {
                         padding: '1px 2px'
                     }}
                     defaultValue={defaultValue}
-                    onChange={async e => onChange(e, field)}
+                    onChange={async e => this.onChange(this.state.inputActionFunctions['dropdown'].onChange, e, field)}
                 >
                     {
                         fieldConfig.options.map(function(type) {
@@ -181,7 +187,7 @@ class FormContentGenerator extends React.Component {
         />
     }
 
-    switchField(field, fieldConfig, onChange) {
+    switchField(field, fieldConfig) {
         let id = this.props.nodeOperation + '-' + field;
         return <Input
             key={id}
@@ -193,7 +199,7 @@ class FormContentGenerator extends React.Component {
                 <Switch
                     id={id + '-input'}
                     isChecked={this.props.nodeObj[field]}
-                    onChange={async e => onChange(e, field)}
+                    onChange={async e => this.onChange(this.state.inputActionFunctions['switch'].onChange, e, field)}
                 />
             }
         />
