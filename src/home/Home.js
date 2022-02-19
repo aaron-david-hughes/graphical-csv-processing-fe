@@ -27,6 +27,7 @@ class Home extends React.Component {
             saveGraphFilename: 'SaveGraph.json',
             savePopup: false,
             loadPopup: false,
+            loading: false,
             invalidNodes: [],
             invalidNodeCardinalities: []
         }
@@ -173,7 +174,7 @@ class Home extends React.Component {
         graphicalCsvProcessingAPI({
             files: this.state.files,
             graphData: this.state.graphData
-        }, filename, this.addBanner.bind(this), this.state.config.backend);
+        }, filename, this.addBanner.bind(this), this.state.config.backend, this.loading.bind(this));
     }
 
     openSettings() {
@@ -382,7 +383,6 @@ class Home extends React.Component {
         }
     }
 
-    //will be used on loading
     async dataUrlToFile(dataUrl, fileName) {
         console.log(dataUrl);
         const res = await fetch(dataUrl);
@@ -487,6 +487,12 @@ class Home extends React.Component {
         });
     }
 
+    async loading(status) {
+        await this.setState({
+            loading: status
+        })
+    }
+
     render() {
         return HomeTemplate(
             {
@@ -517,7 +523,8 @@ class Home extends React.Component {
                 updateConfig: this.updateConfig.bind(this),
                 revertConfig: this.revertConfig.bind(this),
                 clearGraph: this.clearGraph.bind(this),
-                setDefaultsEnabled: this.setDefaultsEnabled.bind(this)
+                setDefaultsEnabled: this.setDefaultsEnabled.bind(this),
+                loading: this.loading.bind(this)
             },
             this.state
         );

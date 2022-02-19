@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from "../generalPurposeComponents/input/Input";
+import ClipLoader from "react-spinners/ClipLoader"
 
 class ProcessForm extends React.Component {
 
@@ -31,7 +32,10 @@ class ProcessForm extends React.Component {
             style={{
                 width: '100%'
             }}
-            onSubmit={e => this.props.onSubmitForm(e, this.state.title)}
+            onSubmit={async e => {
+                await this.props.loading(true);
+                this.props.onSubmitForm(e, this.state.title);
+            }}
         >
             <div
                 style={{
@@ -62,13 +66,17 @@ class ProcessForm extends React.Component {
                         {` Filename to be used: ${this.state.title}`}
                     </p>
                 </div>
-                <button
-                    id='processButton'
-                    title='process'
-                    disabled={!this.props.isGraphValid()}
-                >
-                    process
-                </button>
+                {
+                    this.props.isLoading
+                        ? <ClipLoader loading={this.props.isLoading} size={30} />
+                        : <button
+                            id='processButton'
+                            title='process'
+                            disabled={!this.props.isGraphValid()}
+                        >
+                            process
+                        </button>
+                }
             </div>
         </form>
     }

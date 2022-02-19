@@ -131,6 +131,8 @@ function render(props, state) {
                 addNode={props.addNode}
                 addBanner={props.addBanner}
                 isGraphValid={props.isGraphValid}
+                loading={props.loading}
+                isLoading={state.loading}
             />
         </div>
 

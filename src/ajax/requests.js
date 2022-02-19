@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-export function graphicalCsvProcessingAPI(formContent, filename, addBanner, backend) {
+export function graphicalCsvProcessingAPI(formContent, filename, addBanner, backend, loading) {
     const formData = new FormData();
     formContent.files.forEach(file => {
         formData.append('csvFiles', file.file);
@@ -17,6 +17,10 @@ export function graphicalCsvProcessingAPI(formContent, filename, addBanner, back
         responseType: 'blob'
     }
 
+    if (process.env.REACT_APP_BACKEND) {
+        backend = process.env.REACT_APP_BACKEND;
+    }
+
     if (
         formContent &&
         formContent.files && formContent.files.length > 0 &&
@@ -25,6 +29,7 @@ export function graphicalCsvProcessingAPI(formContent, filename, addBanner, back
     ) {
         Axios.post(backend, formData, config).then(response => {
             saveFile(response.data, filename);
+            loading(false);
         }).catch(async error => {
             if (error.response) {
                 let text = await error.response.data.text();
@@ -38,6 +43,7 @@ export function graphicalCsvProcessingAPI(formContent, filename, addBanner, back
                     type: 'failure'
                 });
             }
+            loading(false);
         });
     }
 }

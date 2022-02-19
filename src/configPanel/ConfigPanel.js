@@ -40,6 +40,8 @@ class ConfigPanel extends React.Component {
                     onSubmitForm={this.props.onSubmitForm}
                     graphData={this.props.graphData}
                     isGraphValid={this.props.isGraphValid}
+                    loading={this.props.loading}
+                    isLoading={this.props.isLoading}
                 />
             </Collapsible>
         </div>;
