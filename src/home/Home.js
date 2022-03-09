@@ -311,8 +311,11 @@ class Home extends React.Component {
                 if (
                     entry[0] !== 'operation' &&
                     entry[0] !== 'specificOperation' &&
-                    entry[0] !== 'expectedInputs'
-                ) node[entry[0]] = null;
+                    entry[0] !== 'expectedInputs' &&
+                    operation[entry[0]]
+                ) {
+                    node[entry[0]] = null;
+                }
             }
         }
     }

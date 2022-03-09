@@ -8,7 +8,7 @@ describe('requests test', () => {
             let addBanner = jest.fn();
             let axiosSpy = jest.spyOn(Axios, 'post');
 
-            requests.graphicalCsvProcessingAPI(null, 'filename', addBanner, 'backend');
+            requests.graphicalCsvProcessingAPI(null, 'filename', addBanner, 'backend', jest.fn());
 
             expect(axiosSpy).toBeCalledTimes(0);
         });
@@ -17,7 +17,7 @@ describe('requests test', () => {
             let addBanner = jest.fn();
             let axiosSpy = jest.spyOn(Axios, 'post');
 
-            requests.graphicalCsvProcessingAPI({files: null}, 'filename', addBanner, 'backend');
+            requests.graphicalCsvProcessingAPI({files: null}, 'filename', addBanner, 'backend', jest.fn());
 
             expect(axiosSpy).toBeCalledTimes(0);
         });
@@ -26,7 +26,7 @@ describe('requests test', () => {
             let addBanner = jest.fn();
             let axiosSpy = jest.spyOn(Axios, 'post');
 
-            requests.graphicalCsvProcessingAPI({files: []}, 'filename', addBanner, 'backend');
+            requests.graphicalCsvProcessingAPI({files: []}, 'filename', addBanner, 'backend', jest.fn());
 
             expect(axiosSpy).toBeCalledTimes(0);
         });
@@ -35,7 +35,7 @@ describe('requests test', () => {
             let addBanner = jest.fn();
             let axiosSpy = jest.spyOn(Axios, 'post');
 
-            requests.graphicalCsvProcessingAPI({files: [{file: ''}]}, 'filename', addBanner, 'backend');
+            requests.graphicalCsvProcessingAPI({files: [{file: ''}]}, 'filename', addBanner, 'backend', jest.fn());
 
             expect(axiosSpy).toBeCalledTimes(0);
         });
@@ -46,7 +46,7 @@ describe('requests test', () => {
 
             let formContent = {files: [{file: ''}], graphData: {}}
 
-            requests.graphicalCsvProcessingAPI(formContent, 'filename', addBanner, 'backend');
+            requests.graphicalCsvProcessingAPI(formContent, 'filename', addBanner, 'backend', jest.fn());
 
             expect(axiosSpy).toBeCalledTimes(0);
         });
@@ -57,7 +57,7 @@ describe('requests test', () => {
 
             let formContent = {files: [{file: ''}], graphData: {nodes: []}}
 
-            requests.graphicalCsvProcessingAPI(formContent, 'filename', addBanner, 'backend');
+            requests.graphicalCsvProcessingAPI(formContent, 'filename', addBanner, 'backend', jest.fn());
 
             expect(axiosSpy).toBeCalledTimes(0);
         });
@@ -71,7 +71,7 @@ describe('requests test', () => {
 
             let formContent = {files: [{file: ''}], graphData: {nodes: [{}]}}
 
-            await requests.graphicalCsvProcessingAPI(formContent, 'filename', addBanner, 'backend');
+            await requests.graphicalCsvProcessingAPI(formContent, 'filename', addBanner, 'backend', jest.fn());
 
             expect(global.URL.createObjectURL).toBeCalledTimes(1);
             expect(global.URL.createObjectURL).toBeCalledWith('data');
@@ -89,7 +89,7 @@ describe('requests test', () => {
             let addBanner = jest.fn();
             let formContent = {files: [{file: ''}], graphData: {nodes: [{}]}}
 
-            await requests.graphicalCsvProcessingAPI(formContent, 'filename', addBanner, 'backend');
+            await requests.graphicalCsvProcessingAPI(formContent, 'filename', addBanner, 'backend', jest.fn());
 
             setTimeout(() => {
                 expect(addBanner).toBeCalledTimes(1);
@@ -110,7 +110,7 @@ describe('requests test', () => {
             let addBanner = jest.fn();
             let formContent = {files: [{file: ''}], graphData: {nodes: [{}]}}
 
-            await requests.graphicalCsvProcessingAPI(formContent, 'filename', addBanner, 'backend');
+            await requests.graphicalCsvProcessingAPI(formContent, 'filename', addBanner, 'backend', jest.fn());
 
             setTimeout(() => {
                 expect(addBanner).toBeCalledTimes(1);

@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfigPanel tests ConfigPanel render tests shouldMatchSnapshot 1`] = `
+<div
+  id="control"
+  style={
+    Object {
+      "display": "block",
+      "margin": "1rem",
+      "width": "25%",
+    }
+  }
+>
+  <Collapsible
+    id="nodeAndEdgeEditingCollapsible"
+    style={
+      Object {
+        "marginBottom": "1rem",
+      }
+    }
+    title="Nodes"
+  >
+    <AddNodeController
+      addBanner={[MockFunction]}
+      addFile={[MockFunction]}
+      addNode={[MockFunction]}
+      config={[MockFunction]}
+      graphData={[MockFunction]}
+    />
+  </Collapsible>
+  <Collapsible
+    id="processCollapsible"
+    style={
+      Object {
+        "marginBottom": "1rem",
+      }
+    }
+    title="Process"
+  >
+    <ProcessForm
+      graphData={[MockFunction]}
+      isGraphValid={true}
+      isLoading={true}
+      loading={[MockFunction]}
+      onSubmitForm={[MockFunction]}
+    />
+  </Collapsible>
+</div>
+`;

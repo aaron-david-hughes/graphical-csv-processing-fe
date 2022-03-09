@@ -101,28 +101,28 @@ describe('FormContentGenerator tests', () => {
 
         it('should call text onBlur function when text field blur event occurs', () => {
             render = mount(<FormContentGenerator {...props} />);
-            render.find('#textFieldName-input').simulate('blur');
+            render.find('#testOp-textFieldName-input').simulate('blur');
 
             expect(props.inputActionFunctions.text.onBlur).toHaveBeenCalled();
         });
 
         it('should call numeric onBlur function when numeric field blur event occurs', () => {
             render = mount(<FormContentGenerator {...props} />);
-            render.find('#numericFieldName-input').simulate('blur');
+            render.find('#testOp-numericFieldName-input').simulate('blur');
 
             expect(props.inputActionFunctions.numeric.onBlur).toHaveBeenCalled();
         });
 
         it('should call integer onBlur function when integer field blur event occurs', () => {
             render = mount(<FormContentGenerator {...props} />);
-            render.find('#integerFieldName-input').simulate('blur');
+            render.find('#testOp-integerFieldName-input').simulate('blur');
 
             expect(props.inputActionFunctions.integer.onBlur).toHaveBeenCalled();
         });
 
         it('should call dropdown onChange function when dropdown change event occurs', () => {
             render = mount(<FormContentGenerator {...props} />);
-            render.find('#dropdownFieldName-input').simulate('change');
+            render.find('#testOp-dropdownFieldName-input').simulate('change');
 
             expect(props.inputActionFunctions.dropdown.onChange).toHaveBeenCalled();
         });

@@ -10,15 +10,11 @@ class NodeForm extends React.Component {
         super(props);
 
         this.state = nodeDependentState(
-            !!this.props.node,
+            this.props.node,
             this.props.showNotStartedErrors,
             this.props.config,
             this.props.operation
         );
-
-        if (this.props.node) {
-            this.state.nodeObj = this.props.node;
-        }
 
         if (Object.entries(this.state.inputValidity).filter(entry => entry[1] === 'valid').length ===
             Object.entries(this.state.inputValidity).length) {
@@ -43,11 +39,13 @@ class NodeForm extends React.Component {
 
         if (props.operation !== state.nodeObj.specificOperation && props.operation !== state.nodeObj.operation) {
             newOperationState = nodeDependentState(
-                !!props.node,
+                props.node,
                 props.showNotStartedErrors,
                 props.config,
                 props.operation
             );
+
+            props.setIsFormValid(newOperationState.inputValidity);
 
             if (props.node && (props.node.specificOperation === props.operation || props.node.operation === props.operation)) {
                 newOperationState.nodeObj = props.node;

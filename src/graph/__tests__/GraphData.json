@@ -1,0 +1,128 @@
+{
+  "nodes": [
+    {
+      "id": "0",
+      "normal": {
+        "shape": "square",
+        "fill": "purple",
+        "stroke": "3 #58CD36"
+      },
+      "hovered": {
+        "shape": "square",
+        "fill": "purple",
+        "stroke": "3 #58CD36"
+      },
+      "selected": {
+        "shape": "square",
+        "fill": "purple",
+        "stroke": "3 #58CD36"
+      },
+      "group": "file",
+      "operation": "open_file",
+      "expectedInputs": 0,
+      "name": "Attendance.csv",
+      "inputCardinality": 0,
+      "outputCardinality": 1,
+      "x": 89,
+      "y": -37
+    },
+    {
+      "id": "1",
+      "normal": {
+        "shape": "square",
+        "fill": "purple",
+        "stroke": "3 #58CD36"
+      },
+      "hovered": {
+        "shape": "square",
+        "fill": "purple",
+        "stroke": "3 #58CD36"
+      },
+      "selected": {
+        "shape": "square",
+        "fill": "purple",
+        "stroke": "3 #58CD36"
+      },
+      "group": "file",
+      "operation": "open_file",
+      "expectedInputs": 0,
+      "name": "Scores.csv",
+      "inputCardinality": 0,
+      "outputCardinality": 1,
+      "x": -100,
+      "y": -32
+    },
+    {
+      "id": "2",
+      "normal": {
+        "shape": "diamond",
+        "fill": "blue",
+        "stroke": "3 #58CD36"
+      },
+      "hovered": {
+        "shape": "diamond",
+        "fill": "blue",
+        "stroke": "3 #58CD36"
+      },
+      "selected": {
+        "shape": "diamond",
+        "fill": "blue",
+        "stroke": "3 #58CD36"
+      },
+      "group": "processing",
+      "operation": "join",
+      "specificOperation": "join_inner",
+      "onLeft": "Attendant",
+      "onRight": "StudentNum",
+      "joinType": "inner",
+      "expectedInputs": 2,
+      "inputCardinality": 2,
+      "outputCardinality": 1,
+      "x": 0,
+      "y": 80
+    },
+    {
+      "id": "3",
+      "normal": {
+        "shape": "square",
+        "fill": "purple",
+        "stroke": "3 #58CD36"
+      },
+      "hovered": {
+        "shape": "square",
+        "fill": "purple",
+        "stroke": "3 #58CD36"
+      },
+      "selected": {
+        "shape": "square",
+        "fill": "purple",
+        "stroke": "3 #58CD36"
+      },
+      "group": "file",
+      "operation": "write_file",
+      "expectedInputs": 1,
+      "name": "JoinProduct.csv",
+      "inputCardinality": 1,
+      "outputCardinality": 0,
+      "x": -3,
+      "y": 174
+    }
+  ],
+  "edges": [
+    {
+      "id": "0",
+      "from": "0",
+      "to": "2"
+    },
+    {
+      "id": "1",
+      "from": "1",
+      "to": "2"
+    },
+    {
+      "id": "2",
+      "from": "2",
+      "to": "3"
+    }
+  ]
+}

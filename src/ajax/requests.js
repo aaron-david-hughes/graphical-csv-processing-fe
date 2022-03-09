@@ -2,6 +2,9 @@ import Axios from "axios";
 
 export function graphicalCsvProcessingAPI(formContent, filename, addBanner, backend, loading) {
     const formData = new FormData();
+
+    if (!formContent || !formContent.files || !formContent.graphData) return;
+
     formContent.files.forEach(file => {
         formData.append('csvFiles', file.file);
     });

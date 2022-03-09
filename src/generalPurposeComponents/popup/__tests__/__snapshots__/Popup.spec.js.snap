@@ -6,8 +6,6 @@ exports[`Popup tests Popup render tests matches the snapshot when closed 1`] = `
   style={
     Object {
       "display": "none",
-      "height": "100%",
-      "width": "100%",
     }
   }
 >
@@ -62,8 +60,6 @@ exports[`Popup tests Popup render tests matches the snapshot when open 1`] = `
   style={
     Object {
       "display": "block",
-      "height": "100%",
-      "width": "100%",
     }
   }
 >

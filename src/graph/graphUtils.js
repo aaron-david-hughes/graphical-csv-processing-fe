@@ -3,10 +3,14 @@ let validConfig;
 function fileTooltip(graph) {
     validConfig = true;
 
+    let idConfig = {
+        required: true
+    }
+
     let str = commonTooltip(graph) +
-        displayElement(graph, 'operation') +
-        displayElement(graph, 'name') +
-        displayElement(graph, 'expectedInputs') +
+        displayElement(graph, 'operation', idConfig) +
+        displayElement(graph, 'name', idConfig) +
+        displayElement(graph, 'expectedInputs', idConfig) +
         invalidInputCardinality(graph);
 
     str += validConfig ? "" : invalidConfig();

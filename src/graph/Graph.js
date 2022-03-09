@@ -22,7 +22,7 @@ class Graph extends React.Component {
 
     static getDerivedStateFromProps(props, state) {
         if (graph && graph.da) {
-            Graph.saveCoordinates(props.graphData);
+            Graph.saveCoordinates(props.graphData, graph);
 
             return {
                 ...state,
@@ -47,10 +47,10 @@ class Graph extends React.Component {
         return graphData;
     }
 
-    static saveCoordinates(graphData) {
-        if (graph && graph.da) {
+    static saveCoordinates(graphData, graphVar) {
+        if (graphVar && graphVar.da) {
             for (let node of graphData.nodes) {
-                let coordinates = graph.da.find(n => n.id === node.id);
+                let coordinates = graphVar.da.find(n => n.id === node.id);
 
                 if (coordinates && coordinates.position) {
                     node.x = coordinates.position.x;
@@ -76,7 +76,6 @@ class Graph extends React.Component {
         nodes.normal().stroke()
     }
 
-    //TODO: indicate problem in node
     setTooltip() {
         let config = this.props.config;
 
@@ -108,26 +107,45 @@ class Graph extends React.Component {
         zoomController.render();
     }
 
+    editNodeListenerImpl(e, setEditNode, props, listenerCoordinateSave) {
+        let prevEdgeStateClone = deepClone(prevEdgeState);
+
+        let tag = e.domTarget.tag;
+        fromNode = null;
+
+        if (tag) {
+            if (tag.type === 'node' && prevEdgeStateClone) {
+                //some restore edge details
+                setEditNode(tag.id, prevEdgeStateClone);
+            }
+        }
+
+        listenerCoordinateSave(props.graphData, graph);
+    }
+
     editNodeListener() {
         let setEditNode = this.props.setEditNode;
         let props = this.props;
         let listenerCoordinateSave = Graph.saveCoordinates.bind(this);
 
-        graph.listen('dblClick', function(e) {
-            let prevEdgeStateClone = deepClone(prevEdgeState);
+        graph.listen('dblClick', (e) => this.editNodeListenerImpl(e, setEditNode, props, listenerCoordinateSave));
+    }
 
-            let tag = e.domTarget.tag;
-            fromNode = null;
+    deleteEdgeListenerImpl(e, deleteEdge, props, listenerCoordinateSave) {
+        let tag = e.domTarget.tag;
 
-            if (tag) {
-                if (tag.type === 'node' && prevEdgeStateClone) {
-                    //some restore edge details
-                    setEditNode(tag.id, prevEdgeStateClone);
-                }
+        if (tag) {
+            if (tag.type === 'edge') {
+                deleteEdge(tag.id);
+
+                props.addBanner({
+                    msg: 'Edge deleted',
+                    type: 'success'
+                })
             }
+        }
 
-            listenerCoordinateSave(props.graphData);
-        });
+        listenerCoordinateSave(props.graphData, graph);
     }
 
     deleteEdgeListener() {
@@ -135,22 +153,28 @@ class Graph extends React.Component {
         let props = this.props;
         let listenerCoordinateSave = Graph.saveCoordinates.bind(this);
 
-        graph.listen('dblClick', function(e) {
-            let tag = e.domTarget.tag;
+        graph.listen('dblClick', (e) => this.deleteEdgeListenerImpl(e, deleteEdge, props, listenerCoordinateSave));
+    }
 
-            if (tag) {
-                if (tag.type === 'edge') {
-                    deleteEdge(tag.id);
+    edgeListenerImpl(e, state, props, editEdges, listenerCoordinateSave) {
+        let tag = e.domTarget.tag;
 
-                    props.addBanner({
-                        msg: 'Edge deleted',
-                        type: 'success'
-                    })
-                }
-            }
+        if (tag && tag.type === 'node' && !prevEdgeState) {
+            prevEdgeState = {
+                graphData: deepClone(state.graphData),
+                edgeCounter: props.edgeCounter,
+                invalidNodeCardinalities: deepClone(props.invalidNodeCardinalities)
+            };
 
-            listenerCoordinateSave(props.graphData);
-        });
+            editEdges(state, tag, props);
+            listenerCoordinateSave(props.graphData, graph);
+
+            setTimeout(() => {
+                prevEdgeState = null;
+            }, 1000);
+        } else {
+            listenerCoordinateSave(props.graphData, graph);
+        }
     }
 
     edgeListener() {
@@ -159,26 +183,7 @@ class Graph extends React.Component {
         let editEdges = this.editEdges;
         let listenerCoordinateSave = Graph.saveCoordinates.bind(this);
 
-        graph.listen('click', function(e) {
-            let tag = e.domTarget.tag;
-
-            if (tag && tag.type === 'node' && !prevEdgeState) {
-                prevEdgeState = {
-                    graphData: deepClone(state.graphData),
-                    edgeCounter: props.edgeCounter,
-                    invalidNodeCardinalities: deepClone(props.invalidNodeCardinalities)
-                };
-
-                editEdges(state, tag, props);
-                listenerCoordinateSave(props.graphData);
-
-                setTimeout(() => {
-                    prevEdgeState = null;
-                }, 1000);
-            } else {
-                listenerCoordinateSave(props.graphData);
-            }
-        });
+        graph.listen('click', (e) => this.edgeListenerImpl(e, state, props, editEdges, listenerCoordinateSave));
     }
 
     editEdges(state, tag, props) {
@@ -230,8 +235,6 @@ class Graph extends React.Component {
                 type: 'success'
             });
         }
-
-        console.log(fromNode);
     }
 
     render() {
@@ -256,4 +259,20 @@ class Graph extends React.Component {
     }
 }
 
-export default React.memo(Graph);
+export function testSetPrevEdgeState() {
+    prevEdgeState = {}
+}
+
+export function testUnsetPrevEdgeState() {
+    prevEdgeState = null;
+}
+
+export function testSetFromNode(value) {
+    fromNode = value;
+}
+
+export function testSetGraph(value) {
+    graph = value;
+}
+
+export default Graph;

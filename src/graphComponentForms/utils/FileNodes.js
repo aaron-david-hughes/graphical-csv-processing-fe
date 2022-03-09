@@ -1,4 +1,5 @@
 import deepClone from 'lodash.clonedeep';
+import Validation from '../validation/Validation'
 
 const fileNodeConfig = {
     normal:   {
@@ -70,8 +71,76 @@ export function getNodeObjTemplate(config, operation) {
     }
 }
 
-export function nodeDependentState(valid, showNotStartedErrors, config, operation) {
-    let validity = valid ? 'valid' : 'invalid';
+function validateField(value, type) {
+    let e = {
+        target: {
+            value: value
+        }
+    }
+
+    let valid;
+
+    switch (type) {
+        case 'text':
+            valid = Validation.validateTextField(e);
+            break;
+        case 'numeric':
+            valid = Validation.validateNumericField(e);
+            break;
+        case 'integer':
+            valid = Validation.validateIntegerField(e);
+            break
+        default:
+            valid = true;
+    }
+
+    return valid ? 'valid' : 'invalid';
+}
+
+function editNodeDependentState(startNode, config) {
+    console.log('inside edit node dependent state')
+    let inputValidity;
+
+    let operation = startNode.specificOperation ? startNode.specificOperation : startNode.operation;
+
+    switch (operation) {
+        case 'open_file':
+        case 'write_file':
+            inputValidity = {
+                name: validateField(startNode.name, 'text')
+            }
+            break;
+        default:
+            let operationConfig = config.processing.operations
+                .find(op => op.operation === operation);
+
+            inputValidity = {};
+
+            for (let entry of Object.entries(operationConfig.template)) {
+                let key = entry[0];
+
+                if (key !== 'operation' && operationConfig[key]) {
+                    if (operationConfig[key].required) {
+                        inputValidity[key] = validateField(startNode[key], operationConfig[key].input);
+                    } else {
+                        inputValidity[key] = 'valid';
+                    }
+                }
+            }
+    }
+
+    return {
+        nodeObj: deepClone(startNode),
+        inputValidity
+    }
+}
+
+export function nodeDependentState(startNode, showNotStartedErrors, config, operation) {
+    if (startNode && (startNode.specificOperation === operation || startNode.operation === operation)) {
+        return editNodeDependentState(startNode, config);
+    }
+
+    let validity = startNode ? 'valid' : 'invalid';
 
     if (!showNotStartedErrors) validity = 'notStarted';
 

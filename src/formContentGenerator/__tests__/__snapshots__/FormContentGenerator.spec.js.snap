@@ -13,17 +13,16 @@ exports[`FormContentGenerator tests FormContentGenerator render tests should mat
 >
   <Input
     errorText="Please fill in this field."
-    id="textFieldName"
+    id="testOp-textFieldName"
     input={
       <input
-        defaultValue={null}
-        id="textFieldName-input"
+        id="testOp-textFieldName-input"
         onBlur={[Function]}
         type="text"
       />
     }
     isInvalid={false}
-    key="textFieldName"
+    key="testOp-textFieldName"
     required={true}
     style={
       Object {
@@ -34,17 +33,16 @@ exports[`FormContentGenerator tests FormContentGenerator render tests should mat
   />
   <Input
     errorText="Please supply a number."
-    id="numericFieldName"
+    id="testOp-numericFieldName"
     input={
       <input
-        defaultValue={null}
-        id="numericFieldName-input"
+        id="testOp-numericFieldName-input"
         onBlur={[Function]}
         type="text"
       />
     }
     isInvalid={false}
-    key="numericFieldName"
+    key="testOp-numericFieldName"
     required={true}
     style={
       Object {
@@ -55,17 +53,16 @@ exports[`FormContentGenerator tests FormContentGenerator render tests should mat
   />
   <Input
     errorText="Please supply a integer."
-    id="integerFieldName"
+    id="testOp-integerFieldName"
     input={
       <input
-        defaultValue={null}
-        id="integerFieldName-input"
+        id="testOp-integerFieldName-input"
         onBlur={[Function]}
         type="text"
       />
     }
     isInvalid={false}
-    key="integerFieldName"
+    key="testOp-integerFieldName"
     required={true}
     style={
       Object {
@@ -75,11 +72,10 @@ exports[`FormContentGenerator tests FormContentGenerator render tests should mat
     title="Integer Field Name"
   />
   <Input
-    id="dropdownFieldName"
+    id="testOp-dropdownFieldName"
     input={
       <select
-        defaultValue="first"
-        id="dropdownFieldName-input"
+        id="testOp-dropdownFieldName-input"
         onChange={[Function]}
         style={
           Object {
@@ -105,7 +101,7 @@ exports[`FormContentGenerator tests FormContentGenerator render tests should mat
         </option>
       </select>
     }
-    key="dropdownFieldName"
+    key="testOp-dropdownFieldName"
     required={true}
     style={
       Object {
@@ -115,15 +111,15 @@ exports[`FormContentGenerator tests FormContentGenerator render tests should mat
     title="Dropdown Field Name"
   />
   <Input
-    id="switchFieldName"
+    id="testOp-switchFieldName"
     input={
       <Switch
-        id="switchFieldName-input"
+        id="testOp-switchFieldName-input"
         isChecked={true}
         onChange={[Function]}
       />
     }
-    key="switchFieldName"
+    key="testOp-switchFieldName"
     required={true}
     style={
       Object {
