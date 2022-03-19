@@ -171,7 +171,7 @@ class Graph extends React.Component {
 
             setTimeout(() => {
                 prevEdgeState = null;
-            }, 1000);
+            }, 500);
         } else {
             listenerCoordinateSave(props.graphData, graph);
         }

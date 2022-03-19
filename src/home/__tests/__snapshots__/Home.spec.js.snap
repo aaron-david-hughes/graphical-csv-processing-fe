@@ -1,0 +1,2286 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home tests render tests load popup tests should match snapshot when load graph is open 1`] = `
+<div
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="header"
+    style={
+      Object {
+        "backgroundColor": "lightgray",
+        "borderBottom": "2px solid darkslategray",
+      }
+    }
+  >
+    <h1
+      className="title"
+    >
+      CSV Processor
+    </h1>
+    <button
+      className="headerButton"
+      onClick={[Function]}
+      style={
+        Object {
+          "border": "none",
+          "margin": "1rem",
+        }
+      }
+      title="Settings"
+    >
+      <i
+        className="fa fa-cogs"
+        style={
+          Object {
+            "color": "darkslategray",
+            "fontSize": "36px",
+          }
+        }
+      />
+    </button>
+  </div>
+  <div
+    id="bannerSection"
+    style={
+      Object {
+        "position": "fixed",
+        "width": "100%",
+        "zIndex": "1",
+      }
+    }
+  />
+  <div
+    id="mainContent"
+    style={
+      Object {
+        "display": "inline-flex",
+        "height": "80%",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      id="graph"
+      style={
+        Object {
+          "border": "2px solid darkslategray",
+          "borderRadius": "10px",
+          "margin": "1rem",
+          "width": "75%",
+        }
+      }
+    >
+      <Graph
+        addBanner={[Function]}
+        addEdge={[Function]}
+        config={
+          Object {
+            "processing": Object {
+              "generalTemplate": Object {
+                "group": "processing",
+                "hovered": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "normal": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "selected": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+              },
+              "operations": Array [
+                Object {
+                  "dropdownField": Object {
+                    "input": "dropdown",
+                    "options": Array [
+                      "option1",
+                      "option2",
+                    ],
+                    "required": true,
+                    "title": "dropdown field title",
+                    "width": "100%",
+                  },
+                  "integerField": Object {
+                    "input": "integer",
+                    "required": true,
+                    "title": "integer field title",
+                    "width": "50%",
+                  },
+                  "numericField": Object {
+                    "input": "numeric",
+                    "required": true,
+                    "title": "numeric field title",
+                    "width": "50%",
+                  },
+                  "operation": "test",
+                  "switchField": Object {
+                    "input": "switch",
+                    "required": true,
+                    "title": "switch field title",
+                    "width": "50%",
+                  },
+                  "template": Object {
+                    "dropdownField": "option1",
+                    "integerField": null,
+                    "numericField": null,
+                    "operation": "test",
+                    "switchField": true,
+                    "textField": null,
+                  },
+                  "textField": Object {
+                    "input": "text",
+                    "required": true,
+                    "title": "text field title",
+                    "width": "50%",
+                  },
+                },
+              ],
+            },
+          }
+        }
+        deleteEdge={[Function]}
+        edgeCounter={0}
+        graphData={
+          Object {
+            "edges": Array [],
+            "nodes": Array [],
+          }
+        }
+        invalidNodeCardinalities={Array []}
+        invalidNodes={Array []}
+        setEditNode={[Function]}
+      />
+      <div
+        id="graphButtons"
+        style={
+          Object {
+            "display": "inline-flex",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "left",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="saveButton"
+            onClick={[Function]}
+            title="Save Graph"
+          >
+            save graph
+          </button>
+          <button
+            className="freeButton"
+            id="loadButton"
+            onClick={[Function]}
+            title="Load Graph"
+          >
+            load graph
+          </button>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "right",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="clearButton"
+            onClick={[Function]}
+            title="Clear Graph"
+          >
+            clear graph
+          </button>
+        </div>
+      </div>
+    </div>
+    <ConfigPanel
+      addBanner={[Function]}
+      addFile={[Function]}
+      addNode={[Function]}
+      config={
+        Object {
+          "processing": Object {
+            "generalTemplate": Object {
+              "group": "processing",
+              "hovered": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "normal": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "selected": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+            },
+            "operations": Array [
+              Object {
+                "dropdownField": Object {
+                  "input": "dropdown",
+                  "options": Array [
+                    "option1",
+                    "option2",
+                  ],
+                  "required": true,
+                  "title": "dropdown field title",
+                  "width": "100%",
+                },
+                "integerField": Object {
+                  "input": "integer",
+                  "required": true,
+                  "title": "integer field title",
+                  "width": "50%",
+                },
+                "numericField": Object {
+                  "input": "numeric",
+                  "required": true,
+                  "title": "numeric field title",
+                  "width": "50%",
+                },
+                "operation": "test",
+                "switchField": Object {
+                  "input": "switch",
+                  "required": true,
+                  "title": "switch field title",
+                  "width": "50%",
+                },
+                "template": Object {
+                  "dropdownField": "option1",
+                  "integerField": null,
+                  "numericField": null,
+                  "operation": "test",
+                  "switchField": true,
+                  "textField": null,
+                },
+                "textField": Object {
+                  "input": "text",
+                  "required": true,
+                  "title": "text field title",
+                  "width": "50%",
+                },
+              },
+            ],
+          },
+        }
+      }
+      graphData={
+        Object {
+          "edges": Array [],
+          "nodes": Array [],
+        }
+      }
+      id="control"
+      isGraphValid={[Function]}
+      isLoading={false}
+      loading={[Function]}
+      onSubmitForm={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "margin": "1rem",
+          "width": "25%",
+        }
+      }
+    />
+  </div>
+  <Popup
+    close={[Function]}
+    fitContent={true}
+    height="10%"
+    id="loadPopup"
+    isOpen={true}
+    title="Load Graph"
+    width="35%"
+  >
+    <input
+      accept="application/json"
+      id="loadGraphFileInput"
+      onChange={[Function]}
+      type="file"
+    />
+  </Popup>
+</div>
+`;
+
+exports[`Home tests render tests save graph tests should match snapshot when save graph is open 1`] = `
+<div
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="header"
+    style={
+      Object {
+        "backgroundColor": "lightgray",
+        "borderBottom": "2px solid darkslategray",
+      }
+    }
+  >
+    <h1
+      className="title"
+    >
+      CSV Processor
+    </h1>
+    <button
+      className="headerButton"
+      onClick={[Function]}
+      style={
+        Object {
+          "border": "none",
+          "margin": "1rem",
+        }
+      }
+      title="Settings"
+    >
+      <i
+        className="fa fa-cogs"
+        style={
+          Object {
+            "color": "darkslategray",
+            "fontSize": "36px",
+          }
+        }
+      />
+    </button>
+  </div>
+  <div
+    id="bannerSection"
+    style={
+      Object {
+        "position": "fixed",
+        "width": "100%",
+        "zIndex": "1",
+      }
+    }
+  />
+  <div
+    id="mainContent"
+    style={
+      Object {
+        "display": "inline-flex",
+        "height": "80%",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      id="graph"
+      style={
+        Object {
+          "border": "2px solid darkslategray",
+          "borderRadius": "10px",
+          "margin": "1rem",
+          "width": "75%",
+        }
+      }
+    >
+      <Graph
+        addBanner={[Function]}
+        addEdge={[Function]}
+        config={
+          Object {
+            "processing": Object {
+              "generalTemplate": Object {
+                "group": "processing",
+                "hovered": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "normal": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "selected": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+              },
+              "operations": Array [
+                Object {
+                  "dropdownField": Object {
+                    "input": "dropdown",
+                    "options": Array [
+                      "option1",
+                      "option2",
+                    ],
+                    "required": true,
+                    "title": "dropdown field title",
+                    "width": "100%",
+                  },
+                  "integerField": Object {
+                    "input": "integer",
+                    "required": true,
+                    "title": "integer field title",
+                    "width": "50%",
+                  },
+                  "numericField": Object {
+                    "input": "numeric",
+                    "required": true,
+                    "title": "numeric field title",
+                    "width": "50%",
+                  },
+                  "operation": "test",
+                  "switchField": Object {
+                    "input": "switch",
+                    "required": true,
+                    "title": "switch field title",
+                    "width": "50%",
+                  },
+                  "template": Object {
+                    "dropdownField": "option1",
+                    "integerField": null,
+                    "numericField": null,
+                    "operation": "test",
+                    "switchField": true,
+                    "textField": null,
+                  },
+                  "textField": Object {
+                    "input": "text",
+                    "required": true,
+                    "title": "text field title",
+                    "width": "50%",
+                  },
+                },
+              ],
+            },
+          }
+        }
+        deleteEdge={[Function]}
+        edgeCounter={0}
+        graphData={
+          Object {
+            "edges": Array [],
+            "nodes": Array [],
+          }
+        }
+        invalidNodeCardinalities={Array []}
+        invalidNodes={Array []}
+        setEditNode={[Function]}
+      />
+      <div
+        id="graphButtons"
+        style={
+          Object {
+            "display": "inline-flex",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "left",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="saveButton"
+            onClick={[Function]}
+            title="Save Graph"
+          >
+            save graph
+          </button>
+          <button
+            className="freeButton"
+            id="loadButton"
+            onClick={[Function]}
+            title="Load Graph"
+          >
+            load graph
+          </button>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "right",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="clearButton"
+            onClick={[Function]}
+            title="Clear Graph"
+          >
+            clear graph
+          </button>
+        </div>
+      </div>
+    </div>
+    <ConfigPanel
+      addBanner={[Function]}
+      addFile={[Function]}
+      addNode={[Function]}
+      config={
+        Object {
+          "processing": Object {
+            "generalTemplate": Object {
+              "group": "processing",
+              "hovered": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "normal": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "selected": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+            },
+            "operations": Array [
+              Object {
+                "dropdownField": Object {
+                  "input": "dropdown",
+                  "options": Array [
+                    "option1",
+                    "option2",
+                  ],
+                  "required": true,
+                  "title": "dropdown field title",
+                  "width": "100%",
+                },
+                "integerField": Object {
+                  "input": "integer",
+                  "required": true,
+                  "title": "integer field title",
+                  "width": "50%",
+                },
+                "numericField": Object {
+                  "input": "numeric",
+                  "required": true,
+                  "title": "numeric field title",
+                  "width": "50%",
+                },
+                "operation": "test",
+                "switchField": Object {
+                  "input": "switch",
+                  "required": true,
+                  "title": "switch field title",
+                  "width": "50%",
+                },
+                "template": Object {
+                  "dropdownField": "option1",
+                  "integerField": null,
+                  "numericField": null,
+                  "operation": "test",
+                  "switchField": true,
+                  "textField": null,
+                },
+                "textField": Object {
+                  "input": "text",
+                  "required": true,
+                  "title": "text field title",
+                  "width": "50%",
+                },
+              },
+            ],
+          },
+        }
+      }
+      graphData={
+        Object {
+          "edges": Array [],
+          "nodes": Array [],
+        }
+      }
+      id="control"
+      isGraphValid={[Function]}
+      isLoading={false}
+      loading={[Function]}
+      onSubmitForm={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "margin": "1rem",
+          "width": "25%",
+        }
+      }
+    />
+  </div>
+  <Popup
+    close={[Function]}
+    fitContent={true}
+    height="35%"
+    id="savePopup"
+    isOpen={true}
+    title="Save Graph"
+    width="35%"
+  >
+    <p
+      className="ow"
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       You cannot save an invalid graph
+    </p>
+    <div
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "inline-flex",
+            "width": "100%",
+          }
+        }
+      >
+        <Input
+          input={
+            <input
+              disabled={true}
+              id="graphSaveFilename"
+              onChange={[Function]}
+              type="text"
+            />
+          }
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+          title="Graph Save Name"
+        />
+      </div>
+      <div
+        style={
+          Object {
+            "margin": "5px",
+          }
+        }
+      >
+        <p
+          className="ow"
+        >
+          <i
+            className="fa fa-info-circle"
+          />
+           Using filename: SaveGraph.json
+        </p>
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "inline-flex",
+          "justifyContent": "space-evenly",
+          "width": "100%",
+        }
+      }
+    >
+      <button
+        disabled={true}
+        id="saveWithConfigButton"
+        onClick={[Function]}
+        style={
+          Object {
+            "width": "30%",
+          }
+        }
+        title="Save with Config"
+      >
+        <strong>
+          <h4
+            style={
+              Object {
+                "textDecoration": "underline",
+              }
+            }
+          >
+            Save with Config
+          </h4>
+        </strong>
+        <p>
+          Saves each nodes configuration as it stands, along with the files supplied.
+        </p>
+      </button>
+      <button
+        disabled={true}
+        id="saveConfigTemplateButton"
+        onClick={[Function]}
+        style={
+          Object {
+            "width": "30%",
+          }
+        }
+        title="Save Config Template"
+      >
+        <strong>
+          <h4
+            style={
+              Object {
+                "textDecoration": "underline",
+              }
+            }
+          >
+            Save Config Template
+          </h4>
+        </strong>
+        <p>
+          Saves all but input files, enabling for template ease of use for repetitive processes.
+        </p>
+      </button>
+      <button
+        disabled={true}
+        id="saveTemplateButton"
+        onClick={[Function]}
+        style={
+          Object {
+            "width": "30%",
+          }
+        }
+        title="Save Template"
+      >
+        <strong>
+          <h4
+            style={
+              Object {
+                "textDecoration": "underline",
+              }
+            }
+          >
+            Save Template
+          </h4>
+        </strong>
+        <p>
+          Saves the layout of nodes types and edges, without node configuration of each node.
+        </p>
+      </button>
+    </div>
+  </Popup>
+</div>
+`;
+
+exports[`Home tests render tests should match snapshot when edit node is open 1`] = `
+<div
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="header"
+    style={
+      Object {
+        "backgroundColor": "lightgray",
+        "borderBottom": "2px solid darkslategray",
+      }
+    }
+  >
+    <h1
+      className="title"
+    >
+      CSV Processor
+    </h1>
+    <button
+      className="headerButton"
+      onClick={[Function]}
+      style={
+        Object {
+          "border": "none",
+          "margin": "1rem",
+        }
+      }
+      title="Settings"
+    >
+      <i
+        className="fa fa-cogs"
+        style={
+          Object {
+            "color": "darkslategray",
+            "fontSize": "36px",
+          }
+        }
+      />
+    </button>
+  </div>
+  <div
+    id="bannerSection"
+    style={
+      Object {
+        "position": "fixed",
+        "width": "100%",
+        "zIndex": "1",
+      }
+    }
+  />
+  <div
+    id="mainContent"
+    style={
+      Object {
+        "display": "inline-flex",
+        "height": "80%",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      id="graph"
+      style={
+        Object {
+          "border": "2px solid darkslategray",
+          "borderRadius": "10px",
+          "margin": "1rem",
+          "width": "75%",
+        }
+      }
+    >
+      <Graph
+        addBanner={[Function]}
+        addEdge={[Function]}
+        config={
+          Object {
+            "processing": Object {
+              "generalTemplate": Object {
+                "group": "processing",
+                "hovered": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "normal": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "selected": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+              },
+              "operations": Array [
+                Object {
+                  "dropdownField": Object {
+                    "input": "dropdown",
+                    "options": Array [
+                      "option1",
+                      "option2",
+                    ],
+                    "required": true,
+                    "title": "dropdown field title",
+                    "width": "100%",
+                  },
+                  "integerField": Object {
+                    "input": "integer",
+                    "required": true,
+                    "title": "integer field title",
+                    "width": "50%",
+                  },
+                  "numericField": Object {
+                    "input": "numeric",
+                    "required": true,
+                    "title": "numeric field title",
+                    "width": "50%",
+                  },
+                  "operation": "test",
+                  "switchField": Object {
+                    "input": "switch",
+                    "required": true,
+                    "title": "switch field title",
+                    "width": "50%",
+                  },
+                  "template": Object {
+                    "dropdownField": "option1",
+                    "integerField": null,
+                    "numericField": null,
+                    "operation": "test",
+                    "switchField": true,
+                    "textField": null,
+                  },
+                  "textField": Object {
+                    "input": "text",
+                    "required": true,
+                    "title": "text field title",
+                    "width": "50%",
+                  },
+                },
+              ],
+            },
+          }
+        }
+        deleteEdge={[Function]}
+        edgeCounter={0}
+        graphData={
+          Object {
+            "edges": Array [],
+            "nodes": Array [],
+          }
+        }
+        invalidNodeCardinalities={Array []}
+        invalidNodes={Array []}
+        setEditNode={[Function]}
+      />
+      <div
+        id="graphButtons"
+        style={
+          Object {
+            "display": "inline-flex",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "left",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="saveButton"
+            onClick={[Function]}
+            title="Save Graph"
+          >
+            save graph
+          </button>
+          <button
+            className="freeButton"
+            id="loadButton"
+            onClick={[Function]}
+            title="Load Graph"
+          >
+            load graph
+          </button>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "right",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="clearButton"
+            onClick={[Function]}
+            title="Clear Graph"
+          >
+            clear graph
+          </button>
+        </div>
+      </div>
+    </div>
+    <ConfigPanel
+      addBanner={[Function]}
+      addFile={[Function]}
+      addNode={[Function]}
+      config={
+        Object {
+          "processing": Object {
+            "generalTemplate": Object {
+              "group": "processing",
+              "hovered": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "normal": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "selected": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+            },
+            "operations": Array [
+              Object {
+                "dropdownField": Object {
+                  "input": "dropdown",
+                  "options": Array [
+                    "option1",
+                    "option2",
+                  ],
+                  "required": true,
+                  "title": "dropdown field title",
+                  "width": "100%",
+                },
+                "integerField": Object {
+                  "input": "integer",
+                  "required": true,
+                  "title": "integer field title",
+                  "width": "50%",
+                },
+                "numericField": Object {
+                  "input": "numeric",
+                  "required": true,
+                  "title": "numeric field title",
+                  "width": "50%",
+                },
+                "operation": "test",
+                "switchField": Object {
+                  "input": "switch",
+                  "required": true,
+                  "title": "switch field title",
+                  "width": "50%",
+                },
+                "template": Object {
+                  "dropdownField": "option1",
+                  "integerField": null,
+                  "numericField": null,
+                  "operation": "test",
+                  "switchField": true,
+                  "textField": null,
+                },
+                "textField": Object {
+                  "input": "text",
+                  "required": true,
+                  "title": "text field title",
+                  "width": "50%",
+                },
+              },
+            ],
+          },
+        }
+      }
+      graphData={
+        Object {
+          "edges": Array [],
+          "nodes": Array [],
+        }
+      }
+      id="control"
+      isGraphValid={[Function]}
+      isLoading={false}
+      loading={[Function]}
+      onSubmitForm={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "margin": "1rem",
+          "width": "25%",
+        }
+      }
+    />
+  </div>
+  <Popup
+    close={[Function]}
+    fitContent={true}
+    height="35%"
+    id="editNodePopup"
+    isOpen={true}
+    title="Edit Node"
+    width="35%"
+  >
+    <EditNodeController
+      addBanner={[Function]}
+      addFile={[Function]}
+      close={[Function]}
+      config={
+        Object {
+          "processing": Object {
+            "generalTemplate": Object {
+              "group": "processing",
+              "hovered": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "normal": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "selected": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+            },
+            "operations": Array [
+              Object {
+                "dropdownField": Object {
+                  "input": "dropdown",
+                  "options": Array [
+                    "option1",
+                    "option2",
+                  ],
+                  "required": true,
+                  "title": "dropdown field title",
+                  "width": "100%",
+                },
+                "integerField": Object {
+                  "input": "integer",
+                  "required": true,
+                  "title": "integer field title",
+                  "width": "50%",
+                },
+                "numericField": Object {
+                  "input": "numeric",
+                  "required": true,
+                  "title": "numeric field title",
+                  "width": "50%",
+                },
+                "operation": "test",
+                "switchField": Object {
+                  "input": "switch",
+                  "required": true,
+                  "title": "switch field title",
+                  "width": "50%",
+                },
+                "template": Object {
+                  "dropdownField": "option1",
+                  "integerField": null,
+                  "numericField": null,
+                  "operation": "test",
+                  "switchField": true,
+                  "textField": null,
+                },
+                "textField": Object {
+                  "input": "text",
+                  "required": true,
+                  "title": "text field title",
+                  "width": "50%",
+                },
+              },
+            ],
+          },
+        }
+      }
+      deleteNode={[Function]}
+      editNode={[Function]}
+      graphData={
+        Object {
+          "edges": Array [],
+          "nodes": Array [],
+        }
+      }
+      invalidNodes={Array []}
+      node={
+        Object {
+          "dropdownField": "option1",
+          "integerField": null,
+          "numericField": null,
+          "operation": "test",
+          "switchField": true,
+          "textField": null,
+        }
+      }
+      removeFile={[Function]}
+      setValidNode={[Function]}
+    />
+  </Popup>
+</div>
+`;
+
+exports[`Home tests render tests should match snapshot when no popup is open 1`] = `
+<div
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="header"
+    style={
+      Object {
+        "backgroundColor": "lightgray",
+        "borderBottom": "2px solid darkslategray",
+      }
+    }
+  >
+    <h1
+      className="title"
+    >
+      CSV Processor
+    </h1>
+    <button
+      className="headerButton"
+      onClick={[Function]}
+      style={
+        Object {
+          "border": "none",
+          "margin": "1rem",
+        }
+      }
+      title="Settings"
+    >
+      <i
+        className="fa fa-cogs"
+        style={
+          Object {
+            "color": "darkslategray",
+            "fontSize": "36px",
+          }
+        }
+      />
+    </button>
+  </div>
+  <div
+    id="bannerSection"
+    style={
+      Object {
+        "position": "fixed",
+        "width": "100%",
+        "zIndex": "1",
+      }
+    }
+  />
+  <div
+    id="mainContent"
+    style={
+      Object {
+        "display": "inline-flex",
+        "height": "80%",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      id="graph"
+      style={
+        Object {
+          "border": "2px solid darkslategray",
+          "borderRadius": "10px",
+          "margin": "1rem",
+          "width": "75%",
+        }
+      }
+    >
+      <Graph
+        addBanner={[Function]}
+        addEdge={[Function]}
+        config={
+          Object {
+            "processing": Object {
+              "generalTemplate": Object {
+                "group": "processing",
+                "hovered": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "normal": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "selected": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+              },
+              "operations": Array [
+                Object {
+                  "dropdownField": Object {
+                    "input": "dropdown",
+                    "options": Array [
+                      "option1",
+                      "option2",
+                    ],
+                    "required": true,
+                    "title": "dropdown field title",
+                    "width": "100%",
+                  },
+                  "integerField": Object {
+                    "input": "integer",
+                    "required": true,
+                    "title": "integer field title",
+                    "width": "50%",
+                  },
+                  "numericField": Object {
+                    "input": "numeric",
+                    "required": true,
+                    "title": "numeric field title",
+                    "width": "50%",
+                  },
+                  "operation": "test",
+                  "switchField": Object {
+                    "input": "switch",
+                    "required": true,
+                    "title": "switch field title",
+                    "width": "50%",
+                  },
+                  "template": Object {
+                    "dropdownField": "option1",
+                    "integerField": null,
+                    "numericField": null,
+                    "operation": "test",
+                    "switchField": true,
+                    "textField": null,
+                  },
+                  "textField": Object {
+                    "input": "text",
+                    "required": true,
+                    "title": "text field title",
+                    "width": "50%",
+                  },
+                },
+              ],
+            },
+          }
+        }
+        deleteEdge={[Function]}
+        edgeCounter={0}
+        graphData={
+          Object {
+            "edges": Array [],
+            "nodes": Array [],
+          }
+        }
+        invalidNodeCardinalities={Array []}
+        invalidNodes={Array []}
+        setEditNode={[Function]}
+      />
+      <div
+        id="graphButtons"
+        style={
+          Object {
+            "display": "inline-flex",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "left",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="saveButton"
+            onClick={[Function]}
+            title="Save Graph"
+          >
+            save graph
+          </button>
+          <button
+            className="freeButton"
+            id="loadButton"
+            onClick={[Function]}
+            title="Load Graph"
+          >
+            load graph
+          </button>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "right",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="clearButton"
+            onClick={[Function]}
+            title="Clear Graph"
+          >
+            clear graph
+          </button>
+        </div>
+      </div>
+    </div>
+    <ConfigPanel
+      addBanner={[Function]}
+      addFile={[Function]}
+      addNode={[Function]}
+      config={
+        Object {
+          "processing": Object {
+            "generalTemplate": Object {
+              "group": "processing",
+              "hovered": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "normal": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "selected": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+            },
+            "operations": Array [
+              Object {
+                "dropdownField": Object {
+                  "input": "dropdown",
+                  "options": Array [
+                    "option1",
+                    "option2",
+                  ],
+                  "required": true,
+                  "title": "dropdown field title",
+                  "width": "100%",
+                },
+                "integerField": Object {
+                  "input": "integer",
+                  "required": true,
+                  "title": "integer field title",
+                  "width": "50%",
+                },
+                "numericField": Object {
+                  "input": "numeric",
+                  "required": true,
+                  "title": "numeric field title",
+                  "width": "50%",
+                },
+                "operation": "test",
+                "switchField": Object {
+                  "input": "switch",
+                  "required": true,
+                  "title": "switch field title",
+                  "width": "50%",
+                },
+                "template": Object {
+                  "dropdownField": "option1",
+                  "integerField": null,
+                  "numericField": null,
+                  "operation": "test",
+                  "switchField": true,
+                  "textField": null,
+                },
+                "textField": Object {
+                  "input": "text",
+                  "required": true,
+                  "title": "text field title",
+                  "width": "50%",
+                },
+              },
+            ],
+          },
+        }
+      }
+      graphData={
+        Object {
+          "edges": Array [],
+          "nodes": Array [],
+        }
+      }
+      id="control"
+      isGraphValid={[Function]}
+      isLoading={false}
+      loading={[Function]}
+      onSubmitForm={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "margin": "1rem",
+          "width": "25%",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`Home tests render tests should match snapshot when settings is open 1`] = `
+<div
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="header"
+    style={
+      Object {
+        "backgroundColor": "lightgray",
+        "borderBottom": "2px solid darkslategray",
+      }
+    }
+  >
+    <h1
+      className="title"
+    >
+      CSV Processor
+    </h1>
+    <button
+      className="headerButton"
+      onClick={[Function]}
+      style={
+        Object {
+          "border": "none",
+          "margin": "1rem",
+        }
+      }
+      title="Settings"
+    >
+      <i
+        className="fa fa-cogs"
+        style={
+          Object {
+            "color": "darkslategray",
+            "fontSize": "36px",
+          }
+        }
+      />
+    </button>
+  </div>
+  <div
+    id="bannerSection"
+    style={
+      Object {
+        "position": "fixed",
+        "width": "100%",
+        "zIndex": "1",
+      }
+    }
+  />
+  <div
+    id="mainContent"
+    style={
+      Object {
+        "display": "inline-flex",
+        "height": "80%",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      id="graph"
+      style={
+        Object {
+          "border": "2px solid darkslategray",
+          "borderRadius": "10px",
+          "margin": "1rem",
+          "width": "75%",
+        }
+      }
+    >
+      <Graph
+        addBanner={[Function]}
+        addEdge={[Function]}
+        config={
+          Object {
+            "processing": Object {
+              "generalTemplate": Object {
+                "group": "processing",
+                "hovered": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "normal": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "selected": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+              },
+              "operations": Array [
+                Object {
+                  "dropdownField": Object {
+                    "input": "dropdown",
+                    "options": Array [
+                      "option1",
+                      "option2",
+                    ],
+                    "required": true,
+                    "title": "dropdown field title",
+                    "width": "100%",
+                  },
+                  "integerField": Object {
+                    "input": "integer",
+                    "required": true,
+                    "title": "integer field title",
+                    "width": "50%",
+                  },
+                  "numericField": Object {
+                    "input": "numeric",
+                    "required": true,
+                    "title": "numeric field title",
+                    "width": "50%",
+                  },
+                  "operation": "test",
+                  "switchField": Object {
+                    "input": "switch",
+                    "required": true,
+                    "title": "switch field title",
+                    "width": "50%",
+                  },
+                  "template": Object {
+                    "dropdownField": "option1",
+                    "integerField": null,
+                    "numericField": null,
+                    "operation": "test",
+                    "switchField": true,
+                    "textField": null,
+                  },
+                  "textField": Object {
+                    "input": "text",
+                    "required": true,
+                    "title": "text field title",
+                    "width": "50%",
+                  },
+                },
+              ],
+            },
+          }
+        }
+        deleteEdge={[Function]}
+        edgeCounter={0}
+        graphData={
+          Object {
+            "edges": Array [],
+            "nodes": Array [],
+          }
+        }
+        invalidNodeCardinalities={Array []}
+        invalidNodes={Array []}
+        setEditNode={[Function]}
+      />
+      <div
+        id="graphButtons"
+        style={
+          Object {
+            "display": "inline-flex",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "left",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="saveButton"
+            onClick={[Function]}
+            title="Save Graph"
+          >
+            save graph
+          </button>
+          <button
+            className="freeButton"
+            id="loadButton"
+            onClick={[Function]}
+            title="Load Graph"
+          >
+            load graph
+          </button>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "right",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="clearButton"
+            onClick={[Function]}
+            title="Clear Graph"
+          >
+            clear graph
+          </button>
+        </div>
+      </div>
+    </div>
+    <ConfigPanel
+      addBanner={[Function]}
+      addFile={[Function]}
+      addNode={[Function]}
+      config={
+        Object {
+          "processing": Object {
+            "generalTemplate": Object {
+              "group": "processing",
+              "hovered": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "normal": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "selected": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+            },
+            "operations": Array [
+              Object {
+                "dropdownField": Object {
+                  "input": "dropdown",
+                  "options": Array [
+                    "option1",
+                    "option2",
+                  ],
+                  "required": true,
+                  "title": "dropdown field title",
+                  "width": "100%",
+                },
+                "integerField": Object {
+                  "input": "integer",
+                  "required": true,
+                  "title": "integer field title",
+                  "width": "50%",
+                },
+                "numericField": Object {
+                  "input": "numeric",
+                  "required": true,
+                  "title": "numeric field title",
+                  "width": "50%",
+                },
+                "operation": "test",
+                "switchField": Object {
+                  "input": "switch",
+                  "required": true,
+                  "title": "switch field title",
+                  "width": "50%",
+                },
+                "template": Object {
+                  "dropdownField": "option1",
+                  "integerField": null,
+                  "numericField": null,
+                  "operation": "test",
+                  "switchField": true,
+                  "textField": null,
+                },
+                "textField": Object {
+                  "input": "text",
+                  "required": true,
+                  "title": "text field title",
+                  "width": "50%",
+                },
+              },
+            ],
+          },
+        }
+      }
+      graphData={
+        Object {
+          "edges": Array [],
+          "nodes": Array [],
+        }
+      }
+      id="control"
+      isGraphValid={[Function]}
+      isLoading={false}
+      loading={[Function]}
+      onSubmitForm={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "margin": "1rem",
+          "width": "25%",
+        }
+      }
+    />
+  </div>
+  <SettingsPanel
+    close={[Function]}
+    config={
+      Object {
+        "processing": Object {
+          "generalTemplate": Object {
+            "group": "processing",
+            "hovered": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+            "normal": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+            "selected": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+          },
+          "operations": Array [
+            Object {
+              "dropdownField": Object {
+                "input": "dropdown",
+                "options": Array [
+                  "option1",
+                  "option2",
+                ],
+                "required": true,
+                "title": "dropdown field title",
+                "width": "100%",
+              },
+              "integerField": Object {
+                "input": "integer",
+                "required": true,
+                "title": "integer field title",
+                "width": "50%",
+              },
+              "numericField": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "numeric field title",
+                "width": "50%",
+              },
+              "operation": "test",
+              "switchField": Object {
+                "input": "switch",
+                "required": true,
+                "title": "switch field title",
+                "width": "50%",
+              },
+              "template": Object {
+                "dropdownField": "option1",
+                "integerField": null,
+                "numericField": null,
+                "operation": "test",
+                "switchField": true,
+                "textField": null,
+              },
+              "textField": Object {
+                "input": "text",
+                "required": true,
+                "title": "text field title",
+                "width": "50%",
+              },
+            },
+          ],
+        },
+      }
+    }
+    defaultsEnabled={false}
+    initialConfig={
+      Object {
+        "processing": Object {
+          "generalTemplate": Object {
+            "group": "processing",
+            "hovered": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+            "normal": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+            "selected": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+          },
+          "operations": Array [
+            Object {
+              "dropdownField": Object {
+                "input": "dropdown",
+                "options": Array [
+                  "option1",
+                  "option2",
+                ],
+                "required": true,
+                "title": "dropdown field title",
+                "width": "100%",
+              },
+              "integerField": Object {
+                "input": "integer",
+                "required": true,
+                "title": "integer field title",
+                "width": "50%",
+              },
+              "numericField": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "numeric field title",
+                "width": "50%",
+              },
+              "operation": "test",
+              "switchField": Object {
+                "input": "switch",
+                "required": true,
+                "title": "switch field title",
+                "width": "50%",
+              },
+              "template": Object {
+                "dropdownField": "option1",
+                "integerField": null,
+                "numericField": null,
+                "operation": "test",
+                "switchField": true,
+                "textField": null,
+              },
+              "textField": Object {
+                "input": "text",
+                "required": true,
+                "title": "text field title",
+                "width": "50%",
+              },
+            },
+          ],
+        },
+      }
+    }
+    revertConfig={[Function]}
+    setDefaultsEnabled={[Function]}
+    updateConfig={[Function]}
+  />
+</div>
+`;
+
+exports[`Home tests render tests should render banners when present 1`] = `
+<div
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="header"
+    style={
+      Object {
+        "backgroundColor": "lightgray",
+        "borderBottom": "2px solid darkslategray",
+      }
+    }
+  >
+    <h1
+      className="title"
+    >
+      CSV Processor
+    </h1>
+    <button
+      className="headerButton"
+      onClick={[Function]}
+      style={
+        Object {
+          "border": "none",
+          "margin": "1rem",
+        }
+      }
+      title="Settings"
+    >
+      <i
+        className="fa fa-cogs"
+        style={
+          Object {
+            "color": "darkslategray",
+            "fontSize": "36px",
+          }
+        }
+      />
+    </button>
+  </div>
+  <div
+    id="bannerSection"
+    style={
+      Object {
+        "position": "fixed",
+        "width": "100%",
+        "zIndex": "1",
+      }
+    }
+  >
+    <Banner
+      id={0}
+      key="0"
+      msg="test-msg"
+      removeBanner={[Function]}
+      timeToLive="5000"
+    />
+  </div>
+  <div
+    id="mainContent"
+    style={
+      Object {
+        "display": "inline-flex",
+        "height": "80%",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      id="graph"
+      style={
+        Object {
+          "border": "2px solid darkslategray",
+          "borderRadius": "10px",
+          "margin": "1rem",
+          "width": "75%",
+        }
+      }
+    >
+      <Graph
+        addBanner={[Function]}
+        addEdge={[Function]}
+        config={
+          Object {
+            "processing": Object {
+              "generalTemplate": Object {
+                "group": "processing",
+                "hovered": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "normal": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+                "selected": Object {
+                  "fill": "blue",
+                  "shape": "diamond",
+                },
+              },
+              "operations": Array [
+                Object {
+                  "dropdownField": Object {
+                    "input": "dropdown",
+                    "options": Array [
+                      "option1",
+                      "option2",
+                    ],
+                    "required": true,
+                    "title": "dropdown field title",
+                    "width": "100%",
+                  },
+                  "integerField": Object {
+                    "input": "integer",
+                    "required": true,
+                    "title": "integer field title",
+                    "width": "50%",
+                  },
+                  "numericField": Object {
+                    "input": "numeric",
+                    "required": true,
+                    "title": "numeric field title",
+                    "width": "50%",
+                  },
+                  "operation": "test",
+                  "switchField": Object {
+                    "input": "switch",
+                    "required": true,
+                    "title": "switch field title",
+                    "width": "50%",
+                  },
+                  "template": Object {
+                    "dropdownField": "option1",
+                    "integerField": null,
+                    "numericField": null,
+                    "operation": "test",
+                    "switchField": true,
+                    "textField": null,
+                  },
+                  "textField": Object {
+                    "input": "text",
+                    "required": true,
+                    "title": "text field title",
+                    "width": "50%",
+                  },
+                },
+              ],
+            },
+          }
+        }
+        deleteEdge={[Function]}
+        edgeCounter={0}
+        graphData={
+          Object {
+            "edges": Array [],
+            "nodes": Array [],
+          }
+        }
+        invalidNodeCardinalities={Array []}
+        invalidNodes={Array []}
+        setEditNode={[Function]}
+      />
+      <div
+        id="graphButtons"
+        style={
+          Object {
+            "display": "inline-flex",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "left",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="saveButton"
+            onClick={[Function]}
+            title="Save Graph"
+          >
+            save graph
+          </button>
+          <button
+            className="freeButton"
+            id="loadButton"
+            onClick={[Function]}
+            title="Load Graph"
+          >
+            load graph
+          </button>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "justifyContent": "right",
+              "width": "50%",
+            }
+          }
+        >
+          <button
+            className="freeButton"
+            id="clearButton"
+            onClick={[Function]}
+            title="Clear Graph"
+          >
+            clear graph
+          </button>
+        </div>
+      </div>
+    </div>
+    <ConfigPanel
+      addBanner={[Function]}
+      addFile={[Function]}
+      addNode={[Function]}
+      config={
+        Object {
+          "processing": Object {
+            "generalTemplate": Object {
+              "group": "processing",
+              "hovered": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "normal": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+              "selected": Object {
+                "fill": "blue",
+                "shape": "diamond",
+              },
+            },
+            "operations": Array [
+              Object {
+                "dropdownField": Object {
+                  "input": "dropdown",
+                  "options": Array [
+                    "option1",
+                    "option2",
+                  ],
+                  "required": true,
+                  "title": "dropdown field title",
+                  "width": "100%",
+                },
+                "integerField": Object {
+                  "input": "integer",
+                  "required": true,
+                  "title": "integer field title",
+                  "width": "50%",
+                },
+                "numericField": Object {
+                  "input": "numeric",
+                  "required": true,
+                  "title": "numeric field title",
+                  "width": "50%",
+                },
+                "operation": "test",
+                "switchField": Object {
+                  "input": "switch",
+                  "required": true,
+                  "title": "switch field title",
+                  "width": "50%",
+                },
+                "template": Object {
+                  "dropdownField": "option1",
+                  "integerField": null,
+                  "numericField": null,
+                  "operation": "test",
+                  "switchField": true,
+                  "textField": null,
+                },
+                "textField": Object {
+                  "input": "text",
+                  "required": true,
+                  "title": "text field title",
+                  "width": "50%",
+                },
+              },
+            ],
+          },
+        }
+      }
+      graphData={
+        Object {
+          "edges": Array [],
+          "nodes": Array [],
+        }
+      }
+      id="control"
+      isGraphValid={[Function]}
+      isLoading={false}
+      loading={[Function]}
+      onSubmitForm={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "margin": "1rem",
+          "width": "25%",
+        }
+      }
+    />
+  </div>
+</div>
+`;

@@ -206,7 +206,7 @@
         "template" : {
           "operation": "filter",
           "specificOperation": "greater_than_or_equal_filter",
-          "column": "student number",
+          "column": null,
           "condition": null,
           "filterType": "greater_than_or_equal",
           "equal": true,
@@ -216,7 +216,7 @@
           "input": "text",
           "title": "Column",
           "width": "100%",
-          "required": false
+          "required": true
         },
         "condition": {
           "input": "numeric",
@@ -556,10 +556,10 @@
         }
       },
       {
-        "operation": "set_compliment",
-        "name": "Set Compliment",
+        "operation": "set_complement",
+        "name": "Set Complement",
         "template" : {
-          "operation": "set_compliment",
+          "operation": "set_complement",
           "keyHeader": null,
           "expectedInputs": 2
         },
@@ -600,10 +600,330 @@
         }
       },
       {
+        "operation": "add_literal",
+        "name": "Literal Add",
+        "template": {
+          "operation": "row_basic_math",
+          "specificOperation": "add_literal",
+          "column1": null,
+          "value": null,
+          "newName": null,
+          "mathOperation": "add",
+          "literal": true,
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "numeric",
+          "title": "Literal Value",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "sub_literal",
+        "name": "Literal Subtract",
+        "template": {
+          "operation": "row_basic_math",
+          "specificOperation": "sub_literal",
+          "column1": null,
+          "value": null,
+          "newName": null,
+          "mathOperation": "subtract",
+          "literal": true,
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "numeric",
+          "title": "Literal Value",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "multiply_literal",
+        "name": "Literal Multiply",
+        "template": {
+          "operation": "row_basic_math",
+          "specificOperation": "multiply_literal",
+          "column1": null,
+          "value": null,
+          "newName": null,
+          "mathOperation": "multiply",
+          "literal": true,
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "numeric",
+          "title": "Literal Value",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "div_literal",
+        "name": "Literal Divide",
+        "template": {
+          "operation": "row_basic_math",
+          "specificOperation": "div_literal",
+          "column1": null,
+          "value": null,
+          "newName": null,
+          "mathOperation": "divide",
+          "literal": true,
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "numeric",
+          "title": "Literal Value",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "modulo_literal",
+        "name": "Literal Modulo",
+        "template": {
+          "operation": "row_basic_math",
+          "specificOperation": "modulo_literal",
+          "column1": null,
+          "value": null,
+          "newName": null,
+          "mathOperation": "modulo",
+          "literal": true,
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "numeric",
+          "title": "Literal Value",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "add_variable",
+        "name": "Variable Add",
+        "template": {
+          "operation": "row_basic_math",
+          "specificOperation": "add_variable",
+          "column1": null,
+          "value": null,
+          "newName": null,
+          "mathOperation": "add",
+          "literal": false,
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column 1",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "text",
+          "title": "Column 2",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "sub_variable",
+        "name": "Variable Subtract",
+        "template": {
+          "operation": "row_basic_math",
+          "specificOperation": "sub_variable",
+          "column1": null,
+          "value": null,
+          "newName": null,
+          "mathOperation": "subtract",
+          "literal": false,
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column 1",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "text",
+          "title": "Column 2",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "multiply_variable",
+        "name": "Variable Multiply",
+        "template": {
+          "operation": "row_basic_math",
+          "specificOperation": "multiply_variable",
+          "column1": null,
+          "value": null,
+          "newName": null,
+          "mathOperation": "multiply",
+          "literal": false,
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column 1",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "text",
+          "title": "Column 2",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "div_variable",
+        "name": "Variable Divide",
+        "template": {
+          "operation": "row_basic_math",
+          "specificOperation": "div_variable",
+          "column1": null,
+          "value": null,
+          "newName": null,
+          "mathOperation": "divide",
+          "literal": false,
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column 1",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "text",
+          "title": "Column 2",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
+        "operation": "modulo_variable",
+        "name": "Variable Modulo",
+        "template": {
+          "operation": "row_basic_math",
+          "specificOperation": "modulo_variable",
+          "column1": null,
+          "value": null,
+          "newName": null,
+          "mathOperation": "modulo",
+          "literal": false,
+          "expectedInputs": 1
+        },
+        "column1": {
+          "input": "text",
+          "title": "Column 1",
+          "width": "100%",
+          "required": true
+        },
+        "value": {
+          "input": "text",
+          "title": "Column 2",
+          "width": "100%",
+          "required": true
+        },
+        "newName": {
+          "input": "text",
+          "title": "New Column Name",
+          "width": "100%",
+          "required": true
+        }
+      },
+      {
         "operation": "row_average",
         "name": "Row Average",
         "template" : {
-          "operation": "row_math",
+          "operation": "row_stat_math",
           "specificOperation": "row_average",
           "columns": null,
           "newName": null,
@@ -627,7 +947,7 @@
         "operation": "row_count",
         "name": "Row Count",
         "template" : {
-          "operation": "row_math",
+          "operation": "row_stat_math",
           "specificOperation": "row_count",
           "columns": null,
           "newName": null,
@@ -651,7 +971,7 @@
         "operation": "row_max",
         "name": "Row Max",
         "template" : {
-          "operation": "row_math",
+          "operation": "row_stat_math",
           "specificOperation": "row_max",
           "columns": null,
           "newName": null,
@@ -675,7 +995,7 @@
         "operation": "row_min",
         "name": "Row Min",
         "template" : {
-          "operation": "row_math",
+          "operation": "row_stat_math",
           "specificOperation": "row_min",
           "columns": null,
           "newName": null,
@@ -699,7 +1019,7 @@
         "operation": "row_sum",
         "name": "Row Sum",
         "template" : {
-          "operation": "row_math",
+          "operation": "row_stat_math",
           "specificOperation": "row_sum",
           "columns": null,
           "newName": null,

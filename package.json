@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,6 +48,7 @@
   "devDependencies": {
     "anychart": "^8.10.0",
     "axios": "^0.23.0",
+    "cypress": "^9.5.2",
     "isomorphic-fetch": "^3.0.0",
     "universal-cookie": "^4.0.4"
   },

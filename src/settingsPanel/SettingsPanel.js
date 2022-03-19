@@ -8,14 +8,6 @@ import Validation from "../graphComponentForms/validation/Validation";
 import deepClone from 'lodash.clonedeep';
 import Collapsible from "../generalPurposeComponents/collapsible/Collapsible";
 
-/**
- * thought process:
- *      -immediately valid config assumed
- *      -anywhere the value is not empty is not required
- *      -making a value empty is to null the template value => making it required
- *      -empty field is not a valid attribute
- *      -more extreme changes to config should be done to the config variable read at start up
- */
 class SettingsPanel extends React.Component {
 
     constructor(props) {
@@ -24,19 +16,19 @@ class SettingsPanel extends React.Component {
         this.state = {
             defaultsEnabled: props.defaultsEnabled,
             config: props.config,
+            beforeDefaultConfig: props.config,
             initialConfig: props.initialConfig,
-            configValid: true,
+            configChanged: false,
             configValidity: this.setupValidity()
         }
     }
 
-    //only time possible to be invalid is genuine content and wrong
     setupValidity() {
         let validity = {};
 
         this.props.config.processing.operations.forEach(op => {
             validity[op.operation] = processingInputValidityStartState(op, 'valid');
-        })
+        });
 
         return validity;
     }
@@ -51,24 +43,18 @@ class SettingsPanel extends React.Component {
 
     async textOnBlur(e, operation, field) {
         await this.onBlur(Validation.validateTextField, e, operation, field);
-
-        //work out if configValid is true or false after change
     }
 
     async numericOnBlur(e, operation, field) {
         await this.onBlur(Validation.validateNumericField, e, operation, field);
-
-        //work out if configValid is true or false after change
     }
 
     async integerOnBlur(e, operation, field) {
         await this.onBlur(Validation.validateIntegerField, e, operation, field);
-
-        //work out if configValid is true or false after change
     }
 
     async onBlur(validate, e, operation, field) {
-        if (e.target.value.length === 0) {
+        if (e && e.target && e.target.value !== null && e.target.value.length === 0) {
             let configValidity = deepClone(this.state.configValidity);
             configValidity[operation][field] = 'valid';
 
@@ -76,7 +62,6 @@ class SettingsPanel extends React.Component {
             let opConfig = config.processing.operations.find(op => op.operation === operation);
 
             opConfig.template[field] = null;
-            opConfig[field].required = true;
 
             await this.setState({
                 configValidity,
@@ -91,7 +76,6 @@ class SettingsPanel extends React.Component {
                 let opConfig = config.processing.operations.find(op => op.operation === operation);
 
                 opConfig.template[field] = e.target.value;
-                opConfig[field].required = false;
 
                 await this.setState({
                     configValidity,
@@ -107,6 +91,10 @@ class SettingsPanel extends React.Component {
                 });
             }
         }
+
+        await this.setState({
+            configChanged: this.state.config !== this.state.beforeDefaultConfig
+        });
     }
 
     async dropdownOnChange(e, operation, field) {
@@ -173,10 +161,6 @@ class SettingsPanel extends React.Component {
         </Collapsible>
     }
 
-    placeholder() {
-        console.log('called');
-    }
-
     render() {
         return <Popup
             id='settingsPanel'
@@ -209,7 +193,7 @@ class SettingsPanel extends React.Component {
                             required={false}
                             input={
                                 <Switch
-                                    id={'defaultSwitch-input'}
+                                    id='defaultSwitch-input'
                                     isChecked={this.state.defaultsEnabled}
                                     onChange={async e => this.setDefaultsEnabled(e)}
                                 />
@@ -238,7 +222,7 @@ class SettingsPanel extends React.Component {
                         <button
                             title='save'
                             id='saveButton'
-                            disabled={!this.state.defaultsEnabled}
+                            disabled={!this.state.defaultsEnabled || !this.state.configChanged}
                             onClick={async () => {
                                 await this.props.updateConfig(this.state.config);
                                 this.props.close();

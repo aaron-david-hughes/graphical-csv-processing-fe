@@ -1,0 +1,26 @@
+image: node:16.13.1-alpine
+
+stages:
+  - create_image_and_unit_test
+#  - acceptance_test
+#  - update_image
+
+build_test_image:
+  stage: create_image_and_unit_test
+  tags: [dind]
+  image: docker:19.03.1
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+    - docker:19.03.1-dind
+  script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
+    - docker build -t $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
+    - docker push $CI_REGISTRY:$CI_COMMIT_SHORT_SHA
+
+unit_tests:
+  stage: create_image_and_unit_test
+  tags: [frontend]
+  script:
+    - npm install
+    - npm test

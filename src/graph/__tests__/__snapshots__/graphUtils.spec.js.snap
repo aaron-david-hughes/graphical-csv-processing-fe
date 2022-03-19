@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`graphUtils tests fileToolTip tests should render html with both validity and cardinality errors when invalid data with incorrect input edges 1`] = `"<span style='font-weight:bold'>testId</span><br><br>operation: open_file<br>name: null<br>expectedInputs: 0<br><p style='background-color: #FF272A !important; margin: 2px; padding: 5px; border-radius: 8px;'>Invalid number of inputs: 1, must be: 0.</p><br><p style='background-color: #FF272A !important; margin: 2px; padding: 5px; border-radius: 8px;'>Invalid config, double click to edit the configuration.</p>"`;
+
+exports[`graphUtils tests fileToolTip tests should render html with cardinality error when valid data with incorrect input edges 1`] = `"<span style='font-weight:bold'>testId</span><br><br>operation: open_file<br>name: name.csv<br>expectedInputs: 0<br><p style='background-color: #FF272A !important; margin: 2px; padding: 5px; border-radius: 8px;'>Invalid number of inputs: 1, must be: 0.</p>"`;
+
+exports[`graphUtils tests fileToolTip tests should render html with data validity error when invalid data with correct input edges 1`] = `"<span style='font-weight:bold'>testId</span><br><br>operation: open_file<br>name: null<br>expectedInputs: 0<br><p style='background-color: #FF272A !important; margin: 2px; padding: 5px; border-radius: 8px;'>Invalid config, double click to edit the configuration.</p>"`;
+
+exports[`graphUtils tests fileToolTip tests should render html with no errors when valid data 1`] = `"<span style='font-weight:bold'>testId</span><br><br>operation: open_file<br>name: name.csv<br>expectedInputs: 0"`;
+
+exports[`graphUtils tests processToolTip tests should render html with both validity and cardinality errors when invalid data with incorrect input edges 1`] = `"<span style='font-weight:bold'>testId</span><br><br>operation: join<br>specificOperation: join_left<br>onLeft: test1<br>onRight: null<br>joinType: left<br>expectedInputs: 2<br><p style='background-color: #FF272A !important; margin: 2px; padding: 5px; border-radius: 8px;'>Invalid config, double click to edit the configuration.</p><br><p style='background-color: #FF272A !important; margin: 2px; padding: 5px; border-radius: 8px;'>Invalid number of inputs: 3, must be: 2.</p>"`;
+
+exports[`graphUtils tests processToolTip tests should render html with cardinality error when valid data with incorrect input edges 1`] = `"<span style='font-weight:bold'>testId</span><br><br>operation: join<br>specificOperation: join_left<br>onLeft: test1<br>onRight: test2<br>joinType: left<br>expectedInputs: 2<br><p style='background-color: #FF272A !important; margin: 2px; padding: 5px; border-radius: 8px;'>Invalid number of inputs: 1, must be: 2.</p>"`;
+
+exports[`graphUtils tests processToolTip tests should render html with data validity error when invalid data with correct input edges 1`] = `"<span style='font-weight:bold'>testId</span><br><br>operation: join<br>specificOperation: join_left<br>onLeft: test1<br>onRight: null<br>joinType: left<br>expectedInputs: 2<br><p style='background-color: #FF272A !important; margin: 2px; padding: 5px; border-radius: 8px;'>Invalid config, double click to edit the configuration.</p>"`;
+
+exports[`graphUtils tests processToolTip tests should render html with no errors when data missing but not configured to be required 1`] = `"<span style='font-weight:bold'>testId</span><br><br>operation: join<br>specificOperation: join_left<br>onLeft: test1<br>onRight: null<br>joinType: left<br>expectedInputs: 2"`;
+
+exports[`graphUtils tests processToolTip tests should render html with no errors when valid data 1`] = `"<span style='font-weight:bold'>testId</span><br><br>operation: join<br>specificOperation: join_left<br>onLeft: test1<br>onRight: test2<br>joinType: left<br>expectedInputs: 2"`;

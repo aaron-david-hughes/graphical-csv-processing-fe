@@ -1,0 +1,2646 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NodeForm tests render tests should match snapshot when join_left form for adding 1`] = `
+<div>
+  <FormContentGenerator
+    config={
+      Object {
+        "backend": "http://localhost:8080/process",
+        "processing": Object {
+          "generalTemplate": Object {
+            "group": "processing",
+            "hovered": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+            "normal": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+            "selected": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+          },
+          "operations": Array [
+            Object {
+              "name": "Join Left",
+              "onLeft": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Left",
+                "width": "50%",
+              },
+              "onRight": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Right",
+                "width": "50%",
+              },
+              "operation": "join_left",
+              "template": Object {
+                "expectedInputs": 2,
+                "joinType": "left",
+                "onLeft": null,
+                "onRight": null,
+                "operation": "join",
+                "specificOperation": "join_left",
+              },
+            },
+            Object {
+              "name": "Join Right",
+              "onLeft": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Left",
+                "width": "50%",
+              },
+              "onRight": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Right",
+                "width": "50%",
+              },
+              "operation": "join_right",
+              "template": Object {
+                "expectedInputs": 2,
+                "joinType": "right",
+                "onLeft": null,
+                "onRight": null,
+                "operation": "join",
+                "specificOperation": "join_right",
+              },
+            },
+            Object {
+              "name": "Join Inner",
+              "onLeft": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Left",
+                "width": "50%",
+              },
+              "onRight": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Right",
+                "width": "50%",
+              },
+              "operation": "join_inner",
+              "template": Object {
+                "expectedInputs": 2,
+                "joinType": "inner",
+                "onLeft": null,
+                "onRight": null,
+                "operation": "join",
+                "specificOperation": "join_inner",
+              },
+            },
+            Object {
+              "name": "Join Outer",
+              "onLeft": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Left",
+                "width": "50%",
+              },
+              "onRight": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Right",
+                "width": "50%",
+              },
+              "operation": "join_outer",
+              "template": Object {
+                "expectedInputs": 2,
+                "joinType": "outer",
+                "onLeft": null,
+                "onRight": null,
+                "operation": "join",
+                "specificOperation": "join_outer",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "text",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "equal": Object {
+                "input": "switch",
+                "required": true,
+                "title": "Equal",
+                "width": "100%",
+              },
+              "name": "Filter String Equality",
+              "operation": "string_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "string_equality",
+                "operation": "filter",
+                "specificOperation": "string_filter",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "equal": Object {
+                "input": "switch",
+                "required": true,
+                "title": "Equal",
+                "width": "100%",
+              },
+              "name": "Filter Numeric Equality",
+              "operation": "numeric_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "numeric_equality",
+                "operation": "filter",
+                "specificOperation": "numeric_filter",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "name": "Filter Greater Than",
+              "operation": "greater_than_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "greater_than",
+                "operation": "filter",
+                "specificOperation": "greater_than_filter",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "name": "Filter Greater Than or Equal",
+              "operation": "greater_than_or_equal_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "greater_than_or_equal",
+                "operation": "filter",
+                "specificOperation": "greater_than_or_equal_filter",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "name": "Filter Less Than",
+              "operation": "less_than_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "less_than",
+                "operation": "filter",
+                "specificOperation": "less_than_filter",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "name": "Filter Less Than or Equal",
+              "operation": "less_than_or_equal_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "less_than_or_equal",
+                "operation": "filter",
+                "specificOperation": "less_than_or_equal_filter",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column(s)",
+                "width": "100%",
+              },
+              "name": "Drop Column(s)",
+              "operation": "drop_columns",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "operation": "drop_columns",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column(s)",
+                "width": "100%",
+              },
+              "name": "Take Column(s)",
+              "operation": "take_columns",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "operation": "take_columns",
+              },
+            },
+            Object {
+              "alias": Object {
+                "input": "text",
+                "required": true,
+                "title": "Alias",
+                "width": "100%",
+              },
+              "name": "Alias",
+              "operation": "alias",
+              "template": Object {
+                "alias": null,
+                "expectedInputs": 1,
+                "operation": "alias",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Rename Column",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Name",
+                "width": "100%",
+              },
+              "operation": "rename_column",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "newName": null,
+                "operation": "rename_column",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "column2": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+              "mergeColName": Object {
+                "input": "text",
+                "required": true,
+                "title": "Merged Column Name",
+                "width": "100%",
+              },
+              "name": "Merge Columns String Equality",
+              "operation": "merge_columns_string",
+              "template": Object {
+                "column1": null,
+                "column2": null,
+                "expectedInputs": 1,
+                "mergeColName": null,
+                "mergeType": "string_equality",
+                "operation": "merge_columns",
+                "specificOperation": "merge_columns_string",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "column2": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+              "mergeColName": Object {
+                "input": "text",
+                "required": true,
+                "title": "Merged Column Name",
+                "width": "100%",
+              },
+              "name": "Merge Columns Numeric Equality",
+              "operation": "merge_columns_numeric",
+              "template": Object {
+                "column1": null,
+                "column2": null,
+                "expectedInputs": 1,
+                "mergeColName": null,
+                "mergeType": "numeric_equality",
+                "operation": "merge_columns",
+                "specificOperation": "merge_columns_numeric",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Merge Rows",
+              "operation": "merge_rows",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "merge_rows",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "limit": Object {
+                "input": "integer",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Limit",
+              "operation": "limit",
+              "template": Object {
+                "expectedInputs": 1,
+                "limit": null,
+                "operation": "limit",
+              },
+            },
+            Object {
+              "name": "Concat Tables",
+              "operation": "concat_tables",
+              "template": Object {
+                "expectedInputs": 2,
+                "operation": "concat_tables",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Unique Column",
+              "operation": "unique_column",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "unique_column",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Or",
+              "operation": "or",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 2,
+                "operation": "or",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Order Alphabetical Ascending",
+              "operation": "order_alphabetical_asc",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "order_column",
+                "orderType": "alphabetical_order_asc",
+                "specificOperation": "order_alphabetical_asc",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Order Alphabetical Descending",
+              "operation": "order_alphabetical_desc",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "order_column",
+                "orderType": "alphabetical_order_desc",
+                "specificOperation": "order_alphabetical_desc",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Order Numerically Ascending",
+              "operation": "order_numerical_asc",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "order_column",
+                "orderType": "numeric_order_asc",
+                "specificOperation": "order_numerical_asc",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Order Numerically Descending",
+              "operation": "order_numerical_desc",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "order_column",
+                "orderType": "numeric_order_desc",
+                "specificOperation": "order_numerical_desc",
+              },
+            },
+            Object {
+              "name": "Drop Alias",
+              "operation": "drop_alias",
+              "template": Object {
+                "expectedInputs": 1,
+                "operation": "drop_alias",
+              },
+            },
+            Object {
+              "keyHeader": Object {
+                "input": "text",
+                "required": true,
+                "title": "Key Column",
+                "width": "100%",
+              },
+              "name": "Set Complement",
+              "operation": "set_complement",
+              "template": Object {
+                "expectedInputs": 2,
+                "keyHeader": null,
+                "operation": "set_complement",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "column2": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+              "concatHeader": Object {
+                "input": "text",
+                "required": true,
+                "title": "Concat Column Header",
+                "width": "100%",
+              },
+              "name": "Concat Columns",
+              "operation": "concat_columns",
+              "template": Object {
+                "column1": null,
+                "column2": null,
+                "concatHeader": null,
+                "expectedInputs": 2,
+                "operation": "concat_columns",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Literal Add",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "add_literal",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": true,
+                "mathOperation": "add",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "add_literal",
+                "value": null,
+              },
+              "value": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Literal Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Literal Subtract",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "sub_literal",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": true,
+                "mathOperation": "subtract",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "sub_literal",
+                "value": null,
+              },
+              "value": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Literal Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Literal Multiply",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "multiply_literal",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": true,
+                "mathOperation": "multiply",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "multiply_literal",
+                "value": null,
+              },
+              "value": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Literal Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Literal Divide",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "div_literal",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": true,
+                "mathOperation": "divide",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "div_literal",
+                "value": null,
+              },
+              "value": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Literal Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Literal Modulo",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "modulo_literal",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": true,
+                "mathOperation": "modulo",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "modulo_literal",
+                "value": null,
+              },
+              "value": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Literal Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "name": "Variable Add",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "add_variable",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": false,
+                "mathOperation": "add",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "add_variable",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "name": "Variable Subtract",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "sub_variable",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": false,
+                "mathOperation": "subtract",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "sub_variable",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "name": "Variable Multiply",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "multiply_variable",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": false,
+                "mathOperation": "multiply",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "multiply_variable",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "name": "Variable Divide",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "div_variable",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": false,
+                "mathOperation": "divide",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "div_variable",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "name": "Variable Modulo",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "modulo_variable",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": false,
+                "mathOperation": "modulo",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "modulo_variable",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Columns",
+                "width": "100%",
+              },
+              "name": "Row Average",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "row_average",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "mathOperation": "average",
+                "newName": null,
+                "operation": "row_stat_math",
+                "specificOperation": "row_average",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Columns",
+                "width": "100%",
+              },
+              "name": "Row Count",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "row_count",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "mathOperation": "count",
+                "newName": null,
+                "operation": "row_stat_math",
+                "specificOperation": "row_count",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Columns",
+                "width": "100%",
+              },
+              "name": "Row Max",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "row_max",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "mathOperation": "max",
+                "newName": null,
+                "operation": "row_stat_math",
+                "specificOperation": "row_max",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Columns",
+                "width": "100%",
+              },
+              "name": "Row Min",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "row_min",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "mathOperation": "min",
+                "newName": null,
+                "operation": "row_stat_math",
+                "specificOperation": "row_min",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Columns",
+                "width": "100%",
+              },
+              "name": "Row Sum",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "row_sum",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "mathOperation": "sum",
+                "newName": null,
+                "operation": "row_stat_math",
+                "specificOperation": "row_sum",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Column Average",
+              "operation": "column_average",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "mathOperation": "average",
+                "operation": "column_math",
+                "specificOperation": "column_average",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Column Count",
+              "operation": "column_count",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "mathOperation": "count",
+                "operation": "column_math",
+                "specificOperation": "column_count",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Column Max",
+              "operation": "column_max",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "mathOperation": "max",
+                "operation": "column_math",
+                "specificOperation": "column_max",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Column Min",
+              "operation": "column_min",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "mathOperation": "min",
+                "operation": "column_math",
+                "specificOperation": "column_min",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Column Sum",
+              "operation": "column_sum",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "mathOperation": "sum",
+                "operation": "column_math",
+                "specificOperation": "column_sum",
+              },
+            },
+          ],
+        },
+      }
+    }
+    inputActionFunctions={
+      Object {
+        "dropdown": Object {
+          "onChange": [Function],
+        },
+        "integer": Object {
+          "onBlur": [Function],
+        },
+        "numeric": Object {
+          "onBlur": [Function],
+        },
+        "switch": Object {
+          "onChange": [Function],
+        },
+        "text": Object {
+          "onBlur": [Function],
+        },
+      }
+    }
+    inputValidity={
+      Object {
+        "onLeft": "notStarted",
+        "onRight": "notStarted",
+      }
+    }
+    node={null}
+    nodeObj={
+      Object {
+        "expectedInputs": 2,
+        "group": "processing",
+        "hovered": Object {
+          "fill": "blue",
+          "shape": "diamond",
+        },
+        "joinType": "left",
+        "normal": Object {
+          "fill": "blue",
+          "shape": "diamond",
+        },
+        "onLeft": null,
+        "onRight": null,
+        "operation": "join",
+        "selected": Object {
+          "fill": "blue",
+          "shape": "diamond",
+        },
+        "specificOperation": "join_left",
+      }
+    }
+    nodeOperation="join_left"
+  />
+</div>
+`;
+
+exports[`NodeForm tests render tests should match snapshot when join_left form for editing 1`] = `
+<div>
+  <FormContentGenerator
+    config={
+      Object {
+        "backend": "http://localhost:8080/process",
+        "processing": Object {
+          "generalTemplate": Object {
+            "group": "processing",
+            "hovered": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+            "normal": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+            "selected": Object {
+              "fill": "blue",
+              "shape": "diamond",
+            },
+          },
+          "operations": Array [
+            Object {
+              "name": "Join Left",
+              "onLeft": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Left",
+                "width": "50%",
+              },
+              "onRight": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Right",
+                "width": "50%",
+              },
+              "operation": "join_left",
+              "template": Object {
+                "expectedInputs": 2,
+                "joinType": "left",
+                "onLeft": null,
+                "onRight": null,
+                "operation": "join",
+                "specificOperation": "join_left",
+              },
+            },
+            Object {
+              "name": "Join Right",
+              "onLeft": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Left",
+                "width": "50%",
+              },
+              "onRight": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Right",
+                "width": "50%",
+              },
+              "operation": "join_right",
+              "template": Object {
+                "expectedInputs": 2,
+                "joinType": "right",
+                "onLeft": null,
+                "onRight": null,
+                "operation": "join",
+                "specificOperation": "join_right",
+              },
+            },
+            Object {
+              "name": "Join Inner",
+              "onLeft": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Left",
+                "width": "50%",
+              },
+              "onRight": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Right",
+                "width": "50%",
+              },
+              "operation": "join_inner",
+              "template": Object {
+                "expectedInputs": 2,
+                "joinType": "inner",
+                "onLeft": null,
+                "onRight": null,
+                "operation": "join",
+                "specificOperation": "join_inner",
+              },
+            },
+            Object {
+              "name": "Join Outer",
+              "onLeft": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Left",
+                "width": "50%",
+              },
+              "onRight": Object {
+                "input": "text",
+                "required": true,
+                "title": "On Right",
+                "width": "50%",
+              },
+              "operation": "join_outer",
+              "template": Object {
+                "expectedInputs": 2,
+                "joinType": "outer",
+                "onLeft": null,
+                "onRight": null,
+                "operation": "join",
+                "specificOperation": "join_outer",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "text",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "equal": Object {
+                "input": "switch",
+                "required": true,
+                "title": "Equal",
+                "width": "100%",
+              },
+              "name": "Filter String Equality",
+              "operation": "string_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "string_equality",
+                "operation": "filter",
+                "specificOperation": "string_filter",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "equal": Object {
+                "input": "switch",
+                "required": true,
+                "title": "Equal",
+                "width": "100%",
+              },
+              "name": "Filter Numeric Equality",
+              "operation": "numeric_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "numeric_equality",
+                "operation": "filter",
+                "specificOperation": "numeric_filter",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "name": "Filter Greater Than",
+              "operation": "greater_than_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "greater_than",
+                "operation": "filter",
+                "specificOperation": "greater_than_filter",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "name": "Filter Greater Than or Equal",
+              "operation": "greater_than_or_equal_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "greater_than_or_equal",
+                "operation": "filter",
+                "specificOperation": "greater_than_or_equal_filter",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "name": "Filter Less Than",
+              "operation": "less_than_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "less_than",
+                "operation": "filter",
+                "specificOperation": "less_than_filter",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "condition": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Condition",
+                "width": "100%",
+              },
+              "name": "Filter Less Than or Equal",
+              "operation": "less_than_or_equal_filter",
+              "template": Object {
+                "column": null,
+                "condition": null,
+                "equal": true,
+                "expectedInputs": 1,
+                "filterType": "less_than_or_equal",
+                "operation": "filter",
+                "specificOperation": "less_than_or_equal_filter",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column(s)",
+                "width": "100%",
+              },
+              "name": "Drop Column(s)",
+              "operation": "drop_columns",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "operation": "drop_columns",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column(s)",
+                "width": "100%",
+              },
+              "name": "Take Column(s)",
+              "operation": "take_columns",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "operation": "take_columns",
+              },
+            },
+            Object {
+              "alias": Object {
+                "input": "text",
+                "required": true,
+                "title": "Alias",
+                "width": "100%",
+              },
+              "name": "Alias",
+              "operation": "alias",
+              "template": Object {
+                "alias": null,
+                "expectedInputs": 1,
+                "operation": "alias",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Rename Column",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Name",
+                "width": "100%",
+              },
+              "operation": "rename_column",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "newName": null,
+                "operation": "rename_column",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "column2": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+              "mergeColName": Object {
+                "input": "text",
+                "required": true,
+                "title": "Merged Column Name",
+                "width": "100%",
+              },
+              "name": "Merge Columns String Equality",
+              "operation": "merge_columns_string",
+              "template": Object {
+                "column1": null,
+                "column2": null,
+                "expectedInputs": 1,
+                "mergeColName": null,
+                "mergeType": "string_equality",
+                "operation": "merge_columns",
+                "specificOperation": "merge_columns_string",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "column2": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+              "mergeColName": Object {
+                "input": "text",
+                "required": true,
+                "title": "Merged Column Name",
+                "width": "100%",
+              },
+              "name": "Merge Columns Numeric Equality",
+              "operation": "merge_columns_numeric",
+              "template": Object {
+                "column1": null,
+                "column2": null,
+                "expectedInputs": 1,
+                "mergeColName": null,
+                "mergeType": "numeric_equality",
+                "operation": "merge_columns",
+                "specificOperation": "merge_columns_numeric",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Merge Rows",
+              "operation": "merge_rows",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "merge_rows",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "limit": Object {
+                "input": "integer",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Limit",
+              "operation": "limit",
+              "template": Object {
+                "expectedInputs": 1,
+                "limit": null,
+                "operation": "limit",
+              },
+            },
+            Object {
+              "name": "Concat Tables",
+              "operation": "concat_tables",
+              "template": Object {
+                "expectedInputs": 2,
+                "operation": "concat_tables",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Unique Column",
+              "operation": "unique_column",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "unique_column",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Or",
+              "operation": "or",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 2,
+                "operation": "or",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Order Alphabetical Ascending",
+              "operation": "order_alphabetical_asc",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "order_column",
+                "orderType": "alphabetical_order_asc",
+                "specificOperation": "order_alphabetical_asc",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Order Alphabetical Descending",
+              "operation": "order_alphabetical_desc",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "order_column",
+                "orderType": "alphabetical_order_desc",
+                "specificOperation": "order_alphabetical_desc",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Order Numerically Ascending",
+              "operation": "order_numerical_asc",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "order_column",
+                "orderType": "numeric_order_asc",
+                "specificOperation": "order_numerical_asc",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Order Numerically Descending",
+              "operation": "order_numerical_desc",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "operation": "order_column",
+                "orderType": "numeric_order_desc",
+                "specificOperation": "order_numerical_desc",
+              },
+            },
+            Object {
+              "name": "Drop Alias",
+              "operation": "drop_alias",
+              "template": Object {
+                "expectedInputs": 1,
+                "operation": "drop_alias",
+              },
+            },
+            Object {
+              "keyHeader": Object {
+                "input": "text",
+                "required": true,
+                "title": "Key Column",
+                "width": "100%",
+              },
+              "name": "Set Complement",
+              "operation": "set_complement",
+              "template": Object {
+                "expectedInputs": 2,
+                "keyHeader": null,
+                "operation": "set_complement",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "column2": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+              "concatHeader": Object {
+                "input": "text",
+                "required": true,
+                "title": "Concat Column Header",
+                "width": "100%",
+              },
+              "name": "Concat Columns",
+              "operation": "concat_columns",
+              "template": Object {
+                "column1": null,
+                "column2": null,
+                "concatHeader": null,
+                "expectedInputs": 2,
+                "operation": "concat_columns",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Literal Add",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "add_literal",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": true,
+                "mathOperation": "add",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "add_literal",
+                "value": null,
+              },
+              "value": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Literal Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Literal Subtract",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "sub_literal",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": true,
+                "mathOperation": "subtract",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "sub_literal",
+                "value": null,
+              },
+              "value": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Literal Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Literal Multiply",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "multiply_literal",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": true,
+                "mathOperation": "multiply",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "multiply_literal",
+                "value": null,
+              },
+              "value": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Literal Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Literal Divide",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "div_literal",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": true,
+                "mathOperation": "divide",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "div_literal",
+                "value": null,
+              },
+              "value": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Literal Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Literal Modulo",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "modulo_literal",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": true,
+                "mathOperation": "modulo",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "modulo_literal",
+                "value": null,
+              },
+              "value": Object {
+                "input": "numeric",
+                "required": true,
+                "title": "Literal Value",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "name": "Variable Add",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "add_variable",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": false,
+                "mathOperation": "add",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "add_variable",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "name": "Variable Subtract",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "sub_variable",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": false,
+                "mathOperation": "subtract",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "sub_variable",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "name": "Variable Multiply",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "multiply_variable",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": false,
+                "mathOperation": "multiply",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "multiply_variable",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "name": "Variable Divide",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "div_variable",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": false,
+                "mathOperation": "divide",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "div_variable",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+            },
+            Object {
+              "column1": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 1",
+                "width": "100%",
+              },
+              "name": "Variable Modulo",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "modulo_variable",
+              "template": Object {
+                "column1": null,
+                "expectedInputs": 1,
+                "literal": false,
+                "mathOperation": "modulo",
+                "newName": null,
+                "operation": "row_basic_math",
+                "specificOperation": "modulo_variable",
+                "value": null,
+              },
+              "value": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column 2",
+                "width": "100%",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Columns",
+                "width": "100%",
+              },
+              "name": "Row Average",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "row_average",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "mathOperation": "average",
+                "newName": null,
+                "operation": "row_stat_math",
+                "specificOperation": "row_average",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Columns",
+                "width": "100%",
+              },
+              "name": "Row Count",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "row_count",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "mathOperation": "count",
+                "newName": null,
+                "operation": "row_stat_math",
+                "specificOperation": "row_count",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Columns",
+                "width": "100%",
+              },
+              "name": "Row Max",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "row_max",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "mathOperation": "max",
+                "newName": null,
+                "operation": "row_stat_math",
+                "specificOperation": "row_max",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Columns",
+                "width": "100%",
+              },
+              "name": "Row Min",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "row_min",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "mathOperation": "min",
+                "newName": null,
+                "operation": "row_stat_math",
+                "specificOperation": "row_min",
+              },
+            },
+            Object {
+              "columns": Object {
+                "input": "text",
+                "required": true,
+                "title": "Columns",
+                "width": "100%",
+              },
+              "name": "Row Sum",
+              "newName": Object {
+                "input": "text",
+                "required": true,
+                "title": "New Column Name",
+                "width": "100%",
+              },
+              "operation": "row_sum",
+              "template": Object {
+                "columns": null,
+                "expectedInputs": 1,
+                "mathOperation": "sum",
+                "newName": null,
+                "operation": "row_stat_math",
+                "specificOperation": "row_sum",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Column Average",
+              "operation": "column_average",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "mathOperation": "average",
+                "operation": "column_math",
+                "specificOperation": "column_average",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Column Count",
+              "operation": "column_count",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "mathOperation": "count",
+                "operation": "column_math",
+                "specificOperation": "column_count",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Column Max",
+              "operation": "column_max",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "mathOperation": "max",
+                "operation": "column_math",
+                "specificOperation": "column_max",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Column Min",
+              "operation": "column_min",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "mathOperation": "min",
+                "operation": "column_math",
+                "specificOperation": "column_min",
+              },
+            },
+            Object {
+              "column": Object {
+                "input": "text",
+                "required": true,
+                "title": "Column",
+                "width": "100%",
+              },
+              "name": "Column Sum",
+              "operation": "column_sum",
+              "template": Object {
+                "column": null,
+                "expectedInputs": 1,
+                "mathOperation": "sum",
+                "operation": "column_math",
+                "specificOperation": "column_sum",
+              },
+            },
+          ],
+        },
+      }
+    }
+    inputActionFunctions={
+      Object {
+        "dropdown": Object {
+          "onChange": [Function],
+        },
+        "integer": Object {
+          "onBlur": [Function],
+        },
+        "numeric": Object {
+          "onBlur": [Function],
+        },
+        "switch": Object {
+          "onChange": [Function],
+        },
+        "text": Object {
+          "onBlur": [Function],
+        },
+      }
+    }
+    inputValidity={
+      Object {
+        "onLeft": "valid",
+        "onRight": "invalid",
+      }
+    }
+    node={
+      Object {
+        "expectedInputs": 2,
+        "joinType": "left",
+        "onLeft": "value",
+        "onRight": null,
+        "operation": "join",
+        "specificOperation": "join_left",
+      }
+    }
+    nodeObj={
+      Object {
+        "expectedInputs": 2,
+        "joinType": "left",
+        "onLeft": "value",
+        "onRight": null,
+        "operation": "join",
+        "specificOperation": "join_left",
+      }
+    }
+    nodeOperation="join_left"
+  />
+</div>
+`;
+
+exports[`NodeForm tests render tests should match snapshot when open_file form for adding 1`] = `
+<div>
+  <div
+    id="openFileNodeForm"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexWrap": "wrap",
+          "width": "100%",
+        }
+      }
+    >
+      <Input
+        errorText="Please supply a csv file."
+        input={
+          <input
+            accept="text/csv"
+            id="fileInput"
+            onChange={[Function]}
+            type="file"
+          />
+        }
+        isInvalid={false}
+        required={true}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="File"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NodeForm tests render tests should match snapshot when open_file form for editing when also original node type 1`] = `
+<div>
+  <div
+    id="openFileNodeForm"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexWrap": "wrap",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <p>
+          Currently using 
+          <strong>
+            open test
+          </strong>
+          . Supply a file below and save changes to change.
+        </p>
+      </div>
+      <Input
+        errorText="Please supply a csv file."
+        input={
+          <input
+            accept="text/csv"
+            id="fileInput"
+            onChange={[Function]}
+            type="file"
+          />
+        }
+        isInvalid={false}
+        required={true}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="File"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NodeForm tests render tests should match snapshot when open_file form for editing when not original node type 1`] = `
+<div>
+  <div
+    id="openFileNodeForm"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexWrap": "wrap",
+          "width": "100%",
+        }
+      }
+    >
+      <Input
+        errorText="Please supply a csv file."
+        input={
+          <input
+            accept="text/csv"
+            id="fileInput"
+            onChange={[Function]}
+            type="file"
+          />
+        }
+        isInvalid={false}
+        required={true}
+        style={
+          Object {
+            "width": "50%",
+          }
+        }
+        title="File"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NodeForm tests render tests should match snapshot when write_file form for adding 1`] = `
+<div>
+  <div
+    id="writeFileNodeForm"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-flex",
+          "width": "100%",
+        }
+      }
+    >
+      <Input
+        errorText="Please fill in this field."
+        id="nameTextField"
+        input={
+          <input
+            defaultValue={null}
+            id="nameTextInput"
+            onBlur={[Function]}
+            type="text"
+          />
+        }
+        isInvalid={false}
+        required={true}
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+        title="Filename"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NodeForm tests render tests should match snapshot when write_file form for editing when also original node type 1`] = `
+<div>
+  <div
+    id="writeFileNodeForm"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-flex",
+          "width": "100%",
+        }
+      }
+    >
+      <Input
+        errorText="Please fill in this field."
+        id="nameTextField"
+        input={
+          <input
+            defaultValue="write test"
+            id="nameTextInput"
+            onBlur={[Function]}
+            type="text"
+          />
+        }
+        isInvalid={false}
+        required={true}
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+        title="Filename"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NodeForm tests render tests should match snapshot when write_file form for editing when not original node type 1`] = `
+<div>
+  <div
+    id="writeFileNodeForm"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-flex",
+          "width": "100%",
+        }
+      }
+    >
+      <Input
+        errorText="Please fill in this field."
+        id="nameTextField"
+        input={
+          <input
+            defaultValue={null}
+            id="nameTextInput"
+            onBlur={[Function]}
+            type="text"
+          />
+        }
+        isInvalid={false}
+        required={true}
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+        title="Filename"
+      />
+    </div>
+  </div>
+</div>
+`;

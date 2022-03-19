@@ -5,6 +5,8 @@ import HomeTemplate from './render';
 import {isValidFromStart} from '../graphComponentForms/utils/FileNodes';
 import deepClone from 'lodash.clonedeep';
 
+export let functions;
+
 class Home extends React.Component {
 
     constructor(props) {
@@ -62,7 +64,6 @@ class Home extends React.Component {
     }
 
     editNode(node) {
-        console.log(node);
         let graphData = this.state.graphData;
         let idx = graphData.nodes.findIndex(n => node.id === n.id);
         graphData.nodes[idx] = node;
@@ -139,7 +140,7 @@ class Home extends React.Component {
                 return invalidNodeCardinalities.filter(id => id !== node.id);
         }
 
-        return this.state.invalidNodeCardinalities;
+        return invalidNodeCardinalities;
     }
 
     addBanner(banner) {
@@ -339,7 +340,6 @@ class Home extends React.Component {
                     await this.loadTemplate(loadGraph);
                     break;
                 default:
-                    console.log('general log')
                     this.addBanner({
                         msg: 'Cannot load graph',
                         type: 'failure'
@@ -351,7 +351,6 @@ class Home extends React.Component {
     }
 
     async loadGraphWithConfig(loadGraph) {
-        console.log(loadGraph)
         if (
             loadGraph.files && Object.entries(loadGraph.files).length > 0 &&
             loadGraph.graphData &&
@@ -378,7 +377,6 @@ class Home extends React.Component {
                 files
             });
         } else {
-            console.log('specific config load')
             this.addBanner({
                 msg: 'Cannot load graph',
                 type: 'failure'
@@ -387,7 +385,6 @@ class Home extends React.Component {
     }
 
     async dataUrlToFile(dataUrl, fileName) {
-        console.log(dataUrl);
         const res = await fetch(dataUrl);
         const blob = await res.blob();
         return new File([blob], fileName, {type: 'text/csv'});
@@ -481,7 +478,7 @@ class Home extends React.Component {
             graphValid: true,
             invalidNodes: [],
             invalidNodeCardinalities: []
-        })
+        });
     }
 
     setDefaultsEnabled(status) {
@@ -493,45 +490,49 @@ class Home extends React.Component {
     async loading(status) {
         await this.setState({
             loading: status
-        })
+        });
     }
 
     render() {
+        functions = {
+            ...this.props,
+            addNode: this.addNode.bind(this),
+            setEditNode: this.setEditNode.bind(this),
+            unsetEditNode: this.unsetEditNode.bind(this),
+            editNode: this.editNode.bind(this),
+            deleteNode: this.deleteNode.bind(this),
+            addEdge: this.addEdge.bind(this),
+            deleteEdge: this.deleteEdge.bind(this),
+            addBanner: this.addBanner.bind(this),
+            removeBanner: this.removeBanner.bind(this),
+            addFile: this.addFile.bind(this),
+            removeFile: this.removeFile.bind(this),
+            onSubmitForm: this.onSubmitForm.bind(this),
+            openSettings: this.openSettings.bind(this),
+            closeSettings: this.closeSettings.bind(this),
+            switchSavePopup: this.switchSavePopup.bind(this),
+            switchLoadPopup: this.switchLoadPopup.bind(this),
+            setSaveGraphFilename: this.setSaveGraphFilename.bind(this),
+            isGraphValid: this.isGraphValid.bind(this),
+            saveGraphWithConfig: this.saveGraphWithConfig.bind(this),
+            saveGraphTemplate: this.saveGraphTemplate.bind(this),
+            saveGraphConfigTemplate: this.saveGraphConfigTemplate.bind(this),
+            loadGraph: this.loadGraph.bind(this),
+            setValidNode: this.setValidNode.bind(this),
+            updateConfig: this.updateConfig.bind(this),
+            revertConfig: this.revertConfig.bind(this),
+            clearGraph: this.clearGraph.bind(this),
+            setDefaultsEnabled: this.setDefaultsEnabled.bind(this),
+            loading: this.loading.bind(this)
+        };
+
         return HomeTemplate(
-            {
-                ...this.props,
-                addNode: this.addNode.bind(this),
-                setEditNode: this.setEditNode.bind(this),
-                unsetEditNode: this.unsetEditNode.bind(this),
-                editNode: this.editNode.bind(this),
-                deleteNode: this.deleteNode.bind(this),
-                addEdge: this.addEdge.bind(this),
-                deleteEdge: this.deleteEdge.bind(this),
-                addBanner: this.addBanner.bind(this),
-                removeBanner: this.removeBanner.bind(this),
-                addFile: this.addFile.bind(this),
-                removeFile: this.removeFile.bind(this),
-                onSubmitForm: this.onSubmitForm.bind(this),
-                openSettings: this.openSettings.bind(this),
-                closeSettings: this.closeSettings.bind(this),
-                switchSavePopup: this.switchSavePopup.bind(this),
-                switchLoadPopup: this.switchLoadPopup.bind(this),
-                setSaveGraphFilename: this.setSaveGraphFilename.bind(this),
-                isGraphValid: this.isGraphValid.bind(this),
-                saveGraphWithConfig: this.saveGraphWithConfig.bind(this),
-                saveGraphTemplate: this.saveGraphTemplate.bind(this),
-                saveGraphConfigTemplate: this.saveGraphConfigTemplate.bind(this),
-                loadGraph: this.loadGraph.bind(this),
-                setValidNode: this.setValidNode.bind(this),
-                updateConfig: this.updateConfig.bind(this),
-                revertConfig: this.revertConfig.bind(this),
-                clearGraph: this.clearGraph.bind(this),
-                setDefaultsEnabled: this.setDefaultsEnabled.bind(this),
-                loading: this.loading.bind(this)
-            },
+            functions,
             this.state
         );
     }
 }
+
+
 
 export default Home;

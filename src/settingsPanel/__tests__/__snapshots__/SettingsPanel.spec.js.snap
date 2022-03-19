@@ -1,0 +1,319 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsPanel tests render tests should match snapshot when disabled default values 1`] = `
+<Popup
+  close={[MockFunction]}
+  height="60%"
+  id="settingsPanel"
+  isOpen={true}
+  scrollable={false}
+  title="Settings"
+  width="40%"
+>
+  <div
+    style={
+      Object {
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      id="settingPanelMainBody"
+      style={
+        Object {
+          "height": "calc(100% - 45px)",
+          "maxHeight": "calc(100% - 45px)",
+          "overflowY": "scroll",
+        }
+      }
+    >
+      <div>
+        <Input
+          id="defaultSwitch"
+          input={
+            <Switch
+              id="defaultSwitch-input"
+              isChecked={false}
+              onChange={[Function]}
+            />
+          }
+          required={false}
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+          title="Defaults"
+        />
+      </div>
+    </div>
+    <div
+      id="settingPanelControls"
+      style={
+        Object {
+          "borderTop": "2px solid darkslategray",
+          "display": "inline-flex",
+          "height": "45px",
+          "justifyContent": "space-between",
+          "marginTop": "10px",
+          "paddingTop": "10px",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        id="saveAndCancelButtonDiv"
+      >
+        <button
+          disabled={true}
+          id="saveButton"
+          onClick={[Function]}
+          title="save"
+        >
+          save
+        </button>
+        <button
+          disabled={true}
+          id="cancelButton"
+          onClick={[MockFunction]}
+          title="cancel"
+        >
+          cancel
+        </button>
+      </div>
+      <div
+        id="restoreButtonDiv"
+      >
+        <button
+          disabled={true}
+          id="restoreButton"
+          onClick={[Function]}
+          title="restore"
+        >
+          restore default
+        </button>
+      </div>
+    </div>
+  </div>
+</Popup>
+`;
+
+exports[`SettingsPanel tests render tests should match snapshot when enabled default values 1`] = `
+<Popup
+  close={[MockFunction]}
+  height="60%"
+  id="settingsPanel"
+  isOpen={true}
+  scrollable={false}
+  title="Settings"
+  width="40%"
+>
+  <div
+    style={
+      Object {
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      id="settingPanelMainBody"
+      style={
+        Object {
+          "height": "calc(100% - 45px)",
+          "maxHeight": "calc(100% - 45px)",
+          "overflowY": "scroll",
+        }
+      }
+    >
+      <div>
+        <Input
+          id="defaultSwitch"
+          input={
+            <Switch
+              id="defaultSwitch-input"
+              isChecked={true}
+              onChange={[Function]}
+            />
+          }
+          required={false}
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+          title="Defaults"
+        />
+      </div>
+      <Collapsible
+        id="test-Collapsible"
+        key="test"
+        open={false}
+        style={
+          Object {
+            "marginBottom": "0.5rem",
+            "marginTop": "0.5rem",
+          }
+        }
+      >
+        <FormContentGenerator
+          config={
+            Object {
+              "processing": Object {
+                "generalTemplate": Object {
+                  "group": "processing",
+                  "hovered": Object {
+                    "fill": "blue",
+                    "shape": "diamond",
+                  },
+                  "normal": Object {
+                    "fill": "blue",
+                    "shape": "diamond",
+                  },
+                  "selected": Object {
+                    "fill": "blue",
+                    "shape": "diamond",
+                  },
+                },
+                "operations": Array [
+                  Object {
+                    "dropdownField": Object {
+                      "input": "dropdown",
+                      "options": Array [
+                        "option1",
+                        "option2",
+                      ],
+                      "required": true,
+                      "title": "dropdown field title",
+                      "width": "100%",
+                    },
+                    "integerField": Object {
+                      "input": "integer",
+                      "required": true,
+                      "title": "integer field title",
+                      "width": "50%",
+                    },
+                    "numericField": Object {
+                      "input": "numeric",
+                      "required": true,
+                      "title": "numeric field title",
+                      "width": "50%",
+                    },
+                    "operation": "test",
+                    "switchField": Object {
+                      "input": "switch",
+                      "required": true,
+                      "title": "switch field title",
+                      "width": "50%",
+                    },
+                    "template": Object {
+                      "dropdownField": "option1",
+                      "integerField": null,
+                      "numericField": null,
+                      "switchField": true,
+                      "textField": null,
+                    },
+                    "textField": Object {
+                      "input": "text",
+                      "required": true,
+                      "title": "text field title",
+                      "width": "50%",
+                    },
+                  },
+                ],
+              },
+            }
+          }
+          inputActionFunctions={
+            Object {
+              "dropdown": Object {
+                "onChange": [Function],
+              },
+              "integer": Object {
+                "onBlur": [Function],
+              },
+              "numeric": Object {
+                "onBlur": [Function],
+              },
+              "switch": Object {
+                "onChange": [Function],
+              },
+              "text": Object {
+                "onBlur": [Function],
+              },
+            }
+          }
+          inputValidity={
+            Object {
+              "dropdownField": "valid",
+              "integerField": "valid",
+              "numericField": "valid",
+              "switchField": "valid",
+              "textField": "valid",
+            }
+          }
+          isSettings={true}
+          nodeObj={
+            Object {
+              "dropdownField": "option1",
+              "integerField": null,
+              "numericField": null,
+              "switchField": true,
+              "textField": null,
+            }
+          }
+          nodeOperation="test"
+        />
+      </Collapsible>
+    </div>
+    <div
+      id="settingPanelControls"
+      style={
+        Object {
+          "borderTop": "2px solid darkslategray",
+          "display": "inline-flex",
+          "height": "45px",
+          "justifyContent": "space-between",
+          "marginTop": "10px",
+          "paddingTop": "10px",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        id="saveAndCancelButtonDiv"
+      >
+        <button
+          disabled={true}
+          id="saveButton"
+          onClick={[Function]}
+          title="save"
+        >
+          save
+        </button>
+        <button
+          disabled={false}
+          id="cancelButton"
+          onClick={[MockFunction]}
+          title="cancel"
+        >
+          cancel
+        </button>
+      </div>
+      <div
+        id="restoreButtonDiv"
+      >
+        <button
+          disabled={false}
+          id="restoreButton"
+          onClick={[Function]}
+          title="restore"
+        >
+          restore default
+        </button>
+      </div>
+    </div>
+  </div>
+</Popup>
+`;

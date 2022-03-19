@@ -98,7 +98,6 @@ function validateField(value, type) {
 }
 
 function editNodeDependentState(startNode, config) {
-    console.log('inside edit node dependent state')
     let inputValidity;
 
     let operation = startNode.specificOperation ? startNode.specificOperation : startNode.operation;
@@ -120,7 +119,7 @@ function editNodeDependentState(startNode, config) {
                 let key = entry[0];
 
                 if (key !== 'operation' && operationConfig[key]) {
-                    if (operationConfig[key].required) {
+                    if (operationConfig[key].required || startNode[key]) {
                         inputValidity[key] = validateField(startNode[key], operationConfig[key].input);
                     } else {
                         inputValidity[key] = 'valid';
@@ -168,13 +167,15 @@ export function nodeDependentState(startNode, showNotStartedErrors, config, oper
 export function processingInputValidityStartState(operationConfig, validity) {
     let inputValidity = {};
 
-    for (let [key, value] of Object.entries(operationConfig.template)) {
-        if (value === null) {
-            inputValidity[key] = validity
-        }
+    for (let entry of Object.entries(operationConfig.template)) {
+        let key = entry[0];
 
-        if (key !== 'operation' && operationConfig[key] && !operationConfig[key].required) {
-            inputValidity[key] = 'valid';
+        if (key !== 'operation' && operationConfig[key]) {
+            if (operationConfig[key].required || operationConfig.template[key]) {
+                inputValidity[key] = validateField(operationConfig.template[key], operationConfig[key].input) === 'valid' ? 'valid' : validity;
+            } else {
+                inputValidity[key] = 'valid';
+            }
         }
     }
 

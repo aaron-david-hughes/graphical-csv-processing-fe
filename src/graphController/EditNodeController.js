@@ -113,7 +113,6 @@ class EditNodeController extends React.Component {
                 await this.props.addFile(this.state.file);
             }
 
-            //found the bug lol
             this.props.editNode({
                 id: this.state.node.id,
                 ...this.state.nodeTemplate

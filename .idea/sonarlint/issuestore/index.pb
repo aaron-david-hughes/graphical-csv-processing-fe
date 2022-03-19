@@ -11,13 +11,9 @@ a
 1src/generalPurposeComponents/titleBox/TitleBox.js,b/f/bffcfca891135ed0b16c56232caa0a02542d7999
 [
 +src/generalPurposeComponents/popup/Popup.js,2/5/2510467f9a8838759c5abd6a484f833015ffeb85
-X
-(src/graphController/AddNodeController.js,a/3/a3c4dbbdb6beefe0db90d10c06bbe6646ee7c0e0
 K
 src/home/resources/Home.css,1/e/1e124e8a10e10ff5e3593331085a295ff2388eaf
 g
 7src/generalPurposeComponents/collapsible/Collapsible.js,3/2/324669735f76f48c92e172c9762a8e3eac6d3954
-R
-"src/settingsPanel/SettingsPanel.js,d/3/d320f08bbe37dcdc26f6d3403bc057488234ebb0
 [
 +src/generalPurposeComponents/input/Input.js,a/1/a1c094c06434a530232af378f5e66c0836c278b7

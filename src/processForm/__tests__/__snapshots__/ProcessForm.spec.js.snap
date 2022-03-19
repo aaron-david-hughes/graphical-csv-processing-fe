@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProcessForm tests render tests should match snapshot when not processing 1`] = `
+<form
+  id="processForm"
+  onSubmit={[Function]}
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-flex",
+          "width": "100%",
+        }
+      }
+    >
+      <Input
+        input={
+          <input
+            id="filename"
+            onChange={[Function]}
+            type="text"
+          />
+        }
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+        title="Filename"
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "margin": "5px",
+        }
+      }
+    >
+      <p
+        className="ow"
+      >
+        <i
+          className="fa fa-info-circle"
+        />
+         Filename to be used: Result.zip
+      </p>
+    </div>
+    <button
+      disabled={false}
+      id="processButton"
+      title="process"
+    >
+      process
+    </button>
+  </div>
+</form>
+`;
+
+exports[`ProcessForm tests render tests should match snapshot when processing 1`] = `
+<form
+  id="processForm"
+  onSubmit={[Function]}
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-flex",
+          "width": "100%",
+        }
+      }
+    >
+      <Input
+        input={
+          <input
+            id="filename"
+            onChange={[Function]}
+            type="text"
+          />
+        }
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+        title="Filename"
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "margin": "5px",
+        }
+      }
+    >
+      <p
+        className="ow"
+      >
+        <i
+          className="fa fa-info-circle"
+        />
+         Filename to be used: Result.zip
+      </p>
+    </div>
+    <Loader
+      color="#000000"
+      css=""
+      loading={true}
+      size={30}
+      speedMultiplier={1}
+    />
+  </div>
+</form>
+`;

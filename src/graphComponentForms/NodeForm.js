@@ -212,7 +212,6 @@ class NodeForm extends React.Component {
         if (!required && !/\S/.test(e.target.value)) {
             let defaultValue = this.props.config.processing.operations
                 .find(op => {
-                    console.log(op);
                     return op.operation === this.props.operation
                 }).template[field];
             await this.setNodeObjKey(field, defaultValue)
@@ -231,7 +230,6 @@ class NodeForm extends React.Component {
         if (!required && !/\S/.test(e.target.value)) {
             let defaultValue = this.props.config.processing.operations
                 .find(op => {
-                    console.log(op);
                     return op.operation === this.props.operation
                 }).template[field];
             await this.setNodeObjKey(field, defaultValue)
@@ -250,7 +248,6 @@ class NodeForm extends React.Component {
         if (!required && !/\S/.test(e.target.value)) {
             let defaultValue = this.props.config.processing.operations
                 .find(op => {
-                    console.log(op);
                     return op.operation === this.props.operation
                 }).template[field];
             await this.setNodeObjKey(field, defaultValue)
