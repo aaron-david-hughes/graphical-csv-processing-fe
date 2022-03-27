@@ -120,7 +120,7 @@
           "operation": "filter",
           "specificOperation": "string_filter",
           "column": null,
-          "condition": null,
+          "condition": "",
           "filterType": "string_equality",
           "equal": true,
           "expectedInputs": 1
@@ -135,7 +135,7 @@
           "input": "text",
           "title": "Condition",
           "width": "100%",
-          "required": true
+          "required": false
         },
         "equal": {
           "input": "switch",
