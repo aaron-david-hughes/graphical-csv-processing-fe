@@ -38,7 +38,7 @@ cypress_tests:
     - name: qub40232046/40232046-graphical-processing-be:latest
       alias: graphical-csv-processing-api
   script:
-    - /builds/40232046/graphical-csv-processing-fe/
+    - cd /builds/40232046/graphical-csv-processing-fe/
     - npm install
     - sleep 10
     - npx cypress run
