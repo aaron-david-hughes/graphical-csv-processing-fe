@@ -130,7 +130,7 @@ exports[`AddNodeController tests render tests should match snapshot for node con
             },
             "condition": Object {
               "input": "text",
-              "required": true,
+              "required": false,
               "title": "Condition",
               "width": "100%",
             },
@@ -144,7 +144,7 @@ exports[`AddNodeController tests render tests should match snapshot for node con
             "operation": "string_filter",
             "template": Object {
               "column": null,
-              "condition": null,
+              "condition": "",
               "equal": true,
               "expectedInputs": 1,
               "filterType": "string_equality",
@@ -1275,7 +1275,7 @@ exports[`AddNodeController tests render tests should match snapshot for node con
                     },
                     "condition": Object {
                       "input": "text",
-                      "required": true,
+                      "required": false,
                       "title": "Condition",
                       "width": "100%",
                     },
@@ -1289,7 +1289,7 @@ exports[`AddNodeController tests render tests should match snapshot for node con
                     "operation": "string_filter",
                     "template": Object {
                       "column": null,
-                      "condition": null,
+                      "condition": "",
                       "equal": true,
                       "expectedInputs": 1,
                       "filterType": "string_equality",

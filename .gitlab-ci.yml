@@ -2,7 +2,7 @@ image: node:16.13.1-alpine
 
 stages:
   - create_image_and_unit_test
-#  - acceptance_test
+  - acceptance_test
 #  - update_image
 
 build_test_image:
@@ -24,3 +24,21 @@ unit_tests:
   script:
     - npm install
     - npm test
+
+cypress_tests:
+  stage: acceptance_test
+  tags: [dind]
+  image: node:latest
+  variables:
+    REACT_APP_BACKEND: "graphical-csv-processing-api:8080/process"
+    APP_FRONTEND: "graphical-csv-processing-fe:3000"
+  services:
+    - name: $CI_REGISTRY:$CI_COMMIT_SHORT_SHA
+      alias: graphical-csv-processing-fe
+    - name: qub40232046/40232046-graphical-processing-be:latest
+      alias: graphical-csv-processing-api
+  script:
+    - /builds/40232046/graphical-csv-processing-fe/
+    - npm install
+    - sleep 10
+    - npx cypress run

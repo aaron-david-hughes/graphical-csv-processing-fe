@@ -128,7 +128,7 @@ exports[`NodeForm tests render tests should match snapshot when join_left form f
               },
               "condition": Object {
                 "input": "text",
-                "required": true,
+                "required": false,
                 "title": "Condition",
                 "width": "100%",
               },
@@ -142,7 +142,7 @@ exports[`NodeForm tests render tests should match snapshot when join_left form f
               "operation": "string_filter",
               "template": Object {
                 "column": null,
-                "condition": null,
+                "condition": "",
                 "equal": true,
                 "expectedInputs": 1,
                 "filterType": "string_equality",
@@ -1316,7 +1316,7 @@ exports[`NodeForm tests render tests should match snapshot when join_left form f
               },
               "condition": Object {
                 "input": "text",
-                "required": true,
+                "required": false,
                 "title": "Condition",
                 "width": "100%",
               },
@@ -1330,7 +1330,7 @@ exports[`NodeForm tests render tests should match snapshot when join_left form f
               "operation": "string_filter",
               "template": Object {
                 "column": null,
-                "condition": null,
+                "condition": "",
                 "equal": true,
                 "expectedInputs": 1,
                 "filterType": "string_equality",

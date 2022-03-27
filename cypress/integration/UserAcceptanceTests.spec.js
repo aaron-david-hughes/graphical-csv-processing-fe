@@ -10,79 +10,79 @@ describe('User Acceptance Tests', () => {
         cy.waitForReact(1000, '#root');
     });
 
-    // test('should allow manipulation of graph', graphId => {
-    //     cy.get('select#nodeOptions').select('join_left');
-    //     cy.get('button#next').click();
-    //
-    //     //try to add incorrectly formatted node
-    //     cy.get('button#addNode').click();
-    //     cy.get('div#join_left-onLeft-input-inputDiv').children().get('p').contains(' Please fill in this field.');
-    //     cy.get('div#join_left-onRight-input-inputDiv').children().get('p').contains(' Please fill in this field.');
-    //
-    //     //try to invalidly fill form
-    //     cy.get('input#join_left-onLeft-input').type('column1').clear();
-    //     cy.get('input#join_left-onRight-input').type('column2').clear();
-    //     cy.get('button#addNode').click();
-    //     cy.get('div#join_left-onLeft-input-inputDiv').children().get('p').contains(' Please fill in this field.');
-    //     cy.get('div#join_left-onRight-input-inputDiv').children().get('p').contains(' Please fill in this field.');
-    //
-    //     //return to node type selection
-    //     cy.get('button#prev').click();
-    //
-    //     addNodeAndValidate(formGraphElementId(graphId, 'x'), 'join_left', {
-    //         onLeft: 'column1',
-    //         onRight: 'column2'
-    //     });
-    //
-    //     moveNode(formGraphElementId(graphId, 'x'), -50, -50);
-    //     checkMove(formGraphElementId(graphId, 'x'), '-50', '-50');
-    //
-    //     //edit
-    //     cy.get(formGraphElementId(graphId, 'x')).dblclick();
-    //     checkPresence('div#editNodePopup');
-    //     verifyFormContent({
-    //         'select#nodeOptions': 'join_left',
-    //         'input#join_left-onLeft-input': 'column1',
-    //         'input#join_left-onRight-input': 'column2',
-    //     });
-    //     cy.get('input#join_left-onLeft-input').clear();
-    //     cy.get('input#join_left-onRight-input').clear();
-    //     cy.get('input#join_left-onLeft-input').type('column3');
-    //     cy.get('input#join_left-onRight-input').type('column4');
-    //     cy.get('button#edit').click();
-    //     cy.get('button#edit').click();
-    //
-    //     //verify edit and cancel
-    //     cy.get(formGraphElementId(graphId, '27')).dblclick();
-    //     checkPresence('div#editNodePopup');
-    //     verifyFormContent({
-    //         'select#nodeOptions': 'join_left',
-    //         'input#join_left-onLeft-input': 'column3',
-    //         'input#join_left-onRight-input': 'column4',
-    //     });
-    //     cy.get('button#cancel').click();
-    //
-    //     //add another node
-    //     addNodeAndValidate(formGraphElementId(graphId, '5g'), 'alias', {
-    //         alias: 'testAlias'
-    //     });
-    //
-    //     moveNode(formGraphElementId(graphId, '5g'), 75, -65);
-    //     checkMove(formGraphElementId(graphId, '5g'), '75', '-65');
-    //
-    //     addEdgeAndValidate(
-    //         formGraphElementId(graphId, '8u'),
-    //         formGraphElementId(graphId, '5f'),
-    //         formGraphElementId(graphId, '6s')
-    //     );
-    //
-    //     //delete
-    //     cy.get(formGraphElementId(graphId, '8u')).dblclick();
-    //     cy.get(formGraphElementId(graphId, 'b0')).dblclick();
-    //     cy.get('button#delete').click();
-    //     cy.get(formGraphElementId(graphId, 'dn')).dblclick();
-    //     cy.get('button#delete').click();
-    // });
+    test('should allow manipulation of graph', graphId => {
+        cy.get('select#nodeOptions').select('join_left');
+        cy.get('button#next').click();
+
+        //try to add incorrectly formatted node
+        cy.get('button#addNode').click();
+        cy.get('div#join_left-onLeft-input-inputDiv').children().get('p').contains(' Please fill in this field.');
+        cy.get('div#join_left-onRight-input-inputDiv').children().get('p').contains(' Please fill in this field.');
+
+        //try to invalidly fill form
+        cy.get('input#join_left-onLeft-input').type('column1').clear();
+        cy.get('input#join_left-onRight-input').type('column2').clear();
+        cy.get('button#addNode').click();
+        cy.get('div#join_left-onLeft-input-inputDiv').children().get('p').contains(' Please fill in this field.');
+        cy.get('div#join_left-onRight-input-inputDiv').children().get('p').contains(' Please fill in this field.');
+
+        //return to node type selection
+        cy.get('button#prev').click();
+
+        addNodeAndValidate(formGraphElementId(graphId, 'x'), 'join_left', {
+            onLeft: 'column1',
+            onRight: 'column2'
+        });
+
+        moveNode(formGraphElementId(graphId, 'x'), -50, -50);
+        checkMove(formGraphElementId(graphId, 'x'), '-50', '-50');
+
+        //edit
+        cy.get(formGraphElementId(graphId, 'x')).dblclick();
+        checkPresence('div#editNodePopup');
+        verifyFormContent({
+            'select#nodeOptions': 'join_left',
+            'input#join_left-onLeft-input': 'column1',
+            'input#join_left-onRight-input': 'column2',
+        });
+        cy.get('input#join_left-onLeft-input').clear();
+        cy.get('input#join_left-onRight-input').clear();
+        cy.get('input#join_left-onLeft-input').type('column3');
+        cy.get('input#join_left-onRight-input').type('column4');
+        cy.get('button#edit').click();
+        cy.get('button#edit').click();
+
+        //verify edit and cancel
+        cy.get(formGraphElementId(graphId, '27')).dblclick();
+        checkPresence('div#editNodePopup');
+        verifyFormContent({
+            'select#nodeOptions': 'join_left',
+            'input#join_left-onLeft-input': 'column3',
+            'input#join_left-onRight-input': 'column4',
+        });
+        cy.get('button#cancel').click();
+
+        //add another node
+        addNodeAndValidate(formGraphElementId(graphId, '5g'), 'alias', {
+            alias: 'testAlias'
+        });
+
+        moveNode(formGraphElementId(graphId, '5g'), 75, -65);
+        checkMove(formGraphElementId(graphId, '5g'), '75', '-65');
+
+        addEdgeAndValidate(
+            formGraphElementId(graphId, '8u'),
+            formGraphElementId(graphId, '5f'),
+            formGraphElementId(graphId, '6s')
+        );
+
+        //delete
+        cy.get(formGraphElementId(graphId, '8u')).dblclick();
+        cy.get(formGraphElementId(graphId, 'b0')).dblclick();
+        cy.get('button#delete').click();
+        cy.get(formGraphElementId(graphId, 'dn')).dblclick();
+        cy.get('button#delete').click();
+    });
 
     test('process a query from scratch - the list of people and count who scored less than 45', graphId => {
         addOpenFileNodeAndValidate(formGraphElementId(graphId, 'x'), 'classlist.csv');

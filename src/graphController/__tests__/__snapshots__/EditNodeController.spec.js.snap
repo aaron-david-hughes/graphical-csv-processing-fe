@@ -445,7 +445,7 @@ exports[`EditNodeController tests render tests should match snapshot 1`] = `
               },
               "condition": Object {
                 "input": "text",
-                "required": true,
+                "required": false,
                 "title": "Condition",
                 "width": "100%",
               },
@@ -459,7 +459,7 @@ exports[`EditNodeController tests render tests should match snapshot 1`] = `
               "operation": "string_filter",
               "template": Object {
                 "column": null,
-                "condition": null,
+                "condition": "",
                 "equal": true,
                 "expectedInputs": 1,
                 "filterType": "string_equality",
