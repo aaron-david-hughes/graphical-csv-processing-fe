@@ -41,7 +41,7 @@ cypress_tests:
     - cd /builds/40232046/graphical-csv-processing-fe/
     - npm install
     - sleep 10
-    - RUN apt-get update && \
+    - apt-get update && \
       apt-get install -y \
       libgtk2.0-0 \
       libnotify-dev \
