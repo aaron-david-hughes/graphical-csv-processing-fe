@@ -1,29 +1,29 @@
 image: node:16.13.1-alpine
 
 stages:
-  - create_image_and_unit_test
+#  - create_image_and_unit_test
   - acceptance_test
 #  - update_image
 
-build_test_image:
-  stage: create_image_and_unit_test
-  tags: [dind]
-  image: docker:19.03.1
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"
-  services:
-    - docker:19.03.1-dind
-  script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
-    - docker build -t $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
-    - docker push $CI_REGISTRY:$CI_COMMIT_SHORT_SHA
-
-unit_tests:
-  stage: create_image_and_unit_test
-  tags: [frontend]
-  script:
-    - npm install
-    - npm test
+#build_test_image:
+#  stage: create_image_and_unit_test
+#  tags: [dind]
+#  image: docker:19.03.1
+#  variables:
+#    DOCKER_TLS_CERTDIR: "/certs"
+#  services:
+#    - docker:19.03.1-dind
+#  script:
+#    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
+#    - docker build -t $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
+#    - docker push $CI_REGISTRY:$CI_COMMIT_SHORT_SHA
+#
+#unit_tests:
+#  stage: create_image_and_unit_test
+#  tags: [frontend]
+#  script:
+#    - npm install
+#    - npm test
 
 cypress_tests:
   stage: acceptance_test
@@ -33,7 +33,7 @@ cypress_tests:
     REACT_APP_BACKEND: "graphical-csv-processing-api:8080/process"
     APP_FRONTEND: "graphical-csv-processing-fe:3000"
   services:
-    - name: $CI_REGISTRY:$CI_COMMIT_SHORT_SHA
+    - name: $CI_REGISTRY:1271a68f
       alias: graphical-csv-processing-fe
     - name: qub40232046/40232046-graphical-processing-be:latest
       alias: graphical-csv-processing-api
@@ -41,5 +41,13 @@ cypress_tests:
     - cd /builds/40232046/graphical-csv-processing-fe/
     - npm install
     - sleep 10
-    - apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+    - RUN apt-get update && \
+      apt-get install -y \
+      libgtk2.0-0 \
+      libnotify-dev \
+      libgconf-2-4 \
+      libnss3 \
+      libxss1 \
+      libasound2 \
+      xvfb
     - npx cypress run --browser electron
