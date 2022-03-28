@@ -28,7 +28,7 @@ stages:
 cypress_tests:
   stage: acceptance_test
   tags: [dind]
-  image: cookiescrumbs/cypress-m1:9.4.1
+  image: node:latest
   variables:
     REACT_APP_BACKEND: "graphical-csv-processing-api:8080/process"
     APP_FRONTEND: "graphical-csv-processing-fe:3000"
@@ -39,5 +39,5 @@ cypress_tests:
       alias: graphical-csv-processing-api
   script:
     - cd /builds/40232046/graphical-csv-processing-fe/
-    - npm install
+    - npm ci
     - npx cypress run
