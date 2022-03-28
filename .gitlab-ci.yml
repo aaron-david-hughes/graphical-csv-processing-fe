@@ -40,4 +40,4 @@ cypress_tests:
   script:
     - cd /builds/40232046/graphical-csv-processing-fe/
     - npm ci
-    - npx cypress run
+    - xvfb-run npx cypress run
