@@ -28,7 +28,7 @@ unit_tests:
 cypress_tests:
   stage: acceptance_test
   tags: [dind]
-  image: node:latest
+  image: cypress/browsers:node16.5.0-chrome94-ff93
   variables:
     REACT_APP_BACKEND: "graphical-csv-processing-api:8080/process"
     APP_FRONTEND: "graphical-csv-processing-fe:3000"
@@ -41,4 +41,4 @@ cypress_tests:
     - cd /builds/40232046/graphical-csv-processing-fe/
     - npm install
     - sleep 10
-    - npx cypress run
+    - npx cypress run --browser electron

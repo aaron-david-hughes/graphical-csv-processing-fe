@@ -2,7 +2,7 @@ import 'cypress-react-selector';
 import '@4tw/cypress-drag-drop';
 import 'cypress-file-upload';
 import path from 'path';
-import ScoreLessThan45ExpectedData from '../downloads/ScoreLessThan45ExpectedData';
+import ScoreLessThan45ExpectedData from '../payloads/ScoreLessThan45ExpectedData';
 
 describe('User Acceptance Tests', () => {
     before(() => {
