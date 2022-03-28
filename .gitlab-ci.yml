@@ -28,7 +28,7 @@ stages:
 cypress_tests:
   stage: acceptance_test
   tags: [dind]
-  image: qub40232046/cypress-ci:latest
+  image: telefonicacdo/web-builder:chromium93.0.4577-1.2.3
   variables:
     REACT_APP_BACKEND: "graphical-csv-processing-api:8080/process"
     APP_FRONTEND: "graphical-csv-processing-fe:3000"
