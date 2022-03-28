@@ -27,8 +27,8 @@ stages:
 
 cypress_tests:
   stage: acceptance_test
-  tags: [dind]
-  image: qub40232046/cypress-ci:multiarch
+  tags: [cypress]
+  image: cypress/browsers:node16.5.0-chrome94-ff93
   variables:
     REACT_APP_BACKEND: "graphical-csv-processing-api:8080/process"
     APP_FRONTEND: "graphical-csv-processing-fe:3000"
