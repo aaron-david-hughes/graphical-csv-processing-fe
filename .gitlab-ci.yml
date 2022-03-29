@@ -5,32 +5,48 @@ stages:
 #  - acceptance_test
 #  - update_image
 
-build_test_image:
+build_test_image_amd:
   stage: create_image_and_unit_test
-  tags: [cypress]
-  image: qub40232046/docker-buildx:latest
-#  image: docker:19.03.1
+  tags: [dind-amd]
+  image: docker:19.03.1
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
-    DOCKER_CLI_EXPERIMENTAL: enabled
   services:
     - docker:19.03.1-dind
   script:
-    - cd /builds/40232046/graphical-csv-processing-fe/
+#    - cd /builds/40232046/graphical-csv-processing-fe/
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
-    - docker context create tls-environment
-    - docker buildx create --name multiarch-builder --use tls-environment
-    - docker run --privileged --rm tonistiigi/binfmt --install all
-    - docker buildx build --push --platform linux/arm64,linux/amd64 --tag $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
-#    - docker build -t $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
-#    - docker push $CI_REGISTRY:$CI_COMMIT_SHORT_SHA
+#    - docker context create tls-environment
+#    - docker buildx create --name multiarch-builder --use tls-environment
+#    - docker run --privileged --rm tonistiigi/binfmt --install all
+#    - docker buildx build --push --platform linux/arm64,linux/amd64 --tag $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
+    - docker build -t $CI_REGISTRY:$CI_COMMIT_SHORT_SHA-amd .
+    - docker push $CI_REGISTRY:$CI_COMMIT_SHORT_SHA-amd
 
-#unit_tests:
-#  stage: create_image_and_unit_test
-#  tags: [frontend]
-#  script:
-#    - npm install
-#    - npm test
+build_test_image_arm:
+  stage: create_image_and_unit_test
+  tags: [dind-arm]
+  image: docker:19.03.1
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+    - docker:19.03.1-dind
+  script:
+    #    - cd /builds/40232046/graphical-csv-processing-fe/
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
+    #    - docker context create tls-environment
+    #    - docker buildx create --name multiarch-builder --use tls-environment
+    #    - docker run --privileged --rm tonistiigi/binfmt --install all
+    #    - docker buildx build --push --platform linux/arm64,linux/amd64 --tag $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
+    - docker build -t $CI_REGISTRY:$CI_COMMIT_SHORT_SHA-arm .
+    - docker push $CI_REGISTRY:$CI_COMMIT_SHORT_SHA-arm
+
+unit_tests:
+  stage: create_image_and_unit_test
+  tags: [frontend]
+  script:
+    - npm install
+    - npm test
 
 #cypress_tests:
 #  stage: acceptance_test
