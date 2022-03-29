@@ -8,7 +8,7 @@ stages:
 build_test_image:
   stage: create_image_and_unit_test
   tags: [cypress]
-  image: qub40232046/docker-buildx:19.03.1
+  image: qub40232046/docker-buildx:latest
 #  image: docker:19.03.1
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
