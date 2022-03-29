@@ -1,43 +1,47 @@
 image: node:16.13.1-alpine
 
 stages:
-#  - create_image_and_unit_test
-  - acceptance_test
+  - create_image_and_unit_test
+#  - acceptance_test
 #  - update_image
 
-#build_test_image:
-#  stage: create_image_and_unit_test
-#  tags: [dind]
+build_test_image:
+  stage: create_image_and_unit_test
+  tags: [cypress]
+  image: qub40232046/docker-buildx:19.03.1
 #  image: docker:19.03.1
-#  variables:
-#    DOCKER_TLS_CERTDIR: "/certs"
-#  services:
-#    - docker:19.03.1-dind
-#  script:
-#    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_CLI_EXPERIMENTAL: enabled
+  services:
+    - docker:19.03.1-dind
+  script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
+    - docker buildx create --use
+    - docker buildx build --platform linux/arm64/v8,linux/amd64 --tag $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
 #    - docker build -t $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
 #    - docker push $CI_REGISTRY:$CI_COMMIT_SHORT_SHA
-#
-#unit_tests:
-#  stage: create_image_and_unit_test
-#  tags: [frontend]
-#  script:
-#    - npm install
-#    - npm test
 
-cypress_tests:
-  stage: acceptance_test
-  tags: [cypress]
-  image: cypress/browsers:node16.5.0-chrome94-ff93
-  variables:
-    REACT_APP_BACKEND: "graphical-csv-processing-api:8080/process"
-    APP_FRONTEND: "graphical-csv-processing-fe:3000"
-  services:
-    - name: $CI_REGISTRY:1271a68f
-      alias: graphical-csv-processing-fe
-    - name: qub40232046/40232046-graphical-processing-be:latest
-      alias: graphical-csv-processing-api
+unit_tests:
+  stage: create_image_and_unit_test
+  tags: [frontend]
   script:
-    - cd /builds/40232046/graphical-csv-processing-fe/
-    - npm ci
-    - npx cypress run
+    - npm install
+    - npm test
+
+#cypress_tests:
+#  stage: acceptance_test
+#  tags: [cypress]
+#  image: cypress/browsers:node16.5.0-chrome94-ff93
+#  variables:
+#    REACT_APP_BACKEND: "graphical-csv-processing-api:8080/process"
+#    APP_FRONTEND: "graphical-csv-processing-fe:3000"
+#  services:
+#    - name: $CI_REGISTRY:1271a68f
+#      alias: graphical-csv-processing-fe
+#    - name: qub40232046/40232046-graphical-processing-be:latest
+#      alias: graphical-csv-processing-api
+#  script:
+#    - cd /builds/40232046/graphical-csv-processing-fe/
+#    - npm ci
+#    - npx cypress run
