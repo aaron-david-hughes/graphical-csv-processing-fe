@@ -70,10 +70,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 ### docker run
-`docker run -d -p 3000:3000 --volume=${absolute-path}/config.json:/app/src/config.json graphical-csv-processing-fe`  
+`docker run -d -p 3000:3000 --volume=${absolute-path}/config.json:/app/src/config.json qub40232046/40232046-graphical-csv-processing-fe`  
 note: the volume is optional, and a default config is stored within the image
 
 REACT_APP_BACKEND=url to quickly change backend hit
+`docker run -d -p 3000:3000 -e REACT_APP_BACKEND='aarondavidhughes.com/process' qub40232046/40232046-graphical-csv-processing-fe`
 
 dropdown config eg:
 ```json
