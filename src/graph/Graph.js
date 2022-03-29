@@ -48,7 +48,7 @@ class Graph extends React.Component {
     }
 
     static saveCoordinates(graphData, graphVar) {
-        if (graphVar && graphVar.da) {
+        if (graphVar && graphVar.da !== null && graphVar.da !== undefined) {
             for (let node of graphData.nodes) {
                 let coordinates = graphVar.da.find(n => n.id === node.id);
 
