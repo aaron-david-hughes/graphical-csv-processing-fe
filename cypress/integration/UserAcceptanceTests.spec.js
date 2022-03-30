@@ -6,7 +6,8 @@ import ScoreLessThan45ExpectedData from '../payloads/ScoreLessThan45ExpectedData
 
 describe('User Acceptance Tests', () => {
     before(() => {
-        cy.visit('http://localhost:3000');
+        let endpoint = process.env.APP_FRONTEND ? process.env.APP_FRONTEND : 'http://localhost:3000';
+        cy.visit(endpoint);
         cy.waitForReact(1000, '#root');
     });
 
