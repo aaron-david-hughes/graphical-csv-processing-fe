@@ -273,7 +273,7 @@ describe('User Acceptance Tests', () => {
 
 function test(name, callback) {
     it(`${name}`, {
-        defaultCommandTimeout: 10000
+        defaultCommandTimeout: 30000
     }, () => {
         getGraphIdContext(callback);
     });
