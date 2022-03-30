@@ -32,7 +32,7 @@ stages:
 cypress_tests:
   stage: acceptance_test
   tags: [cypress]
-  image: cypress/browsers:node16.5.0-chrome94-ff93
+  image: cypress/browsers:node16.13.0-chrome95-ff94
   variables:
     REACT_APP_BACKEND: "http://graphical-csv-processing-api:8080/process"
     APP_FRONTEND: "http://graphical-csv-processing-fe:3000"
