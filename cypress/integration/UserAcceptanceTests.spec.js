@@ -5,7 +5,7 @@ import path from 'path';
 import ScoreLessThan45ExpectedData from '../payloads/ScoreLessThan45ExpectedData';
 
 describe('User Acceptance Tests', () => {
-    before(() => {
+    beforeEach(() => {
         let endpoint = Cypress.env('FRONTEND') ? Cypress.env('FRONTEND') : 'http://localhost:3000';
         cy.visit(endpoint);
         cy.waitForReact(1000, '#root');
