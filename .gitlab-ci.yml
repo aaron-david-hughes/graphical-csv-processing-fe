@@ -1,33 +1,33 @@
 image: node:16.13.1-alpine
 
 stages:
-  - create_image_and_unit_test
+#  - create_image_and_unit_test
   - acceptance_test
-  - update_image
+#  - update_image
 
-build_test_image:
-  stage: create_image_and_unit_test
-  tags: [dind-amd]
-  image: qub40232046/docker-buildx:latest
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"
-    DOCKER_CLI_EXPERIMENTAL: enabled
-  services:
-    - docker:20.10.12-dind
-  script:
-    - cd /builds/40232046/graphical-csv-processing-fe/
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
-    - docker context create tls-environment
-    - docker buildx create --name multiarch-builder --use tls-environment
-    - docker run --privileged --rm tonistiigi/binfmt --install all
-    - docker buildx build --push --platform linux/arm64,linux/amd64 --tag $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
+#build_test_image:
+#  stage: create_image_and_unit_test
+#  tags: [dind-amd]
+#  image: qub40232046/docker-buildx:latest
+#  variables:
+#    DOCKER_TLS_CERTDIR: "/certs"
+#    DOCKER_CLI_EXPERIMENTAL: enabled
+#  services:
+#    - docker:20.10.12-dind
+#  script:
+#    - cd /builds/40232046/graphical-csv-processing-fe/
+#    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
+#    - docker context create tls-environment
+#    - docker buildx create --name multiarch-builder --use tls-environment
+#    - docker run --privileged --rm tonistiigi/binfmt --install all
+#    - docker buildx build --push --platform linux/arm64,linux/amd64 --tag $CI_REGISTRY:$CI_COMMIT_SHORT_SHA .
 
-unit_tests:
-  stage: create_image_and_unit_test
-  tags: [frontend]
-  script:
-    - npm install
-    - npm test
+#unit_tests:
+#  stage: create_image_and_unit_test
+#  tags: [frontend]
+#  script:
+#    - npm install
+#    - npm test
 
 cypress_tests:
   stage: acceptance_test
@@ -36,8 +36,9 @@ cypress_tests:
   variables:
     REACT_APP_BACKEND: "http://graphical-csv-processing-api:8080/process"
     APP_FRONTEND: "http://graphical-csv-processing-fe:3000"
+    CYPRESS_FRONTEND: "http://graphical-csv-processing-fe:3000"
   services:
-    - name: $CI_REGISTRY:$CI_COMMIT_SHORT_SHA
+    - name: $CI_REGISTRY:a7563c32
       alias: graphical-csv-processing-fe
     - name: qub40232046/40232046-graphical-processing-be:amd
       alias: graphical-csv-processing-api
@@ -46,20 +47,20 @@ cypress_tests:
     - npm ci
     - npx cypress run
 
-retag:
-  stage: update_image
-  tags: [dind-amd]
-  image: qub40232046/docker-buildx:latest
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"
-    DOCKER_CLI_EXPERIMENTAL: enabled
-  services:
-    - docker:20.10.12-dind
-  script:
-    - cd /builds/40232046/graphical-csv-processing-fe/
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
-    - docker context create tls-environment
-    - docker buildx create --name multiarch-builder --use tls-environment
-    - docker buildx imagetools create $CI_REGISTRY:$CI_COMMIT_SHORT_SHA --tag $CI_REGISTRY:latest
-  only:
-    - master
+#retag:
+#  stage: update_image
+#  tags: [dind-amd]
+#  image: qub40232046/docker-buildx:latest
+#  variables:
+#    DOCKER_TLS_CERTDIR: "/certs"
+#    DOCKER_CLI_EXPERIMENTAL: enabled
+#  services:
+#    - docker:20.10.12-dind
+#  script:
+#    - cd /builds/40232046/graphical-csv-processing-fe/
+#    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER docker.io --password-stdin
+#    - docker context create tls-environment
+#    - docker buildx create --name multiarch-builder --use tls-environment
+#    - docker buildx imagetools create $CI_REGISTRY:$CI_COMMIT_SHORT_SHA --tag $CI_REGISTRY:latest
+#  only:
+#    - master
