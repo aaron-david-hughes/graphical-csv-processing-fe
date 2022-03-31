@@ -7,13 +7,5 @@ A
 -src/generalPurposeComponents/switch/Switch.js,6/a/6a2e4cb3377eb6edbd2e4ccfb36275b1d3e848b2
 ]
 -src/generalPurposeComponents/banner/Banner.js,9/0/90cffc960fbd9da6245e41ba5927afcd9a8cce9c
-a
-1src/generalPurposeComponents/titleBox/TitleBox.js,b/f/bffcfca891135ed0b16c56232caa0a02542d7999
-[
-+src/generalPurposeComponents/popup/Popup.js,2/5/2510467f9a8838759c5abd6a484f833015ffeb85
-K
-src/home/resources/Home.css,1/e/1e124e8a10e10ff5e3593331085a295ff2388eaf
-g
-7src/generalPurposeComponents/collapsible/Collapsible.js,3/2/324669735f76f48c92e172c9762a8e3eac6d3954
 [
 +src/generalPurposeComponents/input/Input.js,a/1/a1c094c06434a530232af378f5e66c0836c278b7

@@ -2,6 +2,7 @@
 
 exports[`ConfigPanel tests ConfigPanel render tests shouldMatchSnapshot 1`] = `
 <div
+  className="lowScreenWidthEnlargeWidth"
   id="control"
   style={
     Object {

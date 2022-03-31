@@ -6,6 +6,7 @@ class TitleBox extends React.Component {
         return <div
             id={this.props.id}
             style={this.props.style}
+            className={this.props.className}
         >
             <div
                 id={this.props.id + '-header'}

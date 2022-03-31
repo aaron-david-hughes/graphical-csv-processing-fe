@@ -95,3 +95,40 @@ label {
   word-wrap: break-word;
   hyphens: auto;
 }
+
+@media only screen and (max-width: 950px) {
+  .popupSize {
+    width: 75% !important;
+    height: 75% !important;
+    top: calc(50% - 0.5 * 75%) !important;
+    left: calc(50% - 0.5 * 75%) !important;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .lowScreenWidthEnlargeWidth {
+    width: 100% !important;
+  }
+
+  .lowScreenWidthEnlargeGraph {
+    width: 100% !important;
+    height: 60% !important;
+    margin-bottom: 3rem !important;
+  }
+
+  .lowScreenWidthMainContainer {
+    width: 95% !important;
+    display: unset !important;
+    margin: 1rem !important;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .lowScreenWidthButtonWidth {
+    width: 100% !important;
+  }
+
+  .lowScreenWidthButtonList {
+    display: unset !important;
+  }
+}

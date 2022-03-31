@@ -12,6 +12,7 @@ class ConfigPanel extends React.Component {
                 display: 'block',
                 margin: '1rem'
             }}
+            className='lowScreenWidthEnlargeWidth'
         >
             <Collapsible
                 title='Nodes'

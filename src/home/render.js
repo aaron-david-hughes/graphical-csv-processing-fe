@@ -57,6 +57,7 @@ function render(props, state) {
                 height: '80%',
                 display: 'inline-flex'
             }}
+            className='lowScreenWidthMainContainer'
         >
             <div id='graph'
                  style={{
@@ -65,6 +66,7 @@ function render(props, state) {
                      margin: '1rem',
                      width: '75%'
                  }}
+                 className='lowScreenWidthEnlargeGraph'
             >
                 <Graph
                     config={state.defaultsEnabled ? state.config : state.initialConfig}
@@ -206,6 +208,7 @@ function render(props, state) {
                             width: '100%',
                             justifyContent: 'space-evenly'
                         }}
+                        className='lowScreenWidthButtonList'
                     >
                         <button
                             id='saveWithConfigButton'
@@ -218,6 +221,7 @@ function render(props, state) {
                             style={{
                                 width: '30%'
                             }}
+                            className='lowScreenWidthButtonWidth'
                         >
                             <strong><h4 style={{textDecoration: 'underline'}}>Save with Config</h4></strong>
                             <p>Saves each nodes configuration as it stands, along with the files supplied.</p>
@@ -233,6 +237,7 @@ function render(props, state) {
                             style={{
                                 width: '30%'
                             }}
+                            className='lowScreenWidthButtonWidth'
                         >
                             <strong><h4 style={{textDecoration: 'underline'}}>Save Config Template</h4></strong>
                             <p>Saves all but input files, enabling for template ease of use for repetitive processes.</p>
@@ -248,6 +253,7 @@ function render(props, state) {
                             style={{
                                 width: '30%'
                             }}
+                            className='lowScreenWidthButtonWidth'
                         >
                             <strong><h4 style={{textDecoration: 'underline'}}>Save Template</h4></strong>
                             <p>Saves the layout of nodes types and edges, without node configuration of each node.</p>

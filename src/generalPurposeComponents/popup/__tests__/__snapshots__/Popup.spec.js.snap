@@ -23,6 +23,7 @@ exports[`Popup tests Popup render tests matches the snapshot when closed 1`] = `
     }
   />
   <TitleBox
+    className="popupSize"
     icon={
       <i
         className="fa fa-times"
@@ -77,6 +78,7 @@ exports[`Popup tests Popup render tests matches the snapshot when open 1`] = `
     }
   />
   <TitleBox
+    className="popupSize"
     icon={
       <i
         className="fa fa-times"

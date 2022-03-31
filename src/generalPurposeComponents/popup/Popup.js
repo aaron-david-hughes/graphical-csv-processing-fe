@@ -24,6 +24,7 @@ class Popup extends React.Component {
             <TitleBox
                 id={this.props.id}
                 title={this.props.title}
+                className='popupSize'
                 style={{
                     width: this.props.width,
                     height: this.props.height,
