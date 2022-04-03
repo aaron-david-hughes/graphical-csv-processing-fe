@@ -287,7 +287,8 @@
           "input": "text",
           "title": "Column(s)",
           "width": "100%",
-          "required": true
+          "required": true,
+          "errorText": "Please fill in this Comma Separated List"
         }
       },
       {
@@ -302,7 +303,8 @@
           "input": "text",
           "title": "Column(s)",
           "width": "100%",
-          "required": true
+          "required": true,
+          "errorText": "Please fill in this Comma Separated List"
         }
       },
       {
