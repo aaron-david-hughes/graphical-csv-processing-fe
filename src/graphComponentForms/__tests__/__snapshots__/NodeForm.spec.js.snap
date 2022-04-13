@@ -283,6 +283,7 @@ exports[`NodeForm tests render tests should match snapshot when join_left form f
             },
             Object {
               "columns": Object {
+                "errorText": "Please fill in this Comma Separated List",
                 "input": "text",
                 "required": true,
                 "title": "Column(s)",
@@ -298,6 +299,7 @@ exports[`NodeForm tests render tests should match snapshot when join_left form f
             },
             Object {
               "columns": Object {
+                "errorText": "Please fill in this Comma Separated List",
                 "input": "text",
                 "required": true,
                 "title": "Column(s)",
@@ -1471,6 +1473,7 @@ exports[`NodeForm tests render tests should match snapshot when join_left form f
             },
             Object {
               "columns": Object {
+                "errorText": "Please fill in this Comma Separated List",
                 "input": "text",
                 "required": true,
                 "title": "Column(s)",
@@ -1486,6 +1489,7 @@ exports[`NodeForm tests render tests should match snapshot when join_left form f
             },
             Object {
               "columns": Object {
+                "errorText": "Please fill in this Comma Separated List",
                 "input": "text",
                 "required": true,
                 "title": "Column(s)",

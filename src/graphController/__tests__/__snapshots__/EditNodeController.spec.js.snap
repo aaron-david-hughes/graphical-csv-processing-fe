@@ -600,6 +600,7 @@ exports[`EditNodeController tests render tests should match snapshot 1`] = `
             },
             Object {
               "columns": Object {
+                "errorText": "Please fill in this Comma Separated List",
                 "input": "text",
                 "required": true,
                 "title": "Column(s)",
@@ -615,6 +616,7 @@ exports[`EditNodeController tests render tests should match snapshot 1`] = `
             },
             Object {
               "columns": Object {
+                "errorText": "Please fill in this Comma Separated List",
                 "input": "text",
                 "required": true,
                 "title": "Column(s)",

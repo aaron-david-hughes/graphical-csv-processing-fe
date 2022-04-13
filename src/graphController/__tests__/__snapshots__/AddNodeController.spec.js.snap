@@ -285,6 +285,7 @@ exports[`AddNodeController tests render tests should match snapshot for node con
           },
           Object {
             "columns": Object {
+              "errorText": "Please fill in this Comma Separated List",
               "input": "text",
               "required": true,
               "title": "Column(s)",
@@ -300,6 +301,7 @@ exports[`AddNodeController tests render tests should match snapshot for node con
           },
           Object {
             "columns": Object {
+              "errorText": "Please fill in this Comma Separated List",
               "input": "text",
               "required": true,
               "title": "Column(s)",
@@ -1430,6 +1432,7 @@ exports[`AddNodeController tests render tests should match snapshot for node con
                   },
                   Object {
                     "columns": Object {
+                      "errorText": "Please fill in this Comma Separated List",
                       "input": "text",
                       "required": true,
                       "title": "Column(s)",
@@ -1445,6 +1448,7 @@ exports[`AddNodeController tests render tests should match snapshot for node con
                   },
                   Object {
                     "columns": Object {
+                      "errorText": "Please fill in this Comma Separated List",
                       "input": "text",
                       "required": true,
                       "title": "Column(s)",
